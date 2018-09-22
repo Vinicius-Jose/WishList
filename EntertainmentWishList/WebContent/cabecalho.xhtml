@@ -8,63 +8,61 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-<h:body>
-	<ui:composition>
-		<h:form name="cabecalho">
-			<p:tabMenu activeIndex="#{param.i}" style="font-size:14px">
-				<p:menuitem value="Home Page" outcome="/index.xhtml"
-					icon="ui-icon-home">
-					<f:param name="i" value="0" />
-				</p:menuitem>
-				<p:menuitem value="Amigos" outcome="/cabecalho.xhtml"
-					icon="ui-icon-person">
-					<f:param name="i" value="1" />
-				</p:menuitem>
-				<p:menuitem value="Minha Lista" outcome="/cabecalho.xhtml"
-					icon="ui-icon-star">
-					<f:param name="i" value="2" />
-				</p:menuitem>
-				<p:menuitem style="padding:1px;">
-					<f:param name="i" value="3" />
-					<p:menubar
-						style="font-size:14px; padding:0.3px;  font-align:'center'">
-						<p:submenu label="Cadastrar">
-							<p:menuitem style="width:80%" value="Game"></p:menuitem>
-							<p:menuitem style="width:80%" value="Filme"></p:menuitem>
-							<p:menuitem style="width:80%" value="Serie"></p:menuitem>
-						</p:submenu>
-					</p:menubar>
-				</p:menuitem>
-				<p:menuitem value="Gerenciar Usuários" outcome="/cabecalho.xhtml"
-					icon="ui-icon-person">
-					<f:param name="i" value="4" />
-				</p:menuitem>
-				<p:menuitem style="padding:1px; margin-left:170px;">
-					<p:menubar
-						style="font-size:14px; padding:0.3px;  font-align:'center'">
-						<f:facet name="options">
-							<p:inputText placeholder="Procurando Amigos ?"
-								style="height:14px;" />
-						</f:facet>
-					</p:menubar>
+<ui:composition>
+	<h:form name="cabecalho">
+		<p:tabMenu activeIndex="#{param.i}" style="font-size:14px">
+			<p:menuitem value="Home Page" outcome="/index.xhtml"
+				icon="ui-icon-home">
+				<f:param name="i" value="0" />
+			</p:menuitem>
+			<p:menuitem value="Amigos" outcome="/cabecalho.xhtml"
+				icon="ui-icon-person">
+				<f:param name="i" value="1" />
+			</p:menuitem>
+			<p:menuitem value="Minha Lista" outcome="/cabecalho.xhtml"
+				icon="ui-icon-star">
+				<f:param name="i" value="2" />
+			</p:menuitem>
+			<p:menuitem style="padding:1px;">
+				<f:param name="i" value="3" />
+				<p:menubar
+					style="font-size:14px; padding:0.3px;  font-align:'center'">
+					<p:submenu label="Cadastrar">
+						<p:menuitem style="width:80%" value="Game"></p:menuitem>
+						<p:menuitem style="width:80%" value="Filme"></p:menuitem>
+						<p:menuitem style="width:80%" value="Serie"></p:menuitem>
+					</p:submenu>
+				</p:menubar>
+			</p:menuitem>
+			<p:menuitem value="Gerenciar Usuários" outcome="/cabecalho.xhtml"
+				icon="ui-icon-person">
+				<f:param name="i" value="4" />
+			</p:menuitem>
+			<p:menuitem style="padding:1px; margin-left:170px;">
+				<p:menubar
+					style="font-size:14px; padding:0.3px;  font-align:'center'">
+					<f:facet name="options">
+						<p:inputText placeholder="Procurando Amigos ?"
+							style="height:30px;" />
+					</f:facet>
+				</p:menubar>
 
-				</p:menuitem>
-				<p:menuitem style="padding:0.2px">
-					<p:menubar
-						style="font-size:14px; padding:0.3px;  font-align:'center'">
-						<p:submenu
-							style=" background-image: url('#{cabecalhoController.image}'); background-size: 100px 40px; ">
-							<p:menuitem style="width:80%" value="Editar Dados"></p:menuitem>
-							<p:menuitem style="width:80%" value="Logout" icon="ui-icon-close"></p:menuitem>
-						</p:submenu>
-					</p:menubar>
-				</p:menuitem>
+			</p:menuitem>
+			<p:menuitem style="padding:0.2px">
+				<p:menubar
+					style="font-size:14px; padding:0.3px;  font-align:'center'">
+					<p:submenu
+						style=" background-image: url('#{cabecalhoController.image}'); background-size: 100px 40px; ">
+						<p:menuitem style="width:80%" value="Editar Dados"></p:menuitem>
+						<p:menuitem style="width:80%" value="Logout" icon="ui-icon-close"></p:menuitem>
+					</p:submenu>
+				</p:menubar>
+			</p:menuitem>
 
 
-			</p:tabMenu>
-		</h:form>
-	</ui:composition>
-</h:body>
+		</p:tabMenu>
+	</h:form>
+</ui:composition>
 </html>
 <!-- impoerta java/jsf/faceles
 na tela cabeçalho insere <ui:composition> conteudo a ser incluido </ui:composition>
@@ -72,5 +70,22 @@ na tela cabeçalho insere <ui:composition> conteudo a ser incluido </ui:compositi
 
 link que mostra como buscar a imagem do banco
 http://javaonlineguide.net/2015/12/pgraphicimage-tag-in-jsf-primefaces-example-code-for-displaying-dynamic-images.html
+
+
+As seguintes partes devem conter no inicio de cada página; o link deve estar dentro
+da tag head, ele "gruda" o cabeçalho na parte de cima, é o do bootstrap: 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+		crossorigin="anonymous"></link>
+		
+		
+	
 
  -->
