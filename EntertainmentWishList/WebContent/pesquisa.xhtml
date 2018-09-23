@@ -7,11 +7,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Home Page</title>
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 		crossorigin="anonymous"></link>
+
+	<title>Busca</title>
 </h:head>
 <h:body>
 	<ui:insert name="cabecalho">
@@ -19,7 +20,7 @@
 	</ui:insert>
 	<h:form>
 		<div
-			style="margin-top: 25px; display: flex; justify-content: center; align-items: center; font-size: 13px">
+			style="margin-top: 50px; display: flex; justify-content: center; align-items: center; font-size: 13px">
 			<p:commandButton id="pesquisar" size="3"
 				actionListener="#{buttonView.buttonAction}" icon="ui-icon-search" />
 			<p:autoComplete size="70" style="" id="acMinLength"
@@ -28,23 +29,33 @@
 				placeholder="Digite aqui o filme, jogo, livro que deseja buscar" />
 		</div>
 	</h:form>
-	<div style="margin-top: 25px;">
-		<h:outputLabel value="Recomendação de seus amigos"
-			style="font-size:20px;" />
-	</div>
-	<p:contentFlow value="#{imagesView.images}" var="image"
-		style=" height:200px; width:700px ">
-		<h:graphicImage value="#{image}" styleClass="content" />
-		<div class="caption">#{image}</div>
-	</p:contentFlow>
-	<div style="margin-top: 25px;">
-		<h:outputLabel value="Mais Procurados"
-			style="font-size:20px;" />
-	</div>
-	<p:contentFlow value="#{imagesView.images}" var="image"
-		style=" height:200px; width:700px  ">
-		<h:graphicImage value="#{image}" styleClass="content" />
-		<div class="caption">#{image}</div>
-	</p:contentFlow>
+	<h:form id="form" style="margin-top:25px">
+		<p:dataGrid var="entretenimento" value="#{buscaBean.entretenimentos}"
+			columns="4" layout="grid" rows="12" paginator="true"
+			id="entretenimentos"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="6,12,16">
+
+			<f:facet name="header">
+           		 Os Resultados da sua busca
+        	</f:facet>
+
+			<div class="card" style="width: 15rem;">
+				<h:graphicImage class="card-img-top"
+					value="#{entretenimento.poster}" alt="Card image cap"></h:graphicImage>
+				<div class="card-body">
+					<h:outputText class="card-title">#{entretenimento.nomeOriginal}</h:outputText>
+					<p class="card-text">Data de Lançamento:
+						#{entretenimento.dataLancamento}</p>
+					<a href="#" class="btn btn-primary">Visualizar</a>
+				</div>
+			</div>
+
+
+
+		</p:dataGrid>
+
+	</h:form>
+
 </h:body>
 </html>

@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Enumeration;
@@ -11,10 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @RequestScoped
