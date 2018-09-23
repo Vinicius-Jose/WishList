@@ -9,8 +9,8 @@
 
 
 <ui:composition>
-	<h:form name="cabecalho">
-		<p:tabMenu activeIndex="#{param.i}" style="font-size:14px">
+	<h:form  id="fix" name="cabecalho">
+		<p:tabMenu activeIndex="#{param.i}" style="font-size:14px " >
 			<p:menuitem value="Home Page" outcome="/index.xhtml"
 				icon="ui-icon-home">
 				<f:param name="i" value="0" />
@@ -23,7 +23,7 @@
 				icon="ui-icon-star">
 				<f:param name="i" value="2" />
 			</p:menuitem>
-			<p:menuitem style="padding:1px;">
+			<p:menuitem style="padding:1px; ">
 				<f:param name="i" value="3" />
 				<p:menubar
 					style="font-size:14px; padding:0.3px;  font-align:'center'">
@@ -38,7 +38,7 @@
 				icon="ui-icon-person">
 				<f:param name="i" value="4" />
 			</p:menuitem>
-			<p:menuitem style="padding:1px; margin-left:170px;">
+			<p:menuitem style="padding:1px; margin-left:170px; " >
 				<p:menubar
 					style="font-size:14px; padding:0.3px;  font-align:'center'">
 					<f:facet name="options">
@@ -48,7 +48,7 @@
 				</p:menubar>
 
 			</p:menuitem>
-			<p:menuitem style="padding:0.2px">
+			<p:menuitem style="padding:0.2px; ">
 				<p:menubar
 					style="font-size:14px; padding:0.3px;  font-align:'center'">
 					<p:submenu
@@ -58,10 +58,10 @@
 					</p:submenu>
 				</p:menubar>
 			</p:menuitem>
-
-
 		</p:tabMenu>
 	</h:form>
+	
+	<p:sticky target="fix" />
 </ui:composition>
 </html>
 <!-- impoerta java/jsf/faceles

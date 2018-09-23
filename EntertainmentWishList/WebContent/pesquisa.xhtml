@@ -29,7 +29,7 @@
 				placeholder="Digite aqui o filme, jogo, livro que deseja buscar" />
 		</div>
 	</h:form>
-	<h:form id="form" style="margin-top:25px">
+	<h:form id="form" style="margin-top:25px" >
 		<p:dataGrid var="entretenimento" value="#{buscaBean.entretenimentos}"
 			columns="4" layout="grid" rows="12" paginator="true"
 			id="entretenimentos"
@@ -44,10 +44,13 @@
 				<h:graphicImage class="card-img-top"
 					value="#{entretenimento.poster}" alt="Card image cap"></h:graphicImage>
 				<div class="card-body">
-					<h:outputText class="card-title">#{entretenimento.nomeOriginal}</h:outputText>
+					<p class="card-title">#{entretenimento.nomeOriginal}</p>
 					<p class="card-text">Data de Lançamento:
 						#{entretenimento.dataLancamento}</p>
-					<a href="#" class="btn btn-primary">Visualizar</a>
+					<p:commandLink   action="#{buscaBean.mostrarNome}" >
+						<p class="btn btn-primary">Visualizar</p>
+						<f:setPropertyActionListener target="#{buscaBean.selected}" value="#{entretenimento}" />
+					</p:commandLink>
 				</div>
 			</div>
 
