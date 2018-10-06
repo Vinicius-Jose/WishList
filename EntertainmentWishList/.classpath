@@ -8,16 +8,16 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-email-1.5.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/cupertino-1.0.10.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/gson-2.5.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.faces-2.2.13.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.mail.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.servlet-api-3.0.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jersey-client-1.19.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jersey-core-1.19.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsr311-api-1.1.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jstl-1.2.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/primefaces-6.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/EMAIL/commons-email-1.5.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/EMAIL/javax.mail.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/GSON/gson-2.5.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/GSON/javax.servlet-api-3.0.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/GSON/jersey-client-1.19.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/GSON/jersey-core-1.19.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/GSON/jsr311-api-1.1.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/JSF-PRIMEFACES/cupertino-1.0.10.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/JSF-PRIMEFACES/javax.faces-2.2.13.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/JSF-PRIMEFACES/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/JSF-PRIMEFACES/primefaces-6.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
