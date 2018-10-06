@@ -1,19 +1,28 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import enumeradas.StatusAmigo;
 
-public class Usuario {
+@Entity
+public class Usuario implements Serializable{
 
 	private String primeiroNome;
 	private String segundoNome;
 	private String nickName;
+
+	@Id
 	private String email;
 	private String senha;
 	private Byte[] foto;
 	private char permissao;
 	private boolean statusUsuario;
+	@OneToMany
 	private Set<Amigo> amigos;
 	private Usuario usuario;
 

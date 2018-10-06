@@ -1,8 +1,14 @@
 package entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Serie extends Entretenimento {
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+@Entity
+@PrimaryKeyJoinColumn(name = "Entretenimentoid")
+public class Serie extends Entretenimento implements Serializable{
 
 	private String nomePortugues;
 	private int numeroEpisodios;
