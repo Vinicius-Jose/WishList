@@ -7,7 +7,6 @@ import entity.Game;
 import entity.ItemFavoritos;
 import entity.Usuario;
 import enumeradas.Etaria;
-import excecoes.UserNotFoundException;
 
 public class DriverTeste {
 

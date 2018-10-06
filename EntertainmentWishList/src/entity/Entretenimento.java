@@ -21,21 +21,20 @@ public class Entretenimento implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private long id;
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
+	
 	private String nomeOriginal;
+	
 	private int metacritic;
+	
 	@Transient
 	private double notaUsuario;
+	
 	private Date dataLancamento;
+	
 	private String sinopse;
+	
 	private Etaria classificacaoEtaria;
+	
 	private String poster;
 
 	@ManyToOne
@@ -103,6 +102,14 @@ public class Entretenimento implements Serializable{
 
 	public void setEstudio(Estudio estudio) {
 		this.estudio = estudio;
+	}
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }
