@@ -39,5 +39,15 @@ public class SerieDAOImpl {
 		em.close();
 		return serie;
 	}
+	
+	
+	public List<String> buscarNomesSeries(String nome){
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<String> query = em.createQuery(
+				"select s.nomePortugues from Serie s where s.nomePortugues like'%" + nome+"%'",
+				String.class);
+		return query.getResultList();
+		
+	}
 
 }

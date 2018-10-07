@@ -39,5 +39,14 @@ public class FilmeDAOImpl {
 		em.close();
 		return filme;
 	}
+	
+	public List<String> buscarNomesFilmes(String nome){
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<String> query = em.createQuery(
+				"select f.nomePortugues from Filme f where f.nomePortugues like'%" + nome+"%'",
+				String.class);
+		return query.getResultList();
+		
+	}
 
 }

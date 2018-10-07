@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NonUniqueResultException;
@@ -27,5 +29,14 @@ public class EntretenimentoDAOImpl {
 		} finally {
 			return entretenimento;
 		}
+	}
+	
+	public List<String> buscarNomes(String nome){
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<String> query = em.createQuery(
+				"select e.nomeOriginal from Entretenimento e where e.nomeOriginal like'%" + nome+"%'",
+				String.class);
+		return query.getResultList();
+		
 	}
 }
