@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -12,7 +13,9 @@ import org.hibernate.annotations.ColumnDefault;
 public class ItemFavoritos implements Serializable{
 
 	@ColumnDefault(value="null")
+	@Column(nullable=true)
 	private int nota;
+	
 	private String critica;
 
 	@Id

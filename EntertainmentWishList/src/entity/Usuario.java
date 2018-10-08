@@ -3,28 +3,43 @@ package entity;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import enumeradas.StatusAmigo;
 
 @Entity
 public class Usuario implements Serializable{
-
+	
+	@Column(length = 200)
 	private String primeiroNome;
+	
+	@Column(length = 200)
 	private String segundoNome;
+	
+	@Column(length = 100)
 	private String nickName;
 
 	@Id
 	private String email;
+	
 	private String senha;
 	private Byte[] foto;
+	
+	@Column(length = 1)
 	private char permissao;
+	
+	
 	private boolean statusUsuario;
-	@OneToMany
+	
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "Usuarioemail")
 	private Set<Amigo> amigos;
-	private Usuario usuario;
+	
 
 	public void adicionarAmigo(Amigo a) {
 		amigos.add(a);
@@ -112,14 +127,6 @@ public class Usuario implements Serializable{
 
 	public void setAmigos(Set<Amigo> amigos) {
 		this.amigos = amigos;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 }

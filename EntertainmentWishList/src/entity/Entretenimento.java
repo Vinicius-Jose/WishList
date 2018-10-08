@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
@@ -38,7 +39,9 @@ public class Entretenimento implements Serializable{
 	private String poster;
 
 	@ManyToOne
+	@JoinColumn(name = "Estudioid")
 	private Estudio estudio;
+	
 
 	public String getNomeOriginal() {
 		return nomeOriginal;

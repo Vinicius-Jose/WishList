@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -9,7 +10,11 @@ import javax.persistence.Id;
 public class Plataforma implements Serializable{
 	@Id
 	private long id;
+	
+	@Column(length=100)
 	private String nome;
+	
+	@Column(length=100)
 	private String empresa;
 
 	public String getNome() {

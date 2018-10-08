@@ -11,11 +11,14 @@ import enumeradas.StatusAmigo;
 
 @Entity
 public class Amigo implements Serializable {
-	private StatusAmigo status;
+	
+	
 	@Id
 	@JoinColumn(name = "Usuarioemail2")
 	@ManyToOne
 	private Usuario usuario;
+	
+	private StatusAmigo status;
 
 	public StatusAmigo getStatus() {
 		return status;

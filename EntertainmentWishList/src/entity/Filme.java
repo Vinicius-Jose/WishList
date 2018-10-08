@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -10,9 +11,14 @@ import javax.persistence.PrimaryKeyJoinColumn;
 public class Filme extends Entretenimento implements Serializable{
 
 	private String nomePortugues;
+	
 	private double imdb;
+	
 	private int rottenTomatoes;
+	
 	private int duracao;
+	
+	@Column(length = 100)
 	private String diretor;
 
 	public String getNomePortugues() {
