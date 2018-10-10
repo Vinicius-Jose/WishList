@@ -17,17 +17,6 @@
 	<ui:insert name="cabecalho">
 		<ui:include src="/cabecalho.xhtml"></ui:include>
 	</ui:insert>
-	<h:form>
-		<div
-			style="margin-top: 25px; display: flex; justify-content: center; align-items: center; font-size: 13px">
-			<p:commandButton id="pesquisar" size="3"
-				actionListener="#{buttonView.buttonAction}" icon="ui-icon-search" />
-			<p:autoComplete size="70" style="" id="acMinLength"
-				minQueryLength="3" value="#{autoCompleteView.txt2}"
-				completeMethod="methodo de completarTexto" effect="fade"
-				placeholder="Digite aqui o filme, jogo, livro que deseja buscar" />
-		</div>
-	</h:form>
 	<div style="margin-top: 25px;">
 		<h:outputLabel value="Recomendação de seus amigos"
 			style="font-size:20px;" />
