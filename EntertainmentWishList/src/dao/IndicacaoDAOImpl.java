@@ -9,7 +9,7 @@ import javax.persistence.TypedQuery;
 import entity.Indicacao;
 import entity.Usuario;
 
-public class IndicacaoDAOImpl {
+public class IndicacaoDAOImpl implements IndicacaoDAO {
 	private EntityManagerFactory emf;
 	
 	public IndicacaoDAOImpl() {
@@ -17,6 +17,10 @@ public class IndicacaoDAOImpl {
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see dao.IndicacaoDAO#adicionar(entity.Indicacao)
+	 */
+	@Override
 	public void adicionar(Indicacao indicacao) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -25,6 +29,10 @@ public class IndicacaoDAOImpl {
 		em.close();
 	}
 	
+	/* (non-Javadoc)
+	 * @see dao.IndicacaoDAO#alterar(entity.Indicacao)
+	 */
+	@Override
 	public void alterar(Indicacao indicacao) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -33,6 +41,10 @@ public class IndicacaoDAOImpl {
 		em.close();
 	}
 	
+	/* (non-Javadoc)
+	 * @see dao.IndicacaoDAO#buscarIndicacaoEnviada(entity.Usuario)
+	 */
+	@Override
 	public List<Indicacao> buscarIndicacaoEnviada(Usuario user) {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Indicacao> query = em.createQuery("select i from Indicacao i where usuarioIndicador.email = '" + user.getEmail()+"'", Indicacao.class);
@@ -41,6 +53,10 @@ public class IndicacaoDAOImpl {
 		return estudios;
 	}
 	
+	/* (non-Javadoc)
+	 * @see dao.IndicacaoDAO#buscarIndicacaoRecebida(entity.Usuario)
+	 */
+	@Override
 	public List<Indicacao> buscarIndicacaoRecebida(Usuario user) {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Indicacao> query = em.createQuery("select i from Indicacao i where usuarioRecebido.email = '" + user.getEmail()+"'", Indicacao.class);

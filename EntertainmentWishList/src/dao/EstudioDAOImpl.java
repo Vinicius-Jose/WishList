@@ -8,7 +8,7 @@ import javax.persistence.TypedQuery;
 
 import entity.Estudio;
 
-public class EstudioDAOImpl {
+public class EstudioDAOImpl implements EstudioDAO {
 	private EntityManagerFactory emf;
 	
 	public EstudioDAOImpl() {
@@ -16,6 +16,10 @@ public class EstudioDAOImpl {
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see dao.EstudioDAO#adicionar(entity.Estudio)
+	 */
+	@Override
 	public void adicionar(Estudio estudio) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -24,6 +28,10 @@ public class EstudioDAOImpl {
 		em.close();
 	}
 	
+	/* (non-Javadoc)
+	 * @see dao.EstudioDAO#alterar(entity.Estudio)
+	 */
+	@Override
 	public void alterar(Estudio estudio) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -32,6 +40,10 @@ public class EstudioDAOImpl {
 		em.close();
 	}
 	
+	/* (non-Javadoc)
+	 * @see dao.EstudioDAO#buscarEstudios()
+	 */
+	@Override
 	public List<Estudio> buscarEstudios() {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Estudio> query = em.createQuery("select e from Estudio e ", Estudio.class);

@@ -8,7 +8,7 @@ import javax.persistence.TypedQuery;
 
 import entity.Plataforma;
 
-public class PlataformaDAOImpl {
+public class PlataformaDAOImpl implements PlataformaDAO {
 	private EntityManagerFactory emf;
 	
 	public PlataformaDAOImpl() {
@@ -16,6 +16,10 @@ public class PlataformaDAOImpl {
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see dao.PlataformaDAO#adicionar(entity.Plataforma)
+	 */
+	@Override
 	public void adicionar(Plataforma plataforma) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -24,6 +28,10 @@ public class PlataformaDAOImpl {
 		em.close();
 	}
 	
+	/* (non-Javadoc)
+	 * @see dao.PlataformaDAO#alterar(entity.Plataforma)
+	 */
+	@Override
 	public void alterar(Plataforma plataforma) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -32,6 +40,10 @@ public class PlataformaDAOImpl {
 		em.close();
 	}
 	
+	/* (non-Javadoc)
+	 * @see dao.PlataformaDAO#buscarPlataformas()
+	 */
+	@Override
 	public List<Plataforma> buscarPlataformas() {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Plataforma> query = em.createQuery("select p from Plataforma p ", Plataforma.class);

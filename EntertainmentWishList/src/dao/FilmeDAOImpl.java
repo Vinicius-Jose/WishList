@@ -8,13 +8,17 @@ import javax.persistence.TypedQuery;
 
 import entity.Filme;
 
-public class FilmeDAOImpl {
+public class FilmeDAOImpl implements FilmeDAO {
 	private EntityManagerFactory emf;
 
 	public FilmeDAOImpl() {
 		emf = GenericDAO.getGenericDAO();
 	}
 
+	/* (non-Javadoc)
+	 * @see dao.FilmeDAO#adicionar(entity.Filme)
+	 */
+	@Override
 	public void adicionar(Filme filme) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -23,6 +27,10 @@ public class FilmeDAOImpl {
 		em.close();
 	}
 
+	/* (non-Javadoc)
+	 * @see dao.FilmeDAO#alterar(entity.Filme)
+	 */
+	@Override
 	public void alterar(Filme filme) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -31,6 +39,10 @@ public class FilmeDAOImpl {
 		em.close();
 	}
 
+	/* (non-Javadoc)
+	 * @see dao.FilmeDAO#buscarFilmes(java.lang.String)
+	 */
+	@Override
 	public List<Filme> buscarFilmes(String nome) {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Filme> query = em.createQuery("select f from Filme f   where f.nomeOriginal like '%" + nome
@@ -40,6 +52,10 @@ public class FilmeDAOImpl {
 		return filme;
 	}
 	
+	/* (non-Javadoc)
+	 * @see dao.FilmeDAO#buscarNomesFilmes(java.lang.String)
+	 */
+	@Override
 	public List<String> buscarNomesFilmes(String nome){
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<String> query = em.createQuery(

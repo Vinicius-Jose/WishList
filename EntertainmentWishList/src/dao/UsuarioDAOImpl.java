@@ -10,13 +10,20 @@ import javax.persistence.TypedQuery;
 import entity.Usuario;
 import excecoes.UserException;
 
-public class UsuarioDAOImpl {
+public class UsuarioDAOImpl implements UsuarioDAO  {
 	private EntityManagerFactory emf;
 
 	public UsuarioDAOImpl() {
 		emf = GenericDAO.getGenericDAO();
 	}
 
+	/* (non-Javadoc)
+	 * @see dao.FilmeDAO#adicionar(entity.Usuario)
+	 */
+	/* (non-Javadoc)
+	 * @see dao.UsuarioDAO#adicionar(entity.Usuario)
+	 */
+	@Override
 	public void adicionar(Usuario usuario) throws UserException {
 		EntityManager em = emf.createEntityManager();
 
@@ -31,6 +38,13 @@ public class UsuarioDAOImpl {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see dao.FilmeDAO#alterar(entity.Usuario)
+	 */
+	/* (non-Javadoc)
+	 * @see dao.UsuarioDAO#alterar(entity.Usuario)
+	 */
+	@Override
 	public void alterar(Usuario usuario) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -39,6 +53,13 @@ public class UsuarioDAOImpl {
 		em.close();
 	}
 
+	/* (non-Javadoc)
+	 * @see dao.FilmeDAO#validarUsuario(java.lang.String, java.lang.String)
+	 */
+	/* (non-Javadoc)
+	 * @see dao.UsuarioDAO#validarUsuario(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public Usuario validarUsuario(String email, String senha) throws UserException {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Usuario> query = em.createQuery(
@@ -54,6 +75,13 @@ public class UsuarioDAOImpl {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see dao.FilmeDAO#buscarUsuarios(java.lang.String)
+	 */
+	/* (non-Javadoc)
+	 * @see dao.UsuarioDAO#buscarUsuarios(java.lang.String)
+	 */
+	@Override
 	public List<Usuario> buscarUsuarios(String nome) {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Usuario> query = em.createQuery("select u from Usuario u where email like '%" + nome

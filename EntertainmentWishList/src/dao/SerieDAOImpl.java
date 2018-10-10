@@ -8,7 +8,7 @@ import javax.persistence.TypedQuery;
 
 import entity.Serie;
 
-public class SerieDAOImpl {
+public class SerieDAOImpl implements SerieDAO {
 	private EntityManagerFactory emf;
 
 	public SerieDAOImpl() {

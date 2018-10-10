@@ -10,13 +10,17 @@ import javax.persistence.TypedQuery;
 import entity.Entretenimento;
 import excecoes.NotEvaluatedException;
 
-public class EntretenimentoDAOImpl {
+public class EntretenimentoDAOImpl implements EntretenimentoDAO {
 	private EntityManagerFactory emf;
 
 	public EntretenimentoDAOImpl() {
 		emf = GenericDAO.getGenericDAO();
 	}
 
+	/* (non-Javadoc)
+	 * @see dao.EntretenimentoDAO#buscarMediaUsuarios(entity.Entretenimento)
+	 */
+	@Override
 	public Entretenimento buscarMediaUsuarios(Entretenimento entretenimento) throws NotEvaluatedException {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Double> query = em.createQuery(
@@ -31,6 +35,10 @@ public class EntretenimentoDAOImpl {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see dao.EntretenimentoDAO#buscarNomes(java.lang.String)
+	 */
+	@Override
 	public List<String> buscarNomes(String nome){
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<String> query = em.createQuery(

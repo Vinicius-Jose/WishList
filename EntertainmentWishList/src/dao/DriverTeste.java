@@ -23,7 +23,7 @@ public class DriverTeste {
 		b.setDataLancamento(new Date(2555555));
 		b.setClassificacaoEtaria(Etaria.PG18);
 		b.setGenero("fight");
-		GameDAOImpl gd = new GameDAOImpl();
+		GameDAO gd = new GameDAOImpl();
 //		 gd.adicionar(a);
 		// gd.adicionar(b);
 		List<Game> games = gd.buscarGames("ken");
@@ -31,7 +31,7 @@ public class DriverTeste {
 			System.out.println(s.getNomeOriginal());
 		}
 		
-		ItemFavoritoDAOImpl it = new ItemFavoritoDAOImpl();
+		ItemFavoritoDAO it = new ItemFavoritoDAOImpl();
 		List<ItemFavoritos> s = it.buscarFavoritos(new Usuario());
 		for(ItemFavoritos i : s) {
 			System.out.println(i.getNota());
