@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+		crossorigin="anonymous"></link>
+
+	<title>Busca</title>
+</h:head>
+<h:body>
+	<ui:insert name="cabecalho">
+		<ui:include src="/cabecalho.xhtml"></ui:include>
+	</ui:insert>
+
+	<h:form id="form" style="margin-top:25px">
+		<p:dataGrid var="usuario" value="#{buscaUser.usuarios}" columns="6"
+			layout="grid" rows="12" paginator="true" id="entretenimentos"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="6,12,16">
+
+			<f:facet name="header">
+           		 Os Resultados da sua busca
+        	</f:facet>
+
+			<div class="card" style="width: 3 ;length: 3rem">
+				<h:graphicImage class="card-img-top"
+					value="https://image.freepik.com/icones-gratis/perfil-macho-utilizador-sombra_318-40244.jpg"
+					alt="Card image cap"></h:graphicImage>
+				<div class="card-body" >
+					<p class="card-title">#{usuario.primeiroNome}</p>
+					<p class="card-text" style="font-size:12px">Nick Name: #{usuario.nickName} <br/>Email: #{usuario.email}</p>
+					<p:commandLink action="#{buscaUser.mostrarNome}">
+						<p class="btn btn-primary">Visualizar</p>
+						<f:setPropertyActionListener target="#{buscaUser.selected}"
+							value="#{usuario}" />
+					</p:commandLink>
+				</div>
+			</div>
+
+
+
+		</p:dataGrid>
+
+	</h:form>
+
+</h:body>
+</html>

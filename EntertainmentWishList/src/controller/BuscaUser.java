@@ -18,54 +18,54 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entity.Entretenimento;
+import entity.Usuario;
 
 @RequestScoped
 @ManagedBean
-public class BuscaBean {
+public class BuscaUser {
 
-	private List<Entretenimento> entretenimentos;
-	private Entretenimento selected;
+	private List<Usuario> usuarios;
+	private Usuario selected;
 
-	public List<Entretenimento> getEntretenimentos() {
-		return entretenimentos;
+	public List<Usuario> getUsuarios() {
+		return usuarios;
 	}
 
-	public void setEntretenimentos(List<Entretenimento> entretenimentos) {
-		this.entretenimentos = entretenimentos;
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 	@PostConstruct
 	public void init() {
-		entretenimentos = new ArrayList<>();
+		usuarios = new ArrayList<>();
 		for (int i = 0; i < 30; i++) {
-			Entretenimento ent = new Entretenimento();
-			ent.setNomeOriginal("Superman IV " + i);
-			ent.setDataLancamento(new Date(Calendar.getInstance().getTimeInMillis()));
-			ent.setPoster(
-					"https://resizing.flixster.com/TuzSqod_m3cBJEHAMpkEKuaTB0Y=/206x305/v1.bTsxMTIwNzg4MztqOzE3OTA0OzEyMDA7MTUwMzsyMDA0");
-			entretenimentos.add(ent);
+			Usuario user = new Usuario();
+			user.setPrimeiroNome("Usuario " + i);
+			user.setNickName("ÉTOIZ2018");
+			user.setEmail("aaaaaa@hotmail.com");
+			usuarios.add(user);
 		}
 	}
 
-	public Entretenimento getSelected() {
+	public Usuario getSelected() {
 		return selected;
 	}
 
-	public void setSelected(Entretenimento selected) {
+	public void setSelected(Usuario selected) {
 		this.selected = selected;
 	}
 
 	public void mostrarNome() {
 		if (selected != null) {
-			System.out.println(selected.getNomeOriginal());
-			System.out.println(selected.getPoster());
+			System.out.println(selected.getPrimeiroNome());
+			System.out.println(selected.getEmail());
 		} else {
 			System.out.println("oi");
 		}
 
 		ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
 		try {
-			ex.redirect("./index.jsf");
+			ex.redirect("./index.xhtml");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
