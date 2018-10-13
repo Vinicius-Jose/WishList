@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Cadastro Usuario</title>
+</h:head>
+
+<h:body>
+	<h:form>  
+		<div>
+		</div>
+	</h:form>
+
+	<p:panel id="painelCadastro" style="margin-top:25px; margin-bottom:25px;">
+		<p:messages id="message" />
+
+		<h:panelGrid columns="2" cellpadding="5">
+
+			<h:outputLabel for="primeiroNome" value="Primeiro Nome"/>
+			<p:inputTextarea id="primeiroNome" required="true" rows="1" cols="100"/>
+			
+			<h:outputLabel for="segundoNome" value="Segundo Nome"/>
+			<p:inputTextarea id="segundoNome" required="true" rows="1" cols="100"/>
+			
+			<h:outputLabel for="nickname" value="Nickname"/>
+			<p:inputTextarea id="nickname" required="true" rows="1" cols="100"/>
+			
+			<h:outputLabel for="email" value="Email"/>
+			<p:inputTextarea id="email" required="true" rows="1" cols="100"/>
+			
+			<h:outputLabel for="senha" value="Senha"/>
+			<p:inputTextarea id="senha" required="true" rows="1" cols="100"/>
+			
+			<h:outputLabel for="confirmarSenha" value="Confirmar Senha"/>
+			<p:inputTextarea id="confirmarSenha" required="true" rows="1" cols="100"/>
+		</h:panelGrid>
+	</p:panel>
+
+	<p:commandButton id="cadastrar" value="Cadastrar" update="painelCadastro"
+		actionListener="#{buttonView.buttonAction}" icon="ui-icon-disk" 
+		style="float:right;"/>
+	<p:commandButton id="cancelar" value="Cancelar"
+		actionListener="#{buttonView.buttonAction}" 
+		style="float:right;"/>
+</h:body>
+</html>

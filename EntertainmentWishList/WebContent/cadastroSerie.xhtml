@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Cadastro Filme</title>
+</h:head>
+
+<h:body>
+
+	<ui:insert name="cabecalho">
+		<ui:include src="/cabecalho.xhtml"></ui:include>
+	</ui:insert>
+	
+	<h:form>
+		<div
+			style="margin-top: 25px; display: flex; justify-content: center; align-items: center; font-size: 13px">
+			<p:commandButton id="pesquisar" size="3"
+				actionListener="#{buttonView.buttonAction}" icon="ui-icon-search" />
+			<p:autoComplete size="70" style="" id="acMinLength"
+				minQueryLength="3" value="#{autoCompleteView.txt2}"
+				completeMethod="methodo de completarTexto" effect="fade"
+				placeholder="Digite aqui o filme, jogo, livro que deseja buscar" />
+		</div>
+	</h:form>
+
+	<p:panel id="painelCadastro" style="margin-top:25px; margin-bottom:25px;">
+		<p:messages id="message" />
+
+		<h:panelGrid columns="2" cellpadding="5">
+				
+				<h:outputLabel for="nomeOriginal" value="Nome Original"/>
+				<p:inputTextarea id="nomeOriginal" required="true" rows="1" cols="100"/>
+				
+				<h:outputLabel for="urlImage" value="URL da Imagem"/>
+				<p:inputTextarea id="urlImage" required="true" rows="1" cols="100"/>
+					
+				<h:outputLabel for="nomePortugues" value="Nome em Português"/>
+				<p:inputTextarea id="nomePortugues" required="true" rows="1" cols="100"/>
+					
+				<h:outputLabel for="genero" value="Genero"/>
+				<p:inputTextarea id="genero" required="true" rows="1" cols="30"/>
+				
+				<p:outputLabel for="etaria" value="Etaria " />
+				<p:selectOneMenu id="etaria" value="" effect="fold" editable="true">
+					<f:selectItem itemLabel="" itemValue="" />
+					<f:selectItems value="" />
+				</p:selectOneMenu>
+				
+				<h:outputLabel for="temporada" value="Temporada"/>
+				<p:inputTextarea id="temporada" required="true" rows="1" cols="30"/>
+				
+				<h:outputLabel for="episodios" value="Episodios"/>
+				<p:inputTextarea id="episodios" required="true" rows="1" cols="30"/>
+				
+				<p:outputLabel for="dataLancamento" value="Data de Lançamento" />
+				<p:calendar id="dataLancamento" value="#{calendarView.date}" />
+        
+        		<p:outputLabel for="dataTermino" value="Data de Termino" />
+				<p:calendar id="dataTermino" value="#{calendarView.date}" />
+				
+				<h:outputLabel for="estudio" value="Estudio"/>
+				<p:inputTextarea id="estudio" required="true" rows="1" cols="100"/>
+
+				<h:outputLabel for="sinopse" value="Sinopse"/>
+				<p:inputTextarea id="sinopse" required="true" rows="5" cols="100"/>
+		</h:panelGrid>
+	</p:panel>
+	
+	<p:commandButton id="cadastrar" value="Cadastrar" update="painelCadastro"
+		actionListener="#{buttonView.buttonAction}" icon="ui-icon-disk" 
+		style="float:right;"/>
+	<p:commandButton id="cancelar" value="Cancelar"
+		actionListener="#{buttonView.buttonAction}" 
+		style="float:right;"/>
+
+</h:body>
+</html>
