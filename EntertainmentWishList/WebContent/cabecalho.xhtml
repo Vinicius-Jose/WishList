@@ -9,8 +9,8 @@
 
 
 <ui:composition>
-	<h:form  id="fix" name="cabecalho">
-		<p:tabMenu activeIndex="#{param.i}" style="font-size:14px " >
+	<h:form  id="fix" name="cabecalho" >
+		<p:tabMenu activeIndex="#{param.i}" style="font-size:14px;  "  >
 			<p:menuitem value="Home Page" outcome="/index.xhtml"
 				icon="ui-icon-home">
 				<f:param name="i" value="0" />
@@ -23,10 +23,10 @@
 				icon="ui-icon-star">
 				<f:param name="i" value="2" />
 			</p:menuitem>
-			<p:menuitem style="padding:1px; ">
+			<p:menuitem style="padding:1px; " >
 				<f:param name="i" value="3" />
 				<p:menubar
-					style="font-size:14px; padding:0.3px;  font-align:'center'">
+					style="font-size:12px; padding:0.3px;  font-align:'center'; " styleClass="ui-tabmenu">
 					<p:submenu label="Cadastrar">
 						<p:menuitem style="width:80%" value="Jogo" outcome="/cadastroJogo.xhtml"></p:menuitem>
 						<p:menuitem style="width:80%" value="Filme" outcome="/cadastroFilme.xhtml"></p:menuitem>
