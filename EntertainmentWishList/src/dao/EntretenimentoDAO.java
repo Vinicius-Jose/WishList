@@ -9,6 +9,6 @@ public interface EntretenimentoDAO {
 
 	Entretenimento buscarMediaUsuarios(Entretenimento entretenimento) throws NotEvaluatedException;
 
-	List<String> buscarNomes(String nome);
+	List<String> buscarNomes();
 
 }

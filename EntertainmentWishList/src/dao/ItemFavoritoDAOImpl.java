@@ -46,7 +46,8 @@ public class ItemFavoritoDAOImpl implements ItemFavoritoDAO {
 	@Override
 	public List<ItemFavoritos> buscarFavoritos(Usuario user) {
 		EntityManager em = emf.createEntityManager();
-		TypedQuery<ItemFavoritos> query = em.createQuery("select i from ItemFavoritos i  where i.usuario.email = '"+user.getEmail()+"'", ItemFavoritos.class);
+		TypedQuery<ItemFavoritos> query = em.createQuery("select i from ItemFavoritos i  where i.usuario.email = :email", ItemFavoritos.class);
+		query.setParameter("email", user.getEmail());
 		List<ItemFavoritos> favoritos = query.getResultList();
 		em.close();
 		return favoritos;

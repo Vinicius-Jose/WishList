@@ -63,7 +63,9 @@ public class UsuarioDAOImpl implements UsuarioDAO  {
 	public Usuario validarUsuario(String email, String senha) throws UserException {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Usuario> query = em.createQuery(
-				"select u from Usuario u where email = '" + email + "' and senha = '" + senha + "'", Usuario.class);
+				"select u from Usuario u where email = :email and senha = :senha", Usuario.class);
+		query.setParameter("email", email);
+		query.setParameter("senha", senha);
 		Usuario usuario = null;
 		try {
 			usuario = query.getSingleResult();
@@ -84,8 +86,10 @@ public class UsuarioDAOImpl implements UsuarioDAO  {
 	@Override
 	public List<Usuario> buscarUsuarios(String nome) {
 		EntityManager em = emf.createEntityManager();
-		TypedQuery<Usuario> query = em.createQuery("select u from Usuario u where email like '%" + nome
-				+ "%' or nickname like '" + nome + "' or primeiroNome like '%" + nome + "%'", Usuario.class);
+		TypedQuery<Usuario> query = em.createQuery("select u from Usuario u where email like :email or nickname like :nick or primeiroNome like :primeiro", Usuario.class);
+		query.setParameter("email", "%" + nome+"%");
+		query.setParameter("nick", "%" + nome+"%");
+		query.setParameter("primeiro", "%" + nome+"%");
 		List<Usuario> usuarios = query.getResultList();
 		em.close();
 		return usuarios;

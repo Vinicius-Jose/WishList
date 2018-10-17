@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import entity.Game;
+import entity.Indicacao;
 import entity.ItemFavoritos;
 import entity.Usuario;
 import enumeradas.Etaria;
@@ -30,6 +31,13 @@ public class DriverTeste {
 		for (Game s : games) {
 			System.out.println(s.getNomeOriginal());
 		}
+		IndicacaoDAO id = new IndicacaoDAOImpl();
+		Usuario user = new Usuario();
+		user.setEmail("pedro");
+		for(Indicacao ind : id.buscarIndicacaoEnviada(user)) {
+			System.out.println(ind.getStatusIndicacao());
+		}
+		
 		
 		ItemFavoritoDAO it = new ItemFavoritoDAOImpl();
 		List<ItemFavoritos> s = it.buscarFavoritos(new Usuario());

@@ -47,7 +47,8 @@ public class IndicacaoDAOImpl implements IndicacaoDAO {
 	@Override
 	public List<Indicacao> buscarIndicacaoEnviada(Usuario user) {
 		EntityManager em = emf.createEntityManager();
-		TypedQuery<Indicacao> query = em.createQuery("select i from Indicacao i where usuarioIndicador.email = '" + user.getEmail()+"'", Indicacao.class);
+		TypedQuery<Indicacao> query = em.createQuery("select i from Indicacao i where usuarioIndicador.email = :email", Indicacao.class);
+		query.setParameter("email", user.getEmail());
 		List<Indicacao> estudios = query.getResultList();
 		em.close();
 		return estudios;
@@ -59,7 +60,8 @@ public class IndicacaoDAOImpl implements IndicacaoDAO {
 	@Override
 	public List<Indicacao> buscarIndicacaoRecebida(Usuario user) {
 		EntityManager em = emf.createEntityManager();
-		TypedQuery<Indicacao> query = em.createQuery("select i from Indicacao i where usuarioRecebido.email = '" + user.getEmail()+"'", Indicacao.class);
+		TypedQuery<Indicacao> query = em.createQuery("select i from Indicacao i where usuarioRecebido.email = :email", Indicacao.class);
+		query.setParameter("email", user.getEmail());
 		List<Indicacao> estudios = query.getResultList();
 		em.close();
 		return estudios;

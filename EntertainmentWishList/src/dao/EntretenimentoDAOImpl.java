@@ -24,13 +24,15 @@ public class EntretenimentoDAOImpl implements EntretenimentoDAO {
 	public Entretenimento buscarMediaUsuarios(Entretenimento entretenimento) throws NotEvaluatedException {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Double> query = em.createQuery(
-				"select avg(i.nota) from ItemFavoritos i where i.entretenimento.id = " + entretenimento.getId(),
+				"select avg(i.nota) from ItemFavoritos i where i.nota>0 and i.entretenimento.id = :id",
 				Double.class);
 		try {
+			query.setParameter("id",  + entretenimento.getId());
 			entretenimento.setNotaUsuario(query.getSingleResult());
 		} catch (NonUniqueResultException e) {
 			throw new NotEvaluatedException(entretenimento);
 		} finally {
+			em.close();
 			return entretenimento;
 		}
 	}
@@ -39,12 +41,14 @@ public class EntretenimentoDAOImpl implements EntretenimentoDAO {
 	 * @see dao.EntretenimentoDAO#buscarNomes(java.lang.String)
 	 */
 	@Override
-	public List<String> buscarNomes(String nome){
+	public List<String> buscarNomes(){
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<String> query = em.createQuery(
-				"select e.nomeOriginal from Entretenimento e where e.nomeOriginal like'%" + nome+"%'",
+				"select e.nomeOriginal from Entretenimento e ",
 				String.class);
-		return query.getResultList();
+		List<String> nomes = query.getResultList();
+		em.close();
+		return nomes;
 		
 	}
 }

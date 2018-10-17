@@ -15,6 +15,10 @@ public class SerieDAOImpl implements SerieDAO {
 		emf = GenericDAO.getGenericDAO();
 	}
 
+	/* (non-Javadoc)
+	 * @see dao.SerieDAO#adicionar(entity.Serie)
+	 */
+	@Override
 	public void adicionar(Serie serie) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -23,6 +27,10 @@ public class SerieDAOImpl implements SerieDAO {
 		em.close();
 	}
 
+	/* (non-Javadoc)
+	 * @see dao.SerieDAO#alterar(entity.Serie)
+	 */
+	@Override
 	public void alterar(Serie serie) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -31,20 +39,29 @@ public class SerieDAOImpl implements SerieDAO {
 		em.close();
 	}
 
+	/* (non-Javadoc)
+	 * @see dao.SerieDAO#buscarSeries(java.lang.String)
+	 */
+	@Override
 	public List<Serie> buscarSeries(String nome) {
 		EntityManager em = emf.createEntityManager();
-		TypedQuery<Serie> query = em.createQuery("select s from Serie s  where s.nomeOriginal like '%" + nome
-				+ "%' or s.nomePortugues like '%" + nome + "%'", Serie.class);
+		TypedQuery<Serie> query = em.createQuery("select s from Serie s  where s.nomeOriginal like :nomeOriginal or s.nomePortugues like :nomePortugues", Serie.class);
+		query.setParameter("nomeOriginal", "%" + nome+"%");
+		query.setParameter("nomePortugues", "%" + nome+"%");
 		List<Serie> serie = query.getResultList();
 		em.close();
 		return serie;
 	}
 	
 	
-	public List<String> buscarNomesSeries(String nome){
+	/* (non-Javadoc)
+	 * @see dao.SerieDAO#buscarNomesSeries()
+	 */
+	@Override
+	public List<String> buscarNomesSeries(){
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<String> query = em.createQuery(
-				"select s.nomePortugues from Serie s where s.nomePortugues like'%" + nome+"%'",
+				"select s.nomePortugues from Serie s ",
 				String.class);
 		return query.getResultList();
 		

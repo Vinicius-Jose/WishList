@@ -45,8 +45,9 @@ public class FilmeDAOImpl implements FilmeDAO {
 	@Override
 	public List<Filme> buscarFilmes(String nome) {
 		EntityManager em = emf.createEntityManager();
-		TypedQuery<Filme> query = em.createQuery("select f from Filme f   where f.nomeOriginal like '%" + nome
-				+ "%' or f.nomePortugues like '%" + nome + "%'", Filme.class);
+		TypedQuery<Filme> query = em.createQuery("select f from Filme f   where f.nomeOriginal like :nomeOriginal or f.nomePortugues like :nomePortugues", Filme.class);
+		query.setParameter("nomeOriginal", "%" + nome+"%");
+		query.setParameter("nomePortugues", "%" + nome+"%");
 		List<Filme> filme = query.getResultList();
 		em.close();
 		return filme;
@@ -56,12 +57,14 @@ public class FilmeDAOImpl implements FilmeDAO {
 	 * @see dao.FilmeDAO#buscarNomesFilmes(java.lang.String)
 	 */
 	@Override
-	public List<String> buscarNomesFilmes(String nome){
+	public List<String> buscarNomesFilmes(){
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<String> query = em.createQuery(
-				"select f.nomePortugues from Filme f where f.nomePortugues like'%" + nome+"%'",
+				"select f.nomePortugues from Filme f",
 				String.class);
-		return query.getResultList();
+		List<String> nomes = query.getResultList();
+		em.close();
+		return nomes;
 		
 	}
 

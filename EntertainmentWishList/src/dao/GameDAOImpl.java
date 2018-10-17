@@ -45,8 +45,9 @@ public class GameDAOImpl implements GameDAO {
 	@Override
 	public List<Game> buscarGames(String nome) {
 		EntityManager em = emf.createEntityManager();
-		TypedQuery<Game> query = em.createQuery("select g from Game g   where g.nomeOriginal like '%" + nome + "%'",
+		TypedQuery<Game> query = em.createQuery("select g from Game g   where g.nomeOriginal like :nome ",
 				Game.class);
+		query.setParameter("nome","%" + nome + "%");
 		List<Game> games = query.getResultList();
 		em.close();
 		return games;

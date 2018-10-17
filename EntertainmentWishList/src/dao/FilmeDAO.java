@@ -12,6 +12,6 @@ public interface FilmeDAO {
 
 	List<Filme> buscarFilmes(String nome);
 
-	List<String> buscarNomesFilmes(String nome);
+	List<String> buscarNomesFilmes();
 
 }
