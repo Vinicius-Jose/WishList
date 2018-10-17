@@ -11,10 +11,10 @@
 </h:head>
 
 <h:body>
-	<h:form>  
-		<div>
-		</div>
-	</h:form>
+	
+	<ui:insert name="cabecalho">
+		<ui:include src="/cabecalho.xhtml"></ui:include>
+	</ui:insert>
 
 	<p:panel id="painelCadastro" style="margin-top:25px; margin-bottom:25px;">
 		<p:messages id="message" />
