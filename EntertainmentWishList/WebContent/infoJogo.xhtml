@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+		crossorigin="anonymous"></link>
+		
+	
+	<link rel="stylesheet" media = "screen" href="css/estilo.css" type="text/css"/>
+	
+	<title>Informações</title>
+</h:head>
+<h:body>
+	<ui:insert name="cabecalho">
+		<ui:include src="/cabecalho.xhtml"></ui:include>
+	</ui:insert>
+	
+	<h:form>
+		<div class="card" style="width: 8rem; margin-left: 10rem;  margin-top: 2rem;">
+			<h:graphicImage class="card-img-top"
+				value="#{infoBean.poster}" 
+				alt="Card image cap"></h:graphicImage>
+		</div>		
+	
+		<div style="margin-top: -12rem;">
+			<p:outputLabel id="add-list" style="margin-left: 28rem;  ">add lista</p:outputLabel>
+			<p:outputLabel id="recomendado" style="margin-left: 13rem; ">recomendar</p:outputLabel>
+		</div>
+	
+		<div class="sinopse" style="margin-top: 12rem;">
+			<p:outputLabel id="sinopse" style="margin-left: 10rem; ">Sinopse </p:outputLabel><br/>   
+			<p:outputLabel id="sinopse-desc" style="margin-left: 10rem; " value="#{infoBean.selected.sinopse}"></p:outputLabel><br />
+		</div>
+		
+		<div style="margin-top: -12rem; margin-left: 20rem;">
+			<p:outputLabel id="nome-original" >Batman vs Superman</p:outputLabel> <br />
+			<p:outputLabel id="genero" >Genero</p:outputLabel>
+			
+		</div>
+		
+		<div style="margin-left: 30rem; margin-top: -2rem;">
+			<p:outputLabel id="etaria" >Nº de players</p:outputLabel>
+		</div>
+		
+		<div style="margin-top: -4rem; text-align: right; margin-right: 7rem;">
+			<p:outputLabel id="nota1" style="margin-left: 50rem; ">ndfota1</p:outputLabel><br />
+			<p:outputLabel id="nota2" style="margin-left: 50rem; ">nosadsadsata2</p:outputLabel><br />
+		</div>
+		
+		<div style="margin-left: 55rem; margin-top: 5rem;" >
+			<p:outputLabel>Minha nota: 
+				<h:selectOneMenu id="tipoEnderecoId" >
+	                  <f:selectItem itemValue="1" itemLabel="1"/>
+	                  <f:selectItem itemValue="2" itemLabel="2"/>
+	                  <f:selectItem itemValue="1" itemLabel="3"/>
+	                  <f:selectItem itemValue="1" itemLabel="4"/>
+	                  <f:selectItem itemValue="1" itemLabel="5"/>
+	                  <f:selectItem itemValue="1" itemLabel="6"/>
+	                  <f:selectItem itemValue="1" itemLabel="7"/>
+	                  <f:selectItem itemValue="1" itemLabel="8"/>
+	                  <f:selectItem itemValue="1" itemLabel="9"/>
+	                  <f:selectItem itemValue="1" itemLabel="10"/>
+	                  
+	            </h:selectOneMenu>
+            </p:outputLabel>
+		</div>
+	
+		<div style="margin-left: 10rem; margin-top: 2rem;">
+			<p:outputLabel>Estudio:</p:outputLabel><br />
+			<p:outputLabel>Disponivel nas plataformas: XBox, PlayStation, PC</p:outputLabel>
+			
+		</div>
+		
+		<div style="margin-left: 30rem; margin-top: -4rem;">
+			<p:outputLabel>Etaria:</p:outputLabel>
+		</div>
+	
+		<div style="margin-left: 38rem; margin-top: -2rem;">
+			<p:outputLabel>Data de lançamento:</p:outputLabel>
+		</div>
+			
+	
+		<div style="margin-left: 10rem; margin-top: 2rem;">
+			<p:inputTextarea rows="3" cols="77" autoResize="false"/>
+		</div>
+	</h:form>
+	
+	<div style="margin-left: 59rem; margin-top: 1rem;">
+		<p:commandButton id="postar" value="Postar" ></p:commandButton>
+	</div>
+</h:body>
+</html>
