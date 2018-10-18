@@ -9,7 +9,7 @@
 
 
 <ui:composition>
-	<h:form  id="fix" name="cabecalho" >
+	<h:form  id="fix" name="cabecalho">
 		<p:tabMenu activeIndex="#{param.i}" style="font-size:14px;  "  >
 			<p:menuitem value="Home Page" outcome="/index.xhtml"
 				icon="ui-icon-home">
@@ -23,36 +23,36 @@
 				icon="ui-icon-star">
 				<f:param name="i" value="2" />
 			</p:menuitem>
-			<p:menuitem style="padding:1px; " >
+			<p:menuitem style="padding:0px;" >
 				<f:param name="i" value="3" />
 				<p:menubar
-					style="font-size:12px; padding:0.3px;  font-align:'center'; " styleClass="ui-tabmenu">
-					<p:submenu label="Cadastrar">
+					style="font-size:14px; padding:03px;  font-align:'center'; height:25px;" styleClass="ui-tabmenuitem ui-state-default ui-corner-top ui-tabmenuitem-hasicon" >
+					<p:submenu label="Cadastrar" style="height:20px;" styleClass="ui-tabmenuitem ui-state-default ui-corner-top ui-tabmenuitem-hasicon ui-tabmenu-text">
 						<p:menuitem style="width:80%" value="Jogo" outcome="/cadastroJogo.xhtml"></p:menuitem>
 						<p:menuitem style="width:80%" value="Filme" outcome="/cadastroFilme.xhtml"></p:menuitem>
 						<p:menuitem style="width:80%" value="Serie" outcome="/cadastroSerie.xhtml"></p:menuitem>
 					</p:submenu>
+				
 				</p:menubar>
 			</p:menuitem>
 			<p:menuitem value="Cadastrar Usuários" outcome="/cadastroUsuario.xhtml"
 				icon="ui-icon-person">
 				<f:param name="i" value="4" />
 			</p:menuitem>
-			<p:menuitem style="padding:1px; margin-left:170px; " >
+			<p:menuitem style="padding:1px; height:30px" >
 				<p:menubar
-					style="font-size:14px; padding:0.3px;  font-align:'center'">
+					style="font-size:14px; padding:0.3px; font-align:'center'">
 					<f:facet name="options">
 						<p:inputText placeholder="Procurando Amigos ?"
-							style="height:30px;" />
+							style="height:15px; width:300px " />
 					</f:facet>
 				</p:menubar>
-
 			</p:menuitem>
-			<p:menuitem style="padding:0.2px; ">
+			<p:menuitem style="padding:0.0px;">
 				<p:menubar
-					style="font-size:14px; padding:0.3px;  font-align:'center'">
+					style="font-size:14px; padding:0.03px;  font-align:'center'; height:25px;">
 					<p:submenu
-						style=" background-image: url('#{cabecalhoController.image}'); background-size: 100px 40px; ">
+						style=" background-image: url('#{cabecalhoController.image}'); background-size: 100px 40px; height:25px; ">
 						<p:menuitem style="width:80%" value="Editar Dados"></p:menuitem>
 						<p:menuitem style="width:80%" value="Logout" icon="ui-icon-close"></p:menuitem>
 					</p:submenu>
