@@ -21,7 +21,7 @@ public class ImagesView {
 	public List<String> getImages() {
 		return images;
 	}
-	
+
 	public void imprimir() {
 		System.out.println("oi");
 	}

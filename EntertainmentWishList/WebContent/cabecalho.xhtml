@@ -9,8 +9,9 @@
 
 
 <ui:composition>
-	<h:form  id="fix" name="cabecalho">
-		<p:tabMenu activeIndex="#{param.i}" style="font-size:14px;  "  >
+
+	<h:form id="fix" name="cabecalho">
+		<p:tabMenu activeIndex="#{param.i}" style="font-size:14px; ">
 			<p:menuitem value="Home Page" outcome="/index.xhtml"
 				icon="ui-icon-home">
 				<f:param name="i" value="0" />
@@ -23,23 +24,28 @@
 				icon="ui-icon-star">
 				<f:param name="i" value="2" />
 			</p:menuitem>
-			<p:menuitem style="padding:0px;" >
+			<p:menuitem style="padding:0px;">
 				<f:param name="i" value="3" />
 				<p:menubar
-					style="font-size:14px; padding:03px;  font-align:'center'; height:25px;" styleClass="ui-tabmenuitem ui-state-default ui-corner-top ui-tabmenuitem-hasicon" >
-					<p:submenu label="Cadastrar" style="height:20px;" styleClass="ui-tabmenuitem ui-state-default ui-corner-top ui-tabmenuitem-hasicon ui-tabmenu-text">
-						<p:menuitem style="width:80%" value="Jogo" outcome="/cadastroJogo.xhtml"></p:menuitem>
-						<p:menuitem style="width:80%" value="Filme" outcome="/cadastroFilme.xhtml"></p:menuitem>
-						<p:menuitem style="width:80%" value="Serie" outcome="/cadastroSerie.xhtml"></p:menuitem>
+					style="font-size:14px; padding:02px;  font-align:'center'; height:25px;display:flex;justify-content:center"
+					styleClass="ui-tabmenuitem ui-state-default ui-corner-top ui-tabmenuitem-hasicon">
+					<p:submenu label="Cadastrar" style="height:20px;"
+						styleClass="ui-tabmenuitem ui-state-default ui-corner-top ui-tabmenuitem-hasicon ui-tabmenu-text">
+						<p:menuitem style="width:80%" value="Jogo"
+							outcome="/cadastroJogo.xhtml"></p:menuitem>
+						<p:menuitem style="width:80%" value="Filme"
+							outcome="/cadastroFilme.xhtml"></p:menuitem>
+						<p:menuitem style="width:80%" value="Serie"
+							outcome="/cadastroSerie.xhtml"></p:menuitem>
 					</p:submenu>
-				
+
 				</p:menubar>
 			</p:menuitem>
-			<p:menuitem value="Cadastrar Usuários" outcome="/cadastroUsuario.xhtml"
-				icon="ui-icon-person">
+			<p:menuitem value="Cadastrar Usuários"
+				outcome="/cadastroUsuario.xhtml" icon="ui-icon-person">
 				<f:param name="i" value="4" />
 			</p:menuitem>
-			<p:menuitem style="padding:1px; height:30px" >
+			<p:menuitem style="padding:1px; height:30px">
 				<p:menubar
 					style="font-size:14px; padding:0.3px; font-align:'center'">
 					<f:facet name="options">
@@ -60,9 +66,9 @@
 			</p:menuitem>
 		</p:tabMenu>
 	</h:form>
-	
+
 	<p:sticky target="fix" />
-	
+
 	<h:form>
 		<div
 			style="margin-top: 50px; display: flex; justify-content: center; align-items: center; font-size: 13px">

@@ -11,13 +11,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import entity.Entretenimento;
+import entity.Filme;
+import entity.Game;
+import entity.Serie;
 
 @RequestScoped
 @ManagedBean
@@ -38,7 +36,7 @@ public class BuscaBean {
 	public void init() {
 		entretenimentos = new ArrayList<>();
 		for (int i = 0; i < 30; i++) {
-			Entretenimento ent = new Entretenimento();
+			Entretenimento ent = new Serie();
 			ent.setNomeOriginal("Superman IV " + i);
 			ent.setDataLancamento(new Date(Calendar.getInstance().getTimeInMillis()));
 			ent.setPoster(
@@ -56,18 +54,19 @@ public class BuscaBean {
 	}
 
 	public void mostrarNome() {
-		if (selected != null) {
-			System.out.println(selected.getNomeOriginal());
-			System.out.println(selected.getPoster());
-		} else {
-			System.out.println("oi");
-		}
-
+		System.out.println(selected.getNomeOriginal());
+		System.out.println(selected.getPoster());
 		ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
+
 		try {
-			ex.redirect("./index.jsf");
+			if(selected instanceof Serie)
+				ex.redirect("./infoSerie.xhtml");
+			else if(selected instanceof Game) {
+				ex.redirect("./infoJogo.xhtml");
+			}else if(selected instanceof Filme) {
+				ex.redirect("./infoFilme.xhtml");
+			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

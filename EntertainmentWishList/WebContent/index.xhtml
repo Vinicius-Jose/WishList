@@ -14,27 +14,28 @@
 	<ui:insert name="cabecalho">
 		<ui:include src="/cabecalho.xhtml"></ui:include>
 	</ui:insert>
-	
-	<div style="margin-left: 28%; ">
-	<div style="margin-top: 25px; ">
-		<h:outputLabel value="Recomendação de seus amigos"
-			style="font-size:20px;" />
-	</div>
-	
-	<p:contentFlow value="#{imagesView.images}" var="image"
-		style=" height:200px; width:700px; ">
-		<h:graphicImage value="#{image}" styleClass="content" />
-		<div class="caption" style="color: black">#{image}</div>
-	</p:contentFlow>
-	<div style="margin-top: 25px;">
-		<h:outputLabel value="Mais Procurados"
-			style="font-size:20px;" />
-	</div>
-	<p:contentFlow value="#{imagesView.images}" var="image"
-		style=" height:200px; width:700px  ">
-		<h:graphicImage value="#{image}" styleClass="content" />
-		<div class="caption" style="color: black">#{image}</div>
-	</p:contentFlow>
+	<div class="ui-fluid">
+		<div align="center">
+			<div style="margin-top: 25px;">
+				<h:outputLabel value="Recomendação de seus amigos"
+					style="font-size:20px; font-family:Gill Sans,Arial,sans-serif;color:#2c4359" />
+			</div>
+
+			<p:contentFlow value="#{imagesView.images}" var="image"
+				style=" height:200px; width:700px; ">
+				<h:graphicImage value="#{image}" styleClass="content" />
+				<div class="caption" style="color: black">#{image}</div>
+			</p:contentFlow>
+			<div style="margin-top: 25px;">
+				<h:outputLabel value="Mais Procurados"
+					style="font-size:20px; font-family:Gill Sans,Arial,sans-serif; color:#2c4359" />
+			</div>
+			<p:contentFlow value="#{imagesView.images}" var="image"
+				style=" height:200px; width:700px  ">
+				<h:graphicImage value="#{image}" styleClass="content" />
+				<div class="caption" style="color: black">#{image}</div>
+			</p:contentFlow>
+		</div>
 	</div>
 </h:body>
 </html>
