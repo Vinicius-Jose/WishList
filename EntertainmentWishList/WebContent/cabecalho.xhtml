@@ -65,6 +65,7 @@
 				</p:menubar>
 			</p:menuitem>
 		</p:tabMenu>
+	
 	</h:form>
 
 	<p:sticky target="fix" />
@@ -74,10 +75,12 @@
 			style="margin-top: 50px; display: flex; justify-content: center; align-items: center; font-size: 13px">
 			<p:commandButton id="pesquisar" size="3"
 				actionListener="#{buttonView.buttonAction}" icon="ui-icon-search" />
+			<div class="ui-fluid">
 			<p:autoComplete size="70" style="" id="acMinLength"
 				minQueryLength="3" value="#{autoCompleteView.txt2}"
 				completeMethod="methodo de completarTexto" effect="fade"
 				placeholder="Digite aqui o filme, jogo, livro que deseja buscar" />
+			</div>
 		</div>
 	</h:form>
 </ui:composition>
