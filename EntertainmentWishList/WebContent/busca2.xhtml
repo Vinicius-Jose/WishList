@@ -12,12 +12,14 @@
 </h:head>
 
 <h:body>
-	<ui:insert name="cabecalho" >
-		<ui:include src="/cabecalho.xhtml"  />
+	<ui:insert name="cabecalho">
+		<link type="text/css" rel="stylesheet"
+			href="javax.faces.resource/theme.css" />
+		<ui:include src="/cabecalho.xhtml" />
 	</ui:insert>
 
 	<div class="ui-fluid">
-		<h:form id="form" style="margin-top:25px" >
+		<h:form id="form" style="margin-top:25px">
 			<p:dataGrid var="entretenimento" value="#{buscaBean.entretenimentos}"
 				columns="4" layout="grid" rows="12" paginator="true"
 				id="entretenimentos"
