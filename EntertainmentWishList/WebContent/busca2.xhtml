@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+	<title>Busca</title>
+</h:head>
+
+<h:body>
+	<ui:insert name="cabecalho" >
+		<ui:include src="/cabecalho.xhtml"  />
+	</ui:insert>
+
+	<div class="ui-fluid">
+		<h:form id="form" style="margin-top:25px" >
+			<p:dataGrid var="entretenimento" value="#{buscaBean.entretenimentos}"
+				columns="4" layout="grid" rows="12" paginator="true"
+				id="entretenimentos"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="8,12,16">
+
+				<f:facet name="header">
+           		 Os Resultados da sua busca
+        		</f:facet>
+				<h:outputScript library="js" name="modernizr.custom.js" />
+				<h:outputStylesheet library="css" name="component.css" />
+				<h:outputStylesheet library="css" name="demo.css" />
+				<div class="wrapper" style="margin: 5px">
+					<ul class="stage clearfix">
+						<li class="scene">
+							<div class="movie">
+								<div class="poster"
+									style="background-image: url('#{entretenimento.poster}')"></div>
+								<div class="info">
+									<header
+										style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyF8g_pGpREMtE9uHBJigUsLVaPW5m5NKiHic06kBwIqcPyNzQCg')">
+									<h1>#{entretenimento.nomeOriginal}</h1>
+									<span class="year">#{entretenimento.dataLancamento} </span> <span
+										class="rating">#{entretenimento.classificacaoEtaria}</span> </header>
+									<p>#{entretenimento.sinopse}</p>
+									<p:commandButton action="#{buscaBean.mostrarNome}"
+										value="Visualizar" id="Ajax">
+										<f:setPropertyActionListener target="#{buscaBean.selected}"
+											value="#{entretenimento}" />
+									</p:commandButton>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</p:dataGrid>
+
+		</h:form>
+	</div>
+</h:body>
+</html>

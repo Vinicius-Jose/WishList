@@ -16,6 +16,7 @@ import entity.Entretenimento;
 import entity.Filme;
 import entity.Game;
 import entity.Serie;
+import enumeradas.Etaria;
 
 @RequestScoped
 @ManagedBean
@@ -41,6 +42,8 @@ public class BuscaBean {
 			ent.setDataLancamento(new Date(Calendar.getInstance().getTimeInMillis()));
 			ent.setPoster(
 					"https://resizing.flixster.com/TuzSqod_m3cBJEHAMpkEKuaTB0Y=/206x305/v1.bTsxMTIwNzg4MztqOzE3OTA0OzEyMDA7MTUwMzsyMDA0");
+			ent.setClassificacaoEtaria(Etaria.PG10);
+			ent.setSinopse("EUA e União Soviética entram em uma corrida armamentista que pode destruir a Terra, e Super-Homem decide intervir. Enquanto isso, Lex Luthor, seu arqui-inimigo, escapa da prisão e clona o Homem de Aço com material radioativo.");
 			entretenimentos.add(ent);
 		}
 	}
