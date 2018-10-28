@@ -37,7 +37,7 @@ public class Entretenimento implements Serializable{
 	@Transient
 	private double notaUsuario;
 	
-
+	
 	private Date dataLancamento;
 	
 	private String sinopse;

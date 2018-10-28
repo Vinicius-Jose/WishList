@@ -39,6 +39,7 @@ public class DriverTeste {
 		System.out.println("Metacritic " + a.getMetacritic());
 		System.out.println("Rotten " + a.getRottenTomatoes());
 		System.out.println("Poster " + a.getPoster());
+		System.out.println(a.getTemporadas());
 //		System.out.println("Director " + a.getDiretor());
 		
 //		List<Game> games = gd.buscarGames("ken");

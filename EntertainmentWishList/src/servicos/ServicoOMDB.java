@@ -20,6 +20,7 @@ public class ServicoOMDB {
 		String uri = criaURI(e);
 		WebResource resource = cliente.resource(uri);
 		GsonBuilder builder = new GsonBuilder().excludeFieldsWithoutExposeAnnotation();
+		builder.registerTypeAdapter(Serie.class, new SerieDeserializer());
 		Gson gson = builder.create();
 		Entretenimento novo = null;
 		if (e instanceof Game) {
