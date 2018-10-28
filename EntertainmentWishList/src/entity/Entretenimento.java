@@ -13,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import enumeradas.Etaria;
 
 @Entity
@@ -23,19 +26,27 @@ public class Entretenimento implements Serializable{
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private long id;
 	
+	@SerializedName("Title")
+	@Expose
 	private String nomeOriginal;
 	
+	@SerializedName("Metascore")
+	@Expose
 	private int metacritic;
 	
 	@Transient
 	private double notaUsuario;
 	
+
 	private Date dataLancamento;
 	
 	private String sinopse;
 	
+	
 	private Etaria classificacaoEtaria;
 	
+	@SerializedName("Poster")
+	@Expose
 	private String poster;
 
 	@ManyToOne

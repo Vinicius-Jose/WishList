@@ -6,18 +6,29 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 @Entity
 @PrimaryKeyJoinColumn(name = "Entretenimentoid")
 public class Filme extends Entretenimento implements Serializable{
 
 	private String nomePortugues;
 	
-	private double imdb;
+	@SerializedName("imdbRating")
+	@Expose
+	private double imdb; 
 	
+	@SerializedName ("Rotten Tomatoes" )
+	@Expose
 	private int rottenTomatoes;
+	
 	
 	private int duracao;
 	
+	
+	@SerializedName("Director")
+	@Expose
 	@Column(length = 100)
 	private String diretor;
 

@@ -1,50 +1,63 @@
 package dao;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.sql.Date;
 import java.util.List;
 
+import entity.Filme;
 import entity.Game;
 import entity.Indicacao;
 import entity.ItemFavoritos;
 import entity.Usuario;
 import enumeradas.Etaria;
+import servicos.ServicoOMDB;
 
 public class DriverTeste {
 
 	public static void main(String[] args) {
-		Game a = new Game();
-		a.setNomeOriginal("teste");
+		Filme a = new Filme();
+		a.setNomeOriginal("Revenge");
 		a.setDataLancamento(new Date(1111));
 		a.setClassificacaoEtaria(Etaria.PG10);
-		a.setGenero("fasfd");
-
-		Game b = new Game();
-		b.setId(2);
-		b.setNomeOriginal("hadouken");
-		b.setDataLancamento(new Date(2555555));
-		b.setClassificacaoEtaria(Etaria.PG18);
-		b.setGenero("fight");
-		GameDAO gd = new GameDAOImpl();
+//
+//		Game b = new Game();
+//		b.setId(2);
+//		b.setNomeOriginal("hadouken");
+//		b.setDataLancamento(new Date(2555555));
+//		b.setClassificacaoEtaria(Etaria.PG18);
+//		b.setGenero("fight");
+//		GameDAO gd = new GameDAOImpl();
 //		 gd.adicionar(a);
 		// gd.adicionar(b);
-		List<Game> games = gd.buscarGames("ken");
-		for (Game s : games) {
-			System.out.println(s.getNomeOriginal());
-		}
-		IndicacaoDAO id = new IndicacaoDAOImpl();
-		Usuario user = new Usuario();
-		user.setEmail("pedro");
-		for(Indicacao ind : id.buscarIndicacaoEnviada(user)) {
-			System.out.println(ind.getStatusIndicacao());
-		}
 		
+		ServicoOMDB so = new ServicoOMDB();
+		a = (Filme) so.servicoEntretenimento(a);
+		System.out.println("Nome " + a.getNomeOriginal());
+		System.out.println("Metacritic " + a.getMetacritic());
+		System.out.println("Rotten " + a.getRottenTomatoes());
+		System.out.println("Poster " + a.getPoster());
+		System.out.println("Director " + a.getDiretor());
 		
-		ItemFavoritoDAO it = new ItemFavoritoDAOImpl();
-		List<ItemFavoritos> s = it.buscarFavoritos(new Usuario());
-		for(ItemFavoritos i : s) {
-			System.out.println(i.getNota());
-		}
-
+//		List<Game> games = gd.buscarGames("ken");
+//		for (Game s : games) {
+//			System.out.println(s.getNomeOriginal());
+//		}
+//		IndicacaoDAO id = new IndicacaoDAOImpl();
+//		Usuario user = new Usuario();
+//		user.setEmail("pedro");
+//		for(Indicacao ind : id.buscarIndicacaoEnviada(user)) {
+//			System.out.println(ind.getStatusIndicacao());
+//		}
+//		
+//		
+//		ItemFavoritoDAO it = new ItemFavoritoDAOImpl();
+//		List<ItemFavoritos> s = it.buscarFavoritos(new Usuario());
+//		for(ItemFavoritos i : s) {
+//			System.out.println(i.getNota());
+//		}
+//
 	}
 
 }
