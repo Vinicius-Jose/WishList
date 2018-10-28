@@ -10,6 +10,7 @@ import entity.Filme;
 import entity.Game;
 import entity.Indicacao;
 import entity.ItemFavoritos;
+import entity.Serie;
 import entity.Usuario;
 import enumeradas.Etaria;
 import servicos.ServicoOMDB;
@@ -17,8 +18,8 @@ import servicos.ServicoOMDB;
 public class DriverTeste {
 
 	public static void main(String[] args) {
-		Filme a = new Filme();
-		a.setNomeOriginal("Revenge");
+		Serie a = new Serie();
+		a.setNomeOriginal("The Equalizer");
 		a.setDataLancamento(new Date(1111));
 		a.setClassificacaoEtaria(Etaria.PG10);
 //
@@ -33,12 +34,12 @@ public class DriverTeste {
 		// gd.adicionar(b);
 		
 		ServicoOMDB so = new ServicoOMDB();
-		a = (Filme) so.servicoEntretenimento(a);
+		a = (Serie) so.servicoEntretenimento(a);
 		System.out.println("Nome " + a.getNomeOriginal());
 		System.out.println("Metacritic " + a.getMetacritic());
 		System.out.println("Rotten " + a.getRottenTomatoes());
 		System.out.println("Poster " + a.getPoster());
-		System.out.println("Director " + a.getDiretor());
+//		System.out.println("Director " + a.getDiretor());
 		
 //		List<Game> games = gd.buscarGames("ken");
 //		for (Game s : games) {

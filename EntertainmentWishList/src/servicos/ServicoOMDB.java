@@ -39,7 +39,7 @@ public class ServicoOMDB {
 	private String criaURI(Entretenimento e) {
 		String uri = null;
 		try {
-			uri = "http://www.omdbapi.com/?t=" + URLEncoder.encode(e.getNomeOriginal(), "UTF-8")
+			uri = "http://www.omdbapi.com/?t=" + URLEncoder.encode(e.getNomeOriginal(), "UTF-8");
 			if (e instanceof Filme) {
 				uri+="&type=movie&";
 			} else if (e instanceof Serie) {
@@ -53,3 +53,5 @@ public class ServicoOMDB {
 		return uri;
 	}
 }
+
+//outra api = https://moviegraph.io/#usage

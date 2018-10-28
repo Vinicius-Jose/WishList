@@ -7,6 +7,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 @Entity
 @PrimaryKeyJoinColumn(name = "Entretenimentoid")
 public class Serie extends Entretenimento implements Serializable{
@@ -14,6 +17,8 @@ public class Serie extends Entretenimento implements Serializable{
 	@Column(length=200)
 	private String nomePortugues;
 	
+	@SerializedName("totalSeasons")
+	@Expose
 	private int numeroEpisodios;
 	
 	private int temporadas;
