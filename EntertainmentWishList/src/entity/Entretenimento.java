@@ -20,31 +20,27 @@ import enumeradas.Etaria;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Entretenimento implements Serializable{
+public class Entretenimento implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
-	
+
 	@SerializedName("Title")
 	@Expose
 	private String nomeOriginal;
-	
-	@SerializedName("Metascore")
-	@Expose
+
 	private int metacritic;
-	
+
 	@Transient
 	private double notaUsuario;
-	
-	
+
 	private Date dataLancamento;
-	
+
 	private String sinopse;
-	
-	
+
 	private Etaria classificacaoEtaria;
-	
+
 	@SerializedName("Poster")
 	@Expose
 	private String poster;
@@ -52,7 +48,6 @@ public class Entretenimento implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "Estudioid")
 	private Estudio estudio;
-	
 
 	public String getNomeOriginal() {
 		return nomeOriginal;
@@ -117,7 +112,7 @@ public class Entretenimento implements Serializable{
 	public void setEstudio(Estudio estudio) {
 		this.estudio = estudio;
 	}
-	
+
 	public long getId() {
 		return id;
 	}

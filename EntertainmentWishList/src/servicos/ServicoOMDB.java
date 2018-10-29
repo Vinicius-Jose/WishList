@@ -2,6 +2,7 @@ package servicos;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.sql.Date;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -20,16 +21,23 @@ public class ServicoOMDB {
 		String uri = criaURI(e);
 		WebResource resource = cliente.resource(uri);
 		GsonBuilder builder = new GsonBuilder().excludeFieldsWithoutExposeAnnotation();
-		builder.registerTypeAdapter(Serie.class, new SerieDeserializer());
+		builder.registerTypeAdapter(Integer.class, new MetacriticDeserializer());
+		builder.registerTypeAdapter(Date.class, new DateDeserializer());
+		
 		Gson gson = builder.create();
+		
+		String json = resource.get(String.class);
 		Entretenimento novo = null;
+		
 		if (e instanceof Game) {
-			novo = gson.fromJson(resource.get(String.class), Game.class);
+			novo = gson.fromJson(json, Game.class);
 		} else if (e instanceof Filme) {
-			novo = gson.fromJson(resource.get(String.class), Filme.class);
+			novo = gson.fromJson(json, Filme.class);
 		} else if (e instanceof Serie) {
-			novo = gson.fromJson(resource.get(String.class), Serie.class);
+			novo = gson.fromJson(json, Serie.class);
 		}
+		novo.setMetacritic(gson.fromJson(json, Integer.class));
+		novo.setDataLancamento(gson.fromJson(json, Date.class));
 		if (novo.getNomeOriginal() != null) {
 			return novo;
 		}

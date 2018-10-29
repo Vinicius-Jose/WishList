@@ -15,7 +15,7 @@ public class ServicoEmail {
 		sp.setAuthenticator(new DefaultAuthenticator("adsfateczl18@gmail.com", "ads2018fatectudo"));
 		sp.setSSLOnConnect(true);
 		try {
-			sp.addTo("rodrigo.cdl1997@gmail.com", "Rodrigo"); // Destinario
+			sp.addTo(user.getEmail(), user.getPrimeiroNome() + " " + user.getSegundoNome()); // Destinario
 			sp.setFrom("adsfateczl18@gmail.com");// remetente
 			sp.setSubject("Sua Nova Senha");// Assunto
 			sp.setMsg("Olá/r/n" + user.getPrimeiroNome() + "" + user.getSegundoNome()

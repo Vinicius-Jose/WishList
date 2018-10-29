@@ -19,8 +19,7 @@ public class Filme extends Entretenimento implements Serializable{
 	@Expose
 	private double imdb; 
 	
-	@SerializedName ("Rotten Tomatoes" )
-	@Expose
+
 	private int rottenTomatoes;
 	
 	
