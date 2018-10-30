@@ -17,50 +17,59 @@ import entity.Serie;
 public class ServicoOMDB {
 
 	public Entretenimento servicoEntretenimento(Entretenimento e) {
-		Client cliente = new Client();
-		String uri = criaURI(e);
-		WebResource resource = cliente.resource(uri);
-		GsonBuilder builder = new GsonBuilder().excludeFieldsWithoutExposeAnnotation();
-		builder.registerTypeAdapter(Integer.class, new MetacriticDeserializer());
-		builder.registerTypeAdapter(Date.class, new DateDeserializer());
-		
-		Gson gson = builder.create();
-		
-		String json = resource.get(String.class);
 		Entretenimento novo = null;
-		
-		if (e instanceof Game) {
-			novo = gson.fromJson(json, Game.class);
-		} else if (e instanceof Filme) {
-			novo = gson.fromJson(json, Filme.class);
-		} else if (e instanceof Serie) {
-			novo = gson.fromJson(json, Serie.class);
-		}
-		novo.setMetacritic(gson.fromJson(json, Integer.class));
-		novo.setDataLancamento(gson.fromJson(json, Date.class));
-		if (novo.getNomeOriginal() != null) {
-			return novo;
-		}
+		if (!(e instanceof Game)) {
+			Client cliente = new Client();
+			String uri = null;
+			try {
+				uri = criaURI(e);
+			} catch (UnsupportedEncodingException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			WebResource resource = cliente.resource(uri);
+			GsonBuilder builder = new GsonBuilder().excludeFieldsWithoutExposeAnnotation();
+			builder.registerTypeAdapter(Integer.class, new MetacriticDeserializer());
+			builder.registerTypeAdapter(Date.class, new DateDeserializer());
 
-		return e;
+			Gson gson = builder.create();
+
+			String json = resource.get(String.class);
+
+			if (e instanceof Filme) {
+				novo = gson.fromJson(json, Filme.class);
+			} else if (e instanceof Serie) {
+				novo = gson.fromJson(json, Serie.class);
+			}
+			novo.setMetacritic(gson.fromJson(json, Integer.class));
+			novo.setDataLancamento(gson.fromJson(json, Date.class));
+			if (novo.getNomeOriginal() != null) {
+				return novo;
+			} else
+				return e;
+		}else {
+			return e;
+		}
 	}
 
-	private String criaURI(Entretenimento e) {
+
+	private String criaURI(Entretenimento e) throws UnsupportedEncodingException {
 		String uri = null;
-		try {
+		if (!(e instanceof Game)) {
+
 			uri = "http://www.omdbapi.com/?t=" + URLEncoder.encode(e.getNomeOriginal(), "UTF-8");
 			if (e instanceof Filme) {
-				uri+="&type=movie&";
+				uri += "&type=movie&";
 			} else if (e instanceof Serie) {
-				uri+="&type=series&";
+				uri += "&type=series&";
 			}
-			uri+="plot=full&apikey=7fd1758d";
-		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			uri += "plot=full&apikey=7fd1758d";
+
+		} else {
+			uri = "https://www.igdb.com/games/" + URLEncoder.encode(e.getNomeOriginal(), "UTF-8");
 		}
 		return uri;
 	}
 }
 
-//outra api = https://moviegraph.io/#usage
+// outra api = https://moviegraph.io/#usage

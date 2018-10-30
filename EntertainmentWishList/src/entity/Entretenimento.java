@@ -26,10 +26,11 @@ public class Entretenimento implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
 
-	@SerializedName("Title")
+	@SerializedName(value="Title", alternate="name" )
 	@Expose
 	private String nomeOriginal;
-
+	
+	@SerializedName("aggregated_rating")
 	private int metacritic;
 
 	@Transient
@@ -41,7 +42,7 @@ public class Entretenimento implements Serializable {
 
 	private Etaria classificacaoEtaria;
 
-	@SerializedName("Poster")
+	@SerializedName(value="Poster", alternate="artwork")
 	@Expose
 	private String poster;
 

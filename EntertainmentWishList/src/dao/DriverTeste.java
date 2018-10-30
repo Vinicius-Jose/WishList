@@ -1,6 +1,6 @@
 package dao;
 
-import java.io.UnsupportedEncodingException;
+
 import java.net.URL;
 import java.net.URLEncoder;
 import java.sql.Date;
@@ -48,8 +48,6 @@ public class DriverTeste {
 		a = (Filme) so.servicoEntretenimento(a);
 		System.out.println("Nome " + a.getNomeOriginal());
 		System.out.println("Metacritic " + a.getMetacritic());
-		System.out.println("Rotten " + a.getRottenTomatoes());
-		System.out.println("Imdb " + a.getImdb());
 		System.out.println("Poster " + a.getPoster());
 		System.out.println("data" + a.getDataLancamento());
 //		System.out.println("Director " + a.getDiretor());
