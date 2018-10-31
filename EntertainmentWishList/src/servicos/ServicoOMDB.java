@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.sql.Date;
 
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sun.jersey.api.client.Client;
@@ -65,9 +66,7 @@ public class ServicoOMDB {
 			}
 			uri += "plot=full&apikey=7fd1758d";
 
-		} else {
-			uri = "https://www.igdb.com/games/" + URLEncoder.encode(e.getNomeOriginal(), "UTF-8");
-		}
+		} 
 		return uri;
 	}
 }
