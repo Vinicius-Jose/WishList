@@ -15,7 +15,7 @@ import entity.Filme;
 import entity.Game;
 import entity.Serie;
 
-public class ServicoOMDB {
+public class ServicoEntretenimento {
 
 	public Entretenimento servicoEntretenimento(Entretenimento e) {
 		Entretenimento novo = null;
@@ -23,7 +23,7 @@ public class ServicoOMDB {
 			Client cliente = new Client();
 			String uri = null;
 			try {
-				uri = criaURI(e);
+				uri = criaURIOMDB(e);
 			} catch (UnsupportedEncodingException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -54,11 +54,29 @@ public class ServicoOMDB {
 	}
 
 
-	private String criaURI(Entretenimento e) throws UnsupportedEncodingException {
+	private String criaURIOMDB(Entretenimento e) throws UnsupportedEncodingException {
 		String uri = null;
 		if (!(e instanceof Game)) {
 
 			uri = "http://www.omdbapi.com/?t=" + URLEncoder.encode(e.getNomeOriginal(), "UTF-8");
+			if (e instanceof Filme) {
+				uri += "&type=movie&";
+			} else if (e instanceof Serie) {
+				uri += "&type=series&";
+			}
+			uri += "plot=full&apikey=7fd1758d";
+
+		} 
+		return uri;
+	}
+	
+	
+	
+	private String criaURITMDB(Entretenimento e) throws UnsupportedEncodingException {
+		String uri = null;
+		if (!(e instanceof Game)) {
+
+			uri = "https://api.themoviedb.org/3/search/movie?api_key=a5e03bab2b046c01727a5cc5699556bd&language=pt-BR&query=" + URLEncoder.encode(e.getNomeOriginal(), "UTF-8");
 			if (e instanceof Filme) {
 				uri += "&type=movie&";
 			} else if (e instanceof Serie) {

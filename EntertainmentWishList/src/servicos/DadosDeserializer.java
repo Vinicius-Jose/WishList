@@ -19,12 +19,13 @@ public class DadosDeserializer implements JsonDeserializer<HashMap<String, Strin
 	@Override
 	public HashMap<String, String> deserialize(JsonElement element, Type arg1, JsonDeserializationContext arg2) throws JsonParseException {
 		JsonObject jsonObject = element.getAsJsonObject();
-		JsonElement name = jsonObject.getAsJsonArray("results").get(0);
+		JsonElement name = jsonObject.getAsJsonArray("results").get(0).getAsJsonObject().get("backdrop_path");
+		HashMap<String, String> dados = new HashMap<>();
+		dados.put("backgroung", name.getAsString() );
+		name = jsonObject.getAsJsonArray("results").get(0).getAsJsonObject().get("overview");
+		dados.put("sinopse", name.getAsString() );	
 		
-		HashMap<String, String> sql = null;
-		
-		
-		return null;
+		return dados;
 	}
 
 }

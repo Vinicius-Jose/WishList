@@ -18,7 +18,7 @@ import entity.Serie;
 import entity.Usuario;
 import enumeradas.Etaria;
 import servicos.ServicoEmail;
-import servicos.ServicoOMDB;
+import servicos.ServicoEntretenimento;
 
 public class DriverTeste {
 

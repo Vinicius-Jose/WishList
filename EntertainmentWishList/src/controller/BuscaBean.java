@@ -17,7 +17,7 @@ import entity.Filme;
 import entity.Game;
 import entity.Serie;
 import enumeradas.Etaria;
-import servicos.ServicoOMDB;
+import servicos.ServicoEntretenimento;
 
 @RequestScoped
 @ManagedBean
@@ -52,13 +52,13 @@ public class BuscaBean {
 			// entretenimentos.add(ent);
 			Entretenimento s = new Serie();
 			s.setNomeOriginal("Revenge");
-			s = new ServicoOMDB().servicoEntretenimento(s);
+			s = new ServicoEntretenimento().servicoEntretenimento(s);
 			s.setClassificacaoEtaria(Etaria.PG16);
 			entretenimentos.add(s);
 			
 			Entretenimento r = new Filme();
 			r.setNomeOriginal("Revenge");
-			r = new ServicoOMDB().servicoEntretenimento(r);
+			r = new ServicoEntretenimento().servicoEntretenimento(r);
 			r.setClassificacaoEtaria(Etaria.PG16);
 			entretenimentos.add(r);
 		}
