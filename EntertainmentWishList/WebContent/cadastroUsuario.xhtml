@@ -15,32 +15,35 @@
 	<ui:insert name="cabecalho">
 		<ui:include src="/cabecalho.xhtml"></ui:include>
 	</ui:insert>
+	
+	<div class="ui-fluid">
+		<p:panel id="painelCadastro" style="margin-top:25px; margin-bottom:25px;">
+			<p:messages id="message" />
 
-	<p:panel id="painelCadastro" style="margin-top:25px; margin-bottom:25px;">
-		<p:messages id="message" />
-
-		<h:panelGrid columns="2" cellpadding="5">
-
-			<h:outputLabel for="primeiroNome" value="Primeiro Nome"/>
-			<p:inputTextarea id="primeiroNome" required="true" rows="1" cols="100"/>
-			
-			<h:outputLabel for="segundoNome" value="Segundo Nome"/>
-			<p:inputTextarea id="segundoNome" required="true" rows="1" cols="100"/>
-			
-			<h:outputLabel for="nickname" value="Nickname"/>
-			<p:inputTextarea id="nickname" required="true" rows="1" cols="100"/>
-			
-			<h:outputLabel for="email" value="Email"/>
-			<p:inputTextarea id="email" required="true" rows="1" cols="100"/>
-			
-			<h:outputLabel for="senha" value="Senha"/>
-			<p:inputTextarea id="senha" required="true" rows="1" cols="100"/>
-			
-			<h:outputLabel for="confirmarSenha" value="Confirmar Senha"/>
-			<p:inputTextarea id="confirmarSenha" required="true" rows="1" cols="100"/>
-		</h:panelGrid>
-	</p:panel>
-
+			<h:panelGrid columns="2" cellpadding="5">
+	
+				<h:outputLabel for="primeiroNome" value="Primeiro Nome"/>
+				<p:inputText id="primeiroNome" required="true" rows="1" cols="100"/>
+				
+				<h:outputLabel for="segundoNome" value="Segundo Nome"/>
+				<p:inputText id="segundoNome" required="true" rows="1" cols="100"/>
+				
+				<h:outputLabel for="nickname" value="Nickname"/>
+				<p:inputText id="nickname" required="true" rows="1" cols="100"/>
+				
+				<h:outputLabel for="email" value="Email"/>
+				<p:inputText id="email" required="true" rows="1" cols="100"/>
+				
+				<h:outputLabel for="senha" value="Senha"/>
+				<p:inputText id="senha" required="true" rows="1" cols="100"/>
+				
+				<h:outputLabel for="confirmarSenha" value="Confirmar Senha"/>
+				<p:inputText id="confirmarSenha" required="true" rows="1" cols="100"/>
+				
+			</h:panelGrid>
+		</p:panel>
+	</div>
+	
 	<p:commandButton id="cadastrar" value="Cadastrar" update="painelCadastro"
 		actionListener="#{buttonView.buttonAction}" icon="ui-icon-disk" 
 		style="float:right;"/>

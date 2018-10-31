@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Login Usuario</title>
+</h:head>
+
+<h:body>
+	
+	<div class="ui-fluid">
+		<p:panel id="painelLogin" style="margin-top:95px; margin-bottom:25px;">
+			<p:messages id="message" />
+
+			<h:panelGrid columns="2" cellpadding="5">
+	
+				<h:outputLabel for="usuario" value="Nickaname / Email"/>
+				<p:inputText id="usuario" required="true" rows="1" cols="100"/>
+				
+				<h:outputLabel for="senha" value="Senha"/>
+				<p:inputText id="senha" required="true" rows="1" cols="100"/>
+				
+			</h:panelGrid>
+		</p:panel>
+	</div>
+	
+	<div>
+		<p:panel id="painelLogin" style="margin-top:50px; margin-bottom:25px;">
+
+			<h:panelGrid columns="2" cellpadding="5">
+			
+				<p:commandButton id="logar" value="Logar"
+					actionListener="#{buttonView.buttonAction}"
+					style="float:center;"/>
+		
+				<p:commandButton id="esqueciSenha" value="Esqueci minha Senha"
+					actionListener="#{buttonView.buttonAction}" 
+					style="float:right;"/>
+					
+			</h:panelGrid>
+		</p:panel>
+	</div>
+	
+	<div>
+		<p:panel id="painelCadastrar" style="margin-top:50px; margin-bottom:25px;">
+
+			<h:panelGrid columns="2" cellpadding="5">
+			
+				<h:outputLabel value="Não é cadastrado?"/>
+				
+				<p:commandButton id="cadastrar" value="Cadastrar!"
+					actionListener="#{buttonView.buttonAction}"
+					style="float:right;"/>
+		
+			</h:panelGrid>
+		</p:panel>
+	</div>
+	
+</h:body>
+</html>
