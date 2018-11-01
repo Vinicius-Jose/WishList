@@ -3,6 +3,7 @@ package entity;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +24,7 @@ import enumeradas.Etaria;
 public class Entretenimento implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	@SerializedName(value="Title", alternate="name" )
@@ -38,6 +39,7 @@ public class Entretenimento implements Serializable {
 
 	private Date dataLancamento;
 
+	@Column(length=1000)
 	private String sinopse;
 
 	private Etaria classificacaoEtaria;

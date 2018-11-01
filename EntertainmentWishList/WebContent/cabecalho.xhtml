@@ -78,13 +78,13 @@
 		<div
 			style="margin-top: 50px; display: flex; justify-content: center; align-items: center; font-size: 13px">
 			<p:commandButton id="pesquisar" size="3"
-				actionListener="#{cabecalhoController.buttonBusca}"
+				actionListener="#{buscaBean.buttonBusca}"
 				icon="ui-icon-search" />
 			<div class="ui-fluid">
 				<p:autoComplete size="70" style="" id="acMinLength"
-					minQueryLength="3" value="#{cabecalhoController.txt2}"
-					completeMethod="#{cabecalhoController.completeText}" effect="fade"
-					placeholder="Digite aqui o filme, jogo, livro que deseja buscar" />
+					minQueryLength="3" value="#{buscaBean.txtPesquisa}"
+					completeMethod="#{buscaBean.completeText}" effect="fade"
+					placeholder="Digite aqui o filme, jogo, game que deseja buscar" />
 			</div>
 		</div>
 	</h:form>

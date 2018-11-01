@@ -1,30 +1,51 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
+import dao.EntretenimentoDAO;
+import dao.EntretenimentoDAOImpl;
+import dao.FilmeDAO;
+import dao.FilmeDAOImpl;
+import dao.GameDAO;
+import dao.GameDAOImpl;
+import dao.SerieDAO;
+import dao.SerieDAOImpl;
 import entity.Entretenimento;
 import entity.Filme;
 import entity.Game;
 import entity.Serie;
-import enumeradas.Etaria;
-import servicos.ServicoEntretenimento;
 
-@RequestScoped
+
+@SessionScoped
 @ManagedBean
 public class BuscaBean {
 
-	private List<Entretenimento> entretenimentos;
+	private List<Entretenimento> entretenimentos = new LinkedList<>();
 	private Entretenimento selected;
+	private String txtPesquisa;
+	private List<String> nomes;
+
+
+	public BuscaBean() {
+		nomes = new ArrayList<String>();
+		EntretenimentoDAO edao = new EntretenimentoDAOImpl();
+		nomes.addAll(edao.buscarNomes());
+		FilmeDAO fdao = new FilmeDAOImpl();
+		nomes.addAll(fdao.buscarNomesFilmes());
+		SerieDAO sdao = new SerieDAOImpl();
+		nomes.addAll(sdao.buscarNomesSeries());
+
+	}
 
 	public List<Entretenimento> getEntretenimentos() {
 		return entretenimentos;
@@ -32,28 +53,6 @@ public class BuscaBean {
 
 	public void setEntretenimentos(List<Entretenimento> entretenimentos) {
 		this.entretenimentos = entretenimentos;
-	}
-
-	@PostConstruct
-	public void init() {
-		entretenimentos = new ArrayList<>();
-		Entretenimento s = new Serie();
-		s.setNomeOriginal("Revenge");
-		s = new ServicoEntretenimento().servicoEntretenimento(s);
-		s.setClassificacaoEtaria(Etaria.PG16);
-		entretenimentos.add(s);
-		
-		Entretenimento r = new Filme();
-		r.setNomeOriginal("Revenge");
-		r = new ServicoEntretenimento().servicoEntretenimento(r);
-		r.setClassificacaoEtaria(Etaria.PG16);
-		entretenimentos.add(r);
-		for (int i = 0; i < 30; i++) {
-			entretenimentos.add(r);
-			entretenimentos.add(s);
-			System.out.println(r.getImagemFundo());
-		}
-
 	}
 
 	public Entretenimento getSelected() {
@@ -81,6 +80,42 @@ public class BuscaBean {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void buttonBusca(ActionEvent actionEvent) {
+		entretenimentos.clear();
+		FilmeDAO fdao = new FilmeDAOImpl();
+		SerieDAO sdao = new SerieDAOImpl();
+		GameDAO gdao = new GameDAOImpl();
+		entretenimentos.addAll(fdao.buscarFilmes(txtPesquisa));
+		entretenimentos.addAll(sdao.buscarSeries(txtPesquisa));
+		entretenimentos.addAll(gdao.buscarGames(txtPesquisa));
+		try {
+			txtPesquisa = null;
+			FacesContext.getCurrentInstance().getExternalContext().redirect("./busca2.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public String getTxtPesquisa() {
+		return txtPesquisa;
+	}
+
+	public void setTxtPesquisa(String txtPesquisa) {
+		this.txtPesquisa = txtPesquisa;
+	}
+
+	public List<String> completeText(String query) {
+		List<String> results = new ArrayList<>();
+		Collator coll = Collator.getInstance();
+		for(String s : nomes) {
+			if(s.toLowerCase().contains(query.toLowerCase())) {
+				results.add(s);
+			}
+		}
+		return results;
 	}
 
 }

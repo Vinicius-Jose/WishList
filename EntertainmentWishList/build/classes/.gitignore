@@ -1,4 +1,6 @@
-/servicos/
+/controller/
 /dao/
 /entity/
-/controller/
+/enumeradas/
+/excecoes/
+/servicos/

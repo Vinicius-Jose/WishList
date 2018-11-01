@@ -28,6 +28,8 @@ public class TMDBDeserializer implements JsonDeserializer<HashMap<String, String
 			dadosTMDB.put("background", "https://image.tmdb.org/t/p/w300" +name.getAsString());
 			name = jsonArray.get(0).getAsJsonObject().get("overview");
 			dadosTMDB.put("sinopse", name.getAsString());
+			name = jsonArray.get(0).getAsJsonObject().get("title");
+			dadosTMDB.put("nomePt", name.getAsString());
 		}
 		return dadosTMDB;
 	}

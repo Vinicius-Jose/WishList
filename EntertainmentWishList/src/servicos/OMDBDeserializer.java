@@ -13,8 +13,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-import entity.Serie;
-
 public class OMDBDeserializer implements JsonDeserializer<HashMap<String, Object>> {
 
 	@Override
@@ -39,7 +37,6 @@ public class OMDBDeserializer implements JsonDeserializer<HashMap<String, Object
 			data = sdf.parse(name.getAsString());
 			 sql = new Date(data.getTime());
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		dadosOMDB.put("dataLancamento", sql);

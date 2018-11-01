@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import entity.Estudio;
 import entity.Filme;
 import entity.Game;
 import entity.Indicacao;
@@ -24,9 +25,8 @@ public class DriverTeste {
 
 	public static void main(String[] args) {
 		Filme a = new Filme();
-		a.setNomeOriginal("Avatar");
-		a.setDataLancamento(new Date(1111));
-		a.setClassificacaoEtaria(Etaria.PG10);
+		a.setNomeOriginal("Kill Bill");
+		
 //
 //		Game b = new Game();
 //		b.setId(2);
@@ -37,20 +37,19 @@ public class DriverTeste {
 //		GameDAO gd = new GameDAOImpl();
 //		 gd.adicionar(a);
 		// gd.adicionar(b);
-		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", new Locale("en"));
-		try {
-			System.out.println(sdf.parse("18 Dec 2009").toString());
-			System.out.println(new java.sql.Date(sdf.parse("04 Jul 2011").getTime()));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		ServicoEntretenimento so = new ServicoEntretenimento();
 		a = (Filme) so.servicoEntretenimento(a);
-		System.out.println("Nome " + a.getNomeOriginal());
-		System.out.println("Metacritic " + a.getMetacritic());
-		System.out.println("Poster " + a.getPoster());
-		System.out.println("data" + a.getDataLancamento());
+		a.setDuracao(0);
+		a.setClassificacaoEtaria(Etaria.PG12);
+		Estudio es = new Estudio();
+		es.setLocalizacao("USA");
+		es.setNome("Universal");
+		EstudioDAO ed = new EstudioDAOImpl();
+		ed.adicionar(es);
+		a.setEstudio(es);
+		FilmeDAOImpl fd = new FilmeDAOImpl();
+		fd.adicionar(a);
 		
 		
 //		 Usuario u = new Usuario();

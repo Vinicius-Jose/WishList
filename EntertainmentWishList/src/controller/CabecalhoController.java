@@ -23,7 +23,6 @@ public class CabecalhoController {
 	@PostConstruct
 	public void init() {
 		setTxt(null);
-		setTxt2(null);
 	}
 
 	public String getTxt() {
@@ -39,18 +38,7 @@ public class CabecalhoController {
 		s.setAttribute("txt", txt);
 	}
 	
-	public String getTxt2() {
-		ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
-		HttpSession ss =  (HttpSession) ex.getSession(true);
-		return (String) ss.getAttribute("txt2")  ;
-
-	}
-
-	public void setTxt2(String txt) {
-		ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
-		HttpSession s = (HttpSession) ex.getSession(true);
-		s.setAttribute("txt2", txt);
-	}
+	
 
 
 	public URL getImage() throws IOException {
@@ -66,24 +54,9 @@ public class CabecalhoController {
 	}
 	
 	
-	public void buttonBusca(ActionEvent actionEvent) {
-		System.out.println("clicou");
-		try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("./busca.xhtml");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+
 	
-	public List<String> completeText(String query) {
-        List<String> results = new ArrayList<String>();
-        for(int i = 0; i < 10; i++) {
-            results.add(query + i);
-        }
-         
-        return results;
-    }
+	
 	
 	public void buttonBuscaAmigo(ActionEvent actionEvent) {
 		System.out.println("clicou" + getTxt());
