@@ -45,20 +45,20 @@ public class DriverTeste {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		ServicoOMDB so = new ServicoOMDB();
-//		a = (Filme) so.servicoEntretenimento(a);
-//		System.out.println("Nome " + a.getNomeOriginal());
-//		System.out.println("Metacritic " + a.getMetacritic());
-//		System.out.println("Poster " + a.getPoster());
-//		System.out.println("data" + a.getDataLancamento());
+		ServicoEntretenimento so = new ServicoEntretenimento();
+		a = (Filme) so.servicoEntretenimento(a);
+		System.out.println("Nome " + a.getNomeOriginal());
+		System.out.println("Metacritic " + a.getMetacritic());
+		System.out.println("Poster " + a.getPoster());
+		System.out.println("data" + a.getDataLancamento());
 		
 		
-		 Usuario u = new Usuario();
-		 u.setPrimeiroNome("Rodrigo");
-		 u.setSegundoNome("Santiago");
-		 u.setEmail("rodrigo.cdl1997@gmail.com");
-		 u.setSenha("123456");
-		 new ServicoEmail().servicoEmail(u);
+//		 Usuario u = new Usuario();
+//		 u.setPrimeiroNome("Rodrigo");
+//		 u.setSegundoNome("Santiago");
+//		 u.setEmail("rodrigo.cdl1997@gmail.com");
+//		 u.setSenha("123456");
+//		 new ServicoEmail().servicoEmail(u);
 //		System.out.println("Director " + a.getDiretor());
 		
 //		List<Game> games = gd.buscarGames("ken");

@@ -40,11 +40,12 @@
 									style="background-image: url('#{entretenimento.poster}')"></div>
 								<div class="info">
 									<header
-										style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyF8g_pGpREMtE9uHBJigUsLVaPW5m5NKiHic06kBwIqcPyNzQCg')">
+										style="background-image:url('#{entretenimento.imagemFundo}')">
 									<h1>#{entretenimento.nomeOriginal}</h1>
 									<span class="year">#{entretenimento.dataLancamento} </span> <span
 										class="rating">#{entretenimento.classificacaoEtaria}</span> </header>
-									<p>#{entretenimento.sinopse}</p>
+									<p
+										style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical;">#{entretenimento.sinopse}</p>
 									<p:commandButton action="#{buscaBean.mostrarNome}"
 										value="Visualizar" id="Ajax">
 										<f:setPropertyActionListener target="#{buscaBean.selected}"

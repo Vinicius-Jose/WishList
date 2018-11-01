@@ -49,6 +49,8 @@ public class Entretenimento implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "Estudioid")
 	private Estudio estudio;
+	
+	private String imagemFundo;
 
 	public String getNomeOriginal() {
 		return nomeOriginal;
@@ -120,6 +122,14 @@ public class Entretenimento implements Serializable {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getImagemFundo() {
+		return imagemFundo;
+	}
+
+	public void setImagemFundo(String imagemFundo) {
+		this.imagemFundo = imagemFundo;
 	}
 
 }

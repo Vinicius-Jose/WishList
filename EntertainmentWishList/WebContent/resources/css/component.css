@@ -126,12 +126,14 @@ Movie information
 }
 
 .info p {
+	
 	padding: 1.2em 1.4em;
 	margin: 2px 0 0;
 	font-weight: 700;
 	color: #666;
 	line-height: 1.4em;
 	border-top: 10px solid #555;
+	
 }
 
 /*************************************
