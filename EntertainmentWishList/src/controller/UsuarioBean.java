@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
@@ -20,19 +21,19 @@ import excecoes.UserException;
 @SessionScoped
 @ManagedBean
 public class UsuarioBean {
-	private Usuario usuarioLogado;
+	private Usuario usuarioLogado = new Usuario();
 	private List<Usuario> usuarios = new ArrayList<>();
 	private Usuario selected;
 	private String txtBuscaUsuario;
 
 	public UsuarioBean() {
-		UsuarioDAO udao = new UsuarioDAOImpl();
-		try {
-			usuarioLogado = udao.validarUsuario("joana@yahoo.com.br", "12345");
-		} catch (UserException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		UsuarioDAO udao = new UsuarioDAOImpl();
+//		try {
+//			usuarioLogado = udao.validarUsuario("joana@yahoo.com.br", "12345");
+//		} catch (UserException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	public List<Usuario> getUsuarios() {
@@ -109,6 +110,21 @@ public class UsuarioBean {
 			udao.adicionarAmigo(usuarioLogado, amigo);
 		} catch (FriendException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void logar() {
+		UsuarioDAO udao = new UsuarioDAOImpl();
+		try {
+			usuarioLogado = udao.validarUsuario(usuarioLogado.getEmail(), usuarioLogado.getSenha());
+			FacesContext.getCurrentInstance().getExternalContext().redirect("./index.xhtml");
+		} catch (UserException | IOException e) {
+			System.out.println("peguei");
+			usuarioLogado.setEmail(null);
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO",e.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, msg);
 			e.printStackTrace();
 		}
 	}

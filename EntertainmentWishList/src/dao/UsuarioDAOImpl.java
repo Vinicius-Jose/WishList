@@ -72,10 +72,9 @@ public class UsuarioDAOImpl implements UsuarioDAO  {
 		try {
 			usuario = query.getSingleResult();
 			em.close();
+			return usuario;
 		} catch (NoResultException no) {
 			throw new UserException();
-		} finally {
-			return usuario;
 		}
 	}
 

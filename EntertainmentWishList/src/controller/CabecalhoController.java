@@ -20,25 +20,6 @@ import javax.servlet.http.HttpSession;
 @ManagedBean
 public class CabecalhoController {
 	
-	@PostConstruct
-	public void init() {
-		setTxt(null);
-	}
-
-	public String getTxt() {
-		ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
-		HttpSession ss =  (HttpSession) ex.getSession(true);
-		return (String) ss.getAttribute("txt")  ;
-
-	}
-
-	public void setTxt(String txt) {
-		ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
-		HttpSession s = (HttpSession) ex.getSession(true);
-		s.setAttribute("txt", txt);
-	}
-	
-	
 
 
 	public URL getImage() throws IOException {
