@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<?php
-	if(isset($_POST['ContactButton'])){
-		$url = 'https://www.google.com/recaptcha/api/siteverify';
-		$privatekey = "6Lfaa3gUAAAAAJkNPcOo-g3UV6luN_jwH9TSzO2x";
-		$response = file_get_contents($url."?secret=".$privatekey.);
-
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html 	xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:h="http://java.sun.com/jsf/html"
@@ -14,14 +7,13 @@
 		xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Login Usuario</title>
-	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<title>Recuperar Senha</title>
 </h:head>
 
 <h:body>
 
 	<div class="ui-fluid">
-		<p:panel id="painelLogin" style="margin-top:95px; margin-bottom:25px;">
+		<p:panel id="painelRecuperarSenha" style="margin-top:80px; margin-bottom:0px;">
 			<p:messages id="message" />
 
 			<h:panelGrid columns="2" cellpadding="5">
@@ -29,25 +21,29 @@
 				<h:outputLabel for="usuario" value="Nickaname / Email"/>
 				<p:inputText id="usuario" required="true" rows="1" cols="100"/>
 				
-				<h:outputLabel for="senha" value="Senha"/>
-				<p:password id="senha" required="true" rows="1" cols="100"/>
+				<h:outputLabel for="codigo" value="Codigo"/>
+				<p:inputText id="codigo" required="true" rows="1" cols="100"/>
 				
-				<div class="g-recaptcha" data-sitekey="6Lfaa3gUAAAAAM7KdpuwmpUHUH21ht5_rT_LzztK"></div>
+				<h:outputLabel for="novaSenha" value="Nova senha"/>
+				<p:inputText id="novaSenha" required="true" rows="1" cols="100"/>
+				
+				<h:outputLabel for="confirmarNovaSenha" value="Confirme a nova senha"/>
+				<p:inputText id="confirmarNovaSenha" required="true" rows="1" cols="100"/>
 				
 			</h:panelGrid>
 		</p:panel>
 	</div>
 	
 	<div>
-		<p:panel id="painelLogin" style="margin-top:50px; margin-bottom:25px;">
+		<p:panel id="painelLogin" style="margin-top:3px; margin-bottom:25px;">
 
 			<h:panelGrid columns="2" cellpadding="5">
 			
-				<p:commandButton id="logar" value="Logar"
+				<p:commandButton id="recuperar" value="Recuperar"
 					actionListener="#{buttonView.buttonAction}"
 					style="float:center;"/>
 		
-				<p:commandButton id="esqueciSenha" value="Esqueci minha Senha"
+				<p:commandButton id="cancelar" value="Cancelar"
 					actionListener="#{buttonView.buttonAction}" 
 					style="float:right;"/>
 					
@@ -56,7 +52,7 @@
 	</div>
 	
 	<div>
-		<p:panel id="painelCadastrar" style="margin-top:50px; margin-bottom:25px;">
+		<p:panel id="painelCadastrar" style="margin-top:30px; margin-bottom:25px;">
 
 			<h:panelGrid columns="2" cellpadding="5">
 			
@@ -69,6 +65,6 @@
 			</h:panelGrid>
 		</p:panel>
 	</div>
-	
+
 </h:body>
 </html>

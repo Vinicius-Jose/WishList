@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Cadastro Usuario</title>
+</h:head>
+
+<h:body>
+	
+	<ui:insert name="cabecalho">
+		<ui:include src="/cabecalho.xhtml"></ui:include>
+	</ui:insert>
+	
+	<div>
+		<p:panel id="painelBotao" style="margin-top:50px; margin-bottom:50px;">
+		
+			<p:commandButton id="bloquear" value="Bloquear"
+				actionListener="#{buttonView.buttonAction}"
+				style="float:left;"/>
+				
+			</p:panel>
+	</div>
+		
+	<div class="ui-fluid">
+		<p:panel id="painelGerenciar" style="margin-top:25px; margin-bottom:25px;">
+			<p:messages id="message" />
+
+			<h:panelGrid columns="2" cellpadding="5">
+	
+				<h:outputLabel for="primeiroNome" value="Primeiro Nome"/>
+				<h:outputLabel id="primeiroNome" required="true" rows="1" cols="100"/>
+				
+				<h:outputLabel for="segundoNome" value="Segundo Nome"/>
+				<h:outputLabel id="segundoNome" required="true" rows="1" cols="100"/>
+				
+				<h:outputLabel for="nickname" value="Nickname"/>
+				<h:outputLabel id="nickname" required="true" rows="1" cols="100"/>
+				
+				<h:outputLabel for="email" value="Email"/>
+				<h:outputLabel id="email" rows="1" cols="100"/>
+				
+				<h:outputLabel for="dataCadastro" value="Cadastrado em"/>
+				<h:outputLabel id="dataCadastro" rows="1" cols="100"/>
+				
+			</h:panelGrid>
+		</p:panel>
+	</div>
+	
+</h:body>
+</html>
