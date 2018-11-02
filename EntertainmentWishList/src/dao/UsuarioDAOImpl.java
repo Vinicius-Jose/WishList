@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 
 import entity.Amigo;
 import entity.Usuario;
+import excecoes.FriendException;
 import excecoes.UserException;
 
 public class UsuarioDAOImpl implements UsuarioDAO  {
@@ -96,7 +97,7 @@ public class UsuarioDAOImpl implements UsuarioDAO  {
 		return usuarios;
 	}
 	
-	
+	@Override
 	public List<Amigo> buscarSolicitacao(Usuario user){
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Amigo> query = em.createQuery("select a from Amigo a where usuario = :email ", Amigo.class);
@@ -104,6 +105,22 @@ public class UsuarioDAOImpl implements UsuarioDAO  {
 		List<Amigo> usuarios = query.getResultList();
 		em.close();
 		return usuarios;
+	}
+	
+	
+	@Override
+	public void adicionarAmigo(Usuario user, Amigo amigo) throws FriendException {
+		EntityManager em = emf.createEntityManager();
+		try {
+		em.getTransaction().begin();
+		em.persist(amigo);
+		em.getTransaction().commit();
+		em.close();
+		alterar(user);
+		}catch(Exception e) {
+			throw new FriendException(amigo.getUsuario());
+		}
+			
 	}
 
 }

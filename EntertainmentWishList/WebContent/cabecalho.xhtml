@@ -50,11 +50,11 @@
 					style="font-size:14px; padding:0.3px; font-align:'center'">
 					<f:facet name="options">
 						<p:commandButton id="pesquisar" size="1"
-							action="#{buscaUser.buttonBuscaAmigo}"
+							action="#{usuarioBean.buttonBuscaAmigo}"
 							icon="ui-icon-search" />
 						<p:inputText placeholder="Procurando Amigos ?"
 							style="height:15px; width:300px "
-							value="#{buscaUser.txtBuscaUsuario}" />
+							value="#{usuarioBean.txtBuscaUsuario}" />
 					</f:facet>
 				</p:menubar>
 			</p:menuitem>
@@ -78,12 +78,12 @@
 		<div
 			style="margin-top: 50px; display: flex; justify-content: center; align-items: center; font-size: 13px">
 			<p:commandButton id="pesquisar" size="3"
-				actionListener="#{entretenimento.buttonBusca}"
+				actionListener="#{entretenimentoBean.buttonBusca}"
 				icon="ui-icon-search" />
 			<div class="ui-fluid">
 				<p:autoComplete size="70" style="" id="acMinLength"
-					minQueryLength="3" value="#{entretenimento.txtPesquisa}"
-					completeMethod="#{entretenimento.completeText}" effect="fade"
+					minQueryLength="3" value="#{entretenimentoBean.txtPesquisa}"
+					completeMethod="#{entretenimentoBean.completeText}" effect="fade"
 					placeholder="Digite aqui o filme, jogo, game que deseja buscar" />
 			</div>
 		</div>

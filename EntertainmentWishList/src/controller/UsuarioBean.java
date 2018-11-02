@@ -14,18 +14,18 @@ import dao.UsuarioDAOImpl;
 import entity.Amigo;
 import entity.Usuario;
 import enumeradas.StatusAmigo;
+import excecoes.FriendException;
 import excecoes.UserException;
 
 @SessionScoped
 @ManagedBean
-public class BuscaUser {
+public class UsuarioBean {
 	private Usuario usuarioLogado;
 	private List<Usuario> usuarios = new ArrayList<>();
 	private Usuario selected;
 	private String txtBuscaUsuario;
-	
-	
-	public BuscaUser() {
+
+	public UsuarioBean() {
 		UsuarioDAO udao = new UsuarioDAOImpl();
 		try {
 			usuarioLogado = udao.validarUsuario("joana@yahoo.com.br", "12345");
@@ -71,7 +71,7 @@ public class BuscaUser {
 		UsuarioDAO udao = new UsuarioDAOImpl();
 		usuarios.clear();
 		usuarios = udao.buscarUsuarios(txtBuscaUsuario);
-		txtBuscaUsuario=null;
+		txtBuscaUsuario = null;
 		ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
 		try {
 			ex.redirect("./buscaUsuario.xhtml");
@@ -98,16 +98,19 @@ public class BuscaUser {
 		}
 
 	}
-	
-	
-	
-	public void enviarSolicitação() {
+
+	public void enviarSolicitacao() {
 		Amigo amigo = new Amigo();
 		amigo.setUsuario(selected);
 		amigo.setStatus(StatusAmigo.SOLICITADO);
 		usuarioLogado.getAmigos().add(amigo);
 		UsuarioDAO udao = new UsuarioDAOImpl();
-		udao.alterar(usuarioLogado);
+		try {
+			udao.adicionarAmigo(usuarioLogado, amigo);
+		} catch (FriendException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -16,7 +16,7 @@
 	</ui:insert>
 	<div class="ui-fluid">
 		<h:form id="form" style="margin-top:25px">
-			<p:dataGrid var="usuario" value="#{buscaUser.usuarios}" columns="6"
+			<p:dataGrid var="usuario" value="#{usuarioBean.usuarios}" columns="6"
 				layout="grid" rows="12" paginator="true" id="entretenimentos"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="6,12,18">
@@ -34,9 +34,9 @@
 						<p class="card-text" style="font-size: 12px">
 							Nick Name: #{usuario.nickName} <br />Email: #{usuario.email}
 						</p>
-						<p:commandButton action="#{buscaUser.mostrarNome}"
+						<p:commandButton action="#{usuarioBean.enviarSolicitacao}"
 							value="Enviar Solicitação" id="Ajax">
-							<f:setPropertyActionListener target="#{buscaUser.selected}"
+							<f:setPropertyActionListener target="#{usuarioBean.selected}"
 								value="#{usuario}" />
 						</p:commandButton>
 					</div>
