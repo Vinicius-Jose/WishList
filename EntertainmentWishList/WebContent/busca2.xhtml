@@ -20,7 +20,7 @@
 
 	<div class="ui-fluid">
 		<h:form id="form" style="margin-top:25px">
-			<p:dataGrid var="entretenimento" value="#{buscaBean.entretenimentos}"
+			<p:dataGrid var="entretenimento" value="#{entretenimentoBean.entretenimentos}"
 				columns="4" layout="grid" rows="12" paginator="true"
 				id="entretenimentos"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -46,9 +46,9 @@
 										class="rating">#{entretenimento.classificacaoEtaria}</span> </header>
 									<p
 										style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical;">#{entretenimento.sinopse}</p>
-									<p:commandButton action="#{buscaBean.mostrarNome}"
+									<p:commandButton action="#{entretenimentoBean.visualizar}"
 										value="Visualizar" id="Ajax">
-										<f:setPropertyActionListener target="#{buscaBean.selected}"
+										<f:setPropertyActionListener target="#{entretenimentoBean.selected}"
 											value="#{entretenimento}" />
 									</p:commandButton>
 								</div>

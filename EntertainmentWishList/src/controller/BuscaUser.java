@@ -1,31 +1,39 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import entity.Entretenimento;
+import dao.UsuarioDAO;
+import dao.UsuarioDAOImpl;
+import entity.Amigo;
 import entity.Usuario;
+import enumeradas.StatusAmigo;
+import excecoes.UserException;
 
-@RequestScoped
+@SessionScoped
 @ManagedBean
 public class BuscaUser {
-
-	private List<Usuario> usuarios;
+	private Usuario usuarioLogado;
+	private List<Usuario> usuarios = new ArrayList<>();
 	private Usuario selected;
+	private String txtBuscaUsuario;
+	
+	
+	public BuscaUser() {
+		UsuarioDAO udao = new UsuarioDAOImpl();
+		try {
+			usuarioLogado = udao.validarUsuario("joana@yahoo.com.br", "12345");
+		} catch (UserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public List<Usuario> getUsuarios() {
 		return usuarios;
@@ -35,24 +43,42 @@ public class BuscaUser {
 		this.usuarios = usuarios;
 	}
 
-	@PostConstruct
-	public void init() {
-		usuarios = new ArrayList<>();
-		for (int i = 0; i < 30; i++) {
-			Usuario user = new Usuario();
-			user.setPrimeiroNome("Usuario " + i);
-			user.setNickName("ÉTOIZ2018");
-			user.setEmail("aaaaaa@hotmail.com");
-			usuarios.add(user);
-		}
-	}
-
 	public Usuario getSelected() {
 		return selected;
 	}
 
 	public void setSelected(Usuario selected) {
 		this.selected = selected;
+	}
+
+	public Usuario getUsuarioLogado() {
+		return usuarioLogado;
+	}
+
+	public void setUsuarioLogado(Usuario usuarioLogado) {
+		this.usuarioLogado = usuarioLogado;
+	}
+
+	public String getTxtBuscaUsuario() {
+		return txtBuscaUsuario;
+	}
+
+	public void setTxtBuscaUsuario(String txtBuscaUsuario) {
+		this.txtBuscaUsuario = txtBuscaUsuario;
+	}
+
+	public void buttonBuscaAmigo() {
+		UsuarioDAO udao = new UsuarioDAOImpl();
+		usuarios.clear();
+		usuarios = udao.buscarUsuarios(txtBuscaUsuario);
+		txtBuscaUsuario=null;
+		ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
+		try {
+			ex.redirect("./buscaUsuario.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void mostrarNome() {
@@ -72,6 +98,16 @@ public class BuscaUser {
 		}
 
 	}
-
+	
+	
+	
+	public void enviarSolicitação() {
+		Amigo amigo = new Amigo();
+		amigo.setUsuario(selected);
+		amigo.setStatus(StatusAmigo.SOLICITADO);
+		usuarioLogado.getAmigos().add(amigo);
+		UsuarioDAO udao = new UsuarioDAOImpl();
+		udao.alterar(usuarioLogado);
+	}
 
 }

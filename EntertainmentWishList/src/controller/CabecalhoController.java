@@ -58,14 +58,6 @@ public class CabecalhoController {
 	
 	
 	
-	public void buttonBuscaAmigo(ActionEvent actionEvent) {
-		System.out.println("clicou" + getTxt());
-		try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("./buscaUsuario.xhtml");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
 
 }

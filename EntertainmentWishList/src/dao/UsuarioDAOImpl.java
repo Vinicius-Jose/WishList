@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
+import entity.Amigo;
 import entity.Usuario;
 import excecoes.UserException;
 
@@ -91,6 +92,16 @@ public class UsuarioDAOImpl implements UsuarioDAO  {
 		query.setParameter("nick", "%" + nome+"%");
 		query.setParameter("primeiro", "%" + nome+"%");
 		List<Usuario> usuarios = query.getResultList();
+		em.close();
+		return usuarios;
+	}
+	
+	
+	public List<Amigo> buscarSolicitacao(Usuario user){
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Amigo> query = em.createQuery("select a from Amigo a where usuario = :email ", Amigo.class);
+		query.setParameter("email",user.getEmail());
+		List<Amigo> usuarios = query.getResultList();
 		em.close();
 		return usuarios;
 	}

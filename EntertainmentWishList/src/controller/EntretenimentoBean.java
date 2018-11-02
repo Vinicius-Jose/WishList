@@ -28,7 +28,7 @@ import entity.Serie;
 
 @SessionScoped
 @ManagedBean
-public class BuscaBean {
+public class EntretenimentoBean {
 
 	private List<Entretenimento> entretenimentos = new LinkedList<>();
 	private Entretenimento selected;
@@ -36,7 +36,7 @@ public class BuscaBean {
 	private List<String> nomes;
 
 
-	public BuscaBean() {
+	public EntretenimentoBean() {
 		nomes = new ArrayList<String>();
 		EntretenimentoDAO edao = new EntretenimentoDAOImpl();
 		nomes.addAll(edao.buscarNomes());
@@ -63,7 +63,7 @@ public class BuscaBean {
 		this.selected = selected;
 	}
 
-	public void mostrarNome() {
+	public void visualizar() {
 		System.out.println(selected.getNomeOriginal());
 		System.out.println(selected.getPoster());
 		ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
