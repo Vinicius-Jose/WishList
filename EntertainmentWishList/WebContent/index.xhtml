@@ -30,10 +30,10 @@
 				<h:outputLabel value="Mais Procurados"
 					style="font-size:20px; font-family:Gill Sans,Arial,sans-serif; color:#2c4359" />
 			</div>
-			<p:contentFlow value="#{imagesView.images}" var="image"
+			<p:contentFlow value="#{entretenimentoBean.maisBuscados}" var="ent"
 				style=" height:200px; width:700px  ">
-				<h:graphicImage value="#{image}" styleClass="content" />
-				<div class="caption" style="color: black">#{image}</div>
+				<h:graphicImage value="#{ent.poster}" styleClass="content" />
+				<div class="caption" style="color: black">#{ent.nomeOriginal}</div>
 			</p:contentFlow>
 		</div>
 	</div>

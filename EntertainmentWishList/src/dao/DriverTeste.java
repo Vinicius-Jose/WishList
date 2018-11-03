@@ -3,6 +3,7 @@ package dao;
 import java.sql.Date;
 import java.util.Calendar;
 
+import entity.Entretenimento;
 import entity.Estudio;
 import entity.Serie;
 import enumeradas.Etaria;
@@ -11,11 +12,11 @@ import servicos.ServicoEntretenimento;
 public class DriverTeste {
 
 	public static void main(String[] args) {
-		 Serie a = new Serie();
-		 a.setNomeOriginal("Flash");
-		 Calendar c = Calendar.getInstance();
-		 c.set(2014, 1, 15);
-		 a.setDataLancamento(new Date(c.getTimeInMillis()));
+//		 Serie a = new Serie();
+//		 a.setNomeOriginal("Flash");
+//		 Calendar c = Calendar.getInstance();
+//		 c.set(2014, 1, 15);
+//		 a.setDataLancamento(new Date(c.getTimeInMillis()));
 		
 		// Game b = new Game();
 		// b.setId(2);
@@ -27,18 +28,24 @@ public class DriverTeste {
 		// gd.adicionar(a);
 		// gd.adicionar(b);
 
-		 ServicoEntretenimento so = new ServicoEntretenimento();
-		 a = (Serie) so.servicoEntretenimento(a);
-		 a.setClassificacaoEtaria(Etaria.PG12);
-		 Estudio es = new Estudio();
-		 es.setLocalizacao("USA");
-		 es.setNome("Universal");
-		 EstudioDAO ed = new EstudioDAOImpl();
-		 ed.adicionar(es);
-		 a.setEstudio(es);
-		 SerieDAOImpl fd = new SerieDAOImpl();
-		 fd.adicionar(a);
+//		 ServicoEntretenimento so = new ServicoEntretenimento();
+//		 a = (Serie) so.servicoEntretenimento(a);
+//		 a.setClassificacaoEtaria(Etaria.PG12);
+//		 Estudio es = new Estudio();
+//		 es.setLocalizacao("USA");
+//		 es.setNome("Universal");
+//		 EstudioDAO ed = new EstudioDAOImpl();
+//		 ed.adicionar(es);
+//		 a.setEstudio(es);
+//		 SerieDAOImpl fd = new SerieDAOImpl();
+//		 fd.adicionar(a);
 		//
+		
+		EntretenimentoDAO edao = new EntretenimentoDAOImpl();
+		for(Entretenimento e: edao.maisBuscados()) {
+			System.out.println(e.getNomeOriginal());
+			System.out.println(edao.maisBuscados().size());
+		}
 
 //		UsuarioDAO udao = new UsuarioDAOImpl();
 //		Usuario u = new Usuario();

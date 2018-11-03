@@ -1,10 +1,10 @@
 package controller;
 
-import java.awt.Image;
-import java.awt.image.RenderedImage;
 import java.io.ByteArrayInputStream;
-import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +13,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 import org.primefaces.model.DefaultStreamedContent;
 
@@ -35,7 +33,7 @@ public class UsuarioBean {
 	private String txtBuscaUsuario;
 	private DefaultStreamedContent imageSelected;
 	private int i = 0;
-	
+
 	public UsuarioBean() {
 		try {
 			usuarioLogado = new UsuarioDAOImpl().validarUsuario("rodrigo.cdl1997@gmail.com", "123456");
@@ -80,7 +78,7 @@ public class UsuarioBean {
 	public void buttonBuscaAmigo() {
 		UsuarioDAO udao = new UsuarioDAOImpl();
 		usuarios.clear();
-		i=0;
+		i = 0;
 		usuarios = udao.buscarUsuarios(txtBuscaUsuario);
 		txtBuscaUsuario = null;
 		ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
@@ -92,8 +90,6 @@ public class UsuarioBean {
 		}
 	}
 
-
-
 	public void enviarSolicitacao() {
 		Amigo amigo = new Amigo();
 		amigo.setUsuario(selected);
@@ -102,11 +98,11 @@ public class UsuarioBean {
 		UsuarioDAO udao = new UsuarioDAOImpl();
 		try {
 			udao.adicionarAmigo(usuarioLogado, amigo);
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Info","Solicitação Enviada com sucesso");
-			FacesContext.getCurrentInstance().addMessage(null,msg);
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Solicitação Enviada com sucesso");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
 		} catch (FriendException e) {
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO!",e.getMessage());
-			FacesContext.getCurrentInstance().addMessage(null,msg);
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO!", e.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
 	}
 
@@ -139,33 +135,36 @@ public class UsuarioBean {
 	}
 
 	public DefaultStreamedContent getImageSelected() throws IOException {
-		if(i==usuarios.size())i=0;
+		if (i == usuarios.size())
+			i = 0;
 		Usuario u = usuarios.get(i);
 		i++;
 		System.out.println(i);
 		imageSelected = new DefaultStreamedContent(new ByteArrayInputStream(u.getFoto()), "image/jpg");
-		
+
 		return imageSelected;
 	}
-
-	
 
 	public void setImageSelected(DefaultStreamedContent imageSelected) {
 		this.imageSelected = imageSelected;
 	}
 
-	
 	public String getArquivoImagem() throws IOException {
-		String endImagem = "/tmp/" + usuarioLogado.getEmail()+".jpg";
-		File arq = new File(endImagem);
-		RenderedImage img = (RenderedImage) new ImageIcon(usuarioLogado.getFoto()).getImage();
-		ImageIO.write(img, "jpg", new File("/tmp/mypng.png"));
+		String endImagem =  usuarioLogado.getEmail() + ".jpg";
+		InputStream is  = new ByteArrayInputStream(usuarioLogado.getFoto());
+		OutputStream os = new FileOutputStream(endImagem);
+		int length;
+		while ((length = is.read(usuarioLogado.getFoto())) != -1) {
+			os.write(usuarioLogado.getFoto(), 0, length);
+		}
+
+		is.close();
+		os.close();
 		return endImagem;
 	}
-	
-	
+
 	public void recuperar() {
-		
+
 	}
 
 }

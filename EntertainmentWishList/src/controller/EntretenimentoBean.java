@@ -27,6 +27,7 @@ public class EntretenimentoBean {
 	private List<Entretenimento> entretenimentos = new LinkedList<>();
 	private String txtPesquisa;
 	private List<String> nomes;
+	private List<Entretenimento> maisBuscados;
 
 	public EntretenimentoBean() {
 		nomes = new ArrayList<String>();
@@ -36,7 +37,16 @@ public class EntretenimentoBean {
 		nomes.addAll(fdao.buscarNomesFilmes());
 		SerieDAO sdao = new SerieDAOImpl();
 		nomes.addAll(sdao.buscarNomesSeries());
+		setMaisBuscados(edao.maisBuscados());
 
+	}
+
+	public List<Entretenimento> getMaisBuscados() {
+		return maisBuscados;
+	}
+
+	public void setMaisBuscados(List<Entretenimento> maisBuscados) {
+		this.maisBuscados = maisBuscados;
 	}
 
 	public List<Entretenimento> getEntretenimentos() {

@@ -29,11 +29,10 @@ public class EntretenimentoDAOImpl implements EntretenimentoDAO {
 		try {
 			query.setParameter("id",  + entretenimento.getId());
 			entretenimento.setNotaUsuario(query.getSingleResult());
-		} catch (NonUniqueResultException e) {
-			throw new NotEvaluatedException(entretenimento);
-		} finally {
 			em.close();
 			return entretenimento;
+		} catch (NonUniqueResultException e) {
+			throw new NotEvaluatedException(entretenimento);
 		}
 	}
 	
@@ -50,5 +49,18 @@ public class EntretenimentoDAOImpl implements EntretenimentoDAO {
 		em.close();
 		return nomes;
 		
+	}
+	
+	
+	@Override
+	public List<Entretenimento> maisBuscados(){
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Entretenimento> query = em.createQuery(
+				"select  it.entretenimento from ItemFavoritos it group by it.entretenimento order by count(it.entretenimento) desc ",
+				Entretenimento.class);
+
+		List<Entretenimento> maisBuscados = query.getResultList();
+		em.close();
+		return maisBuscados;
 	}
 }

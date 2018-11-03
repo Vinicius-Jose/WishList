@@ -11,4 +11,6 @@ public interface EntretenimentoDAO {
 
 	List<String> buscarNomes();
 
+	List<Entretenimento> maisBuscados();
+
 }
