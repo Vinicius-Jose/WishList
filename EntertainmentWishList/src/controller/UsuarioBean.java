@@ -26,15 +26,7 @@ public class UsuarioBean {
 	private Usuario selected;
 	private String txtBuscaUsuario;
 
-	public UsuarioBean() {
-//		UsuarioDAO udao = new UsuarioDAOImpl();
-//		try {
-//			usuarioLogado = udao.validarUsuario("joana@yahoo.com.br", "12345");
-//		} catch (UserException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-	}
+
 
 	public List<Usuario> getUsuarios() {
 		return usuarios;
@@ -113,23 +105,21 @@ public class UsuarioBean {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	public void logar() {
 		UsuarioDAO udao = new UsuarioDAOImpl();
 		try {
 			usuarioLogado = udao.validarUsuario(usuarioLogado.getEmail(), usuarioLogado.getSenha());
+
 			FacesContext.getCurrentInstance().getExternalContext().redirect("./index.xhtml");
 		} catch (UserException | IOException e) {
-			System.out.println("peguei");
 			usuarioLogado.setEmail(null);
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO",e.getMessage());
-			FacesContext.getCurrentInstance().addMessage(null, msg);
+			FacesMessage msgError = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", e.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, msgError);
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	public void logout() {
 		usuarioLogado = new Usuario();
 		try {

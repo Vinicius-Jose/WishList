@@ -50,10 +50,10 @@
 
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:commandButton id="logar" value="Logar"
-						action="#{usuarioBean.logar}" style="float:center;" />
+						action="#{usuarioBean.logar}" style="float:center;" update="messages" />
 
 					<p:commandButton id="esqueciSenha" value="Esqueci minha Senha"
-						onclick="./recuperarSenha.xhtml" style="float:right;" />
+						action="/recuperarSenha.xhtml"  style="float:right;" immediate="true"  />
 				</h:panelGrid>
 			</p:panel>
 		</div>
@@ -68,7 +68,7 @@
 					<h:outputLabel value="Não é cadastrado?" />
 
 					<p:commandButton id="cadastrar" value="Cadastrar!"
-						style="float:right;" onclick="./cadastroUsuario.xhtml" />
+						style="float:right;" action="/cadastroUsuario.xhtml" />
 
 				</h:panelGrid>
 			</p:panel>
