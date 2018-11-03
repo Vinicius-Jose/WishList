@@ -128,5 +128,16 @@ public class UsuarioBean {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public void logout() {
+		usuarioLogado = new Usuario();
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("./loginUsuario.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

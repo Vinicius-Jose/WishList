@@ -1,14 +1,12 @@
 package controller;
 
 import java.io.IOException;
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -21,20 +19,14 @@ import dao.GameDAOImpl;
 import dao.SerieDAO;
 import dao.SerieDAOImpl;
 import entity.Entretenimento;
-import entity.Filme;
-import entity.Game;
-import entity.Serie;
-
 
 @SessionScoped
 @ManagedBean
 public class EntretenimentoBean {
 
 	private List<Entretenimento> entretenimentos = new LinkedList<>();
-	private Entretenimento selected;
 	private String txtPesquisa;
 	private List<String> nomes;
-
 
 	public EntretenimentoBean() {
 		nomes = new ArrayList<String>();
@@ -55,31 +47,12 @@ public class EntretenimentoBean {
 		this.entretenimentos = entretenimentos;
 	}
 
-	public Entretenimento getSelected() {
-		return selected;
+	public String getTxtPesquisa() {
+		return txtPesquisa;
 	}
 
-	public void setSelected(Entretenimento selected) {
-		this.selected = selected;
-	}
-
-	public void visualizar() {
-		System.out.println(selected.getNomeOriginal());
-		System.out.println(selected.getPoster());
-		ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
-
-		try {
-			if (selected instanceof Serie)
-				ex.redirect("./infoSerie.xhtml");
-			else if (selected instanceof Game) {
-				ex.redirect("./infoJogo.xhtml");
-			} else if (selected instanceof Filme) {
-				ex.redirect("./infoFilme.xhtml");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+	public void setTxtPesquisa(String txtPesquisa) {
+		this.txtPesquisa = txtPesquisa;
 	}
 
 	public void buttonBusca(ActionEvent actionEvent) {
@@ -99,19 +72,11 @@ public class EntretenimentoBean {
 		}
 	}
 
-	public String getTxtPesquisa() {
-		return txtPesquisa;
-	}
-
-	public void setTxtPesquisa(String txtPesquisa) {
-		this.txtPesquisa = txtPesquisa;
-	}
-
 	public List<String> completeText(String query) {
 		List<String> results = new ArrayList<>();
-		Collator coll = Collator.getInstance();
-		for(String s : nomes) {
-			if(s.toLowerCase().contains(query.toLowerCase())) {
+
+		for (String s : nomes) {
+			if (s.toLowerCase().contains(query.toLowerCase())) {
 				results.add(s);
 			}
 		}
