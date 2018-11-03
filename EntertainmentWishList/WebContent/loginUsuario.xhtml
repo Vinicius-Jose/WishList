@@ -16,20 +16,20 @@
 	
 		<div class="ui-fluid">
 			<p:panel id="painelLogin" style="margin-top:95px; margin-bottom:25px;">
-				<p:messages id="message" />
+				<p:messages id="message" autoUpdate="true"/>
 	
 				<h:panelGrid columns="2" cellpadding="5">
 		
 					<h:outputLabel for="email" value="Email"/>
-					<p:inputText id="email" required="true"/>
+					<p:inputText id="email" required="true" value="#{usuarioBean.usuarioLogado.email}"/>
 					
 					<h:outputLabel for="senha" value="Senha"/>
-					<p:password id="senha" required="true"/>
+					<p:password id="senha" required="true" value="#{usuarioBean.usuarioLogado.senha}"/>
 					
-    				<p:messages showDetail="true"/>
+    		<!-- 	<p:messages showDetail="true"/>
 				    <p:captcha label="Captcha" />
 				    <p:commandButton value="Check" actionListener="#{captchaView.submit}" ajax="false" icon="ui-icon-check"/>
-					
+					 -->	
 				</h:panelGrid>
 				
 				<p:keyFilter for="email" mask="	/[a-z0-9_\.\-@]/i" />
@@ -43,11 +43,11 @@
 				<h:panelGrid columns="2" cellpadding="5">
 				
 					<p:commandButton id="logar" value="Logar"
-						actionListener="#{buttonView.buttonAction}"
+						action="#{usuarioBean.logar}" 
 						style="float:center;"/>
 			
 					<p:commandButton id="esqueciSenha" value="Esqueci minha Senha"
-						actionListener="#{buttonView.buttonAction}" 
+						action="/recuperarSenha.xhtml" immediate="true"
 						style="float:right;"/>
 						
 				</h:panelGrid>
@@ -66,7 +66,7 @@
 					<h:outputLabel value="Não é cadastrado?"/>
 					
 					<p:commandButton id="cadastrar" value="Cadastrar!"
-						actionListener="#{buttonView.buttonAction}"
+						action="/cadastroUsuario.xhtml"
 						style="float:right;"/>
 			
 				</h:panelGrid>

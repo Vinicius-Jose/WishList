@@ -161,6 +161,10 @@ public class UsuarioBean {
 		RenderedImage img = (RenderedImage) new ImageIcon(usuarioLogado.getFoto()).getImage();
 		ImageIO.write(img, "jpg", new File("/tmp/mypng.png"));
 		return endImagem;
+	}
+	
+	
+	public void recuperar() {
 		
 	}
 

@@ -20,7 +20,7 @@
 				<h:panelGrid columns="2" cellpadding="5">
 		
 					<h:outputLabel for="email" value="Digite seu email: "/>
-					<p:inputText id="email" required="true"/>
+					<p:inputText id="email" required="true" value="#{usuarioBean.usuarioLogado.email}"/>
 					
 				</h:panelGrid>
 				
@@ -38,11 +38,11 @@
 				<h:panelGrid columns="2" cellpadding="5">
 				
 					<p:commandButton id="recuperar" value="Recuperar"
-						actionListener="#{buttonView.buttonAction}"
+						action="#{usuarioBean.recuperar}"
 						style="float:center;"/>
 			
 					<p:commandButton id="cancelar" value="Cancelar"
-						actionListener="#{buttonView.buttonAction}" 
+						action="/loginUsuario.xhtml" 
 						style="float:right;"/>
 						
 				</h:panelGrid>

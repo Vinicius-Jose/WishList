@@ -39,22 +39,22 @@
 				<h:panelGrid columns="2" cellpadding="5">
 		
 					<h:outputLabel for="primeiroNome" value="Primeiro Nome"/>
-					<p:inputText id="primeiroNome" required="true"/>
+					<p:inputText id="primeiroNome" required="true" value="#{usuarioBean.usuarioLogado.primeiroNome}"/>
 					
-					<h:outputLabel for="segundoNome" value="Segundo Nome"/>
+					<h:outputLabel for="segundoNome" value="Segundo Nome" value="#{usuarioBean.usuarioLogado.segundoNome}"/>
 					<p:inputText id="segundoNome" required="true"/>
 					
-					<h:outputLabel for="nickname" value="Nickname"/>
+					<h:outputLabel for="nickname" value="Nickname" value="#{usuarioBean.usuarioLogado.nickName}"/>
 					<p:inputText id="nickname" required="true"/>
 					
 					<h:outputLabel for="email" value="Email"/>
-					<p:inputText id="email" required="true"/>
+					<p:inputText id="email" required="true" value="#{usuarioBean.usuarioLogado.email}"/>
 					
 					<h:outputLabel for="senhaAtual" value="Senha Atual"/>
-					<p:password id="senhaAtual" value="#{passwordView.password}" feedback="false" required="true"/>
+					<p:password id="senhaAtual" value="#{usuarioBean.usuarioLogado.senha}" feedback="false" required="true"/>
 					
 					<h:outputLabel for="novaSenha" value="Nova Senha"/>
-					<p:password id="novaSenha" value="#{passwordView.password}" feedback="true" required="true"/>
+					<p:password id="novaSenha" value="#{usuarioBean.usuarioLogado.senha}" feedback="true" required="true"/>
 					
 				</h:panelGrid>
 				
@@ -67,7 +67,7 @@
 			actionListener="#{buttonView.buttonAction}" icon="ui-icon-disk" 
 			style="float:right;"/>
 		<p:commandButton id="cancelar" value="Cancelar"
-			actionListener="#{buttonView.buttonAction}" 
+			action="/index.xhtml" immediate="true"
 			style="float:right;"/>
 			
 	</h:form>
