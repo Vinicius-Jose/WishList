@@ -16,40 +16,73 @@
 		<ui:include src="/cabecalho.xhtml"></ui:include>
 	</ui:insert>
 	
-	<div>
-		<p:panel id="painelBotao" style="margin-top:50px; margin-bottom:50px;">
+	<h:form>
+	
+		<div style="margin-top: 20px; display: flex; justify-content: center; font-size: 15px">
+			<div class="ui-fluid">
+				<h:outputText value="Pesquise por email: " style="font-size: 20px"/>
+							
+				<p:inputText id="email"/>
+				<p:keyFilter for="email" mask="	/[a-z0-9_\.\-@]/i" />
+			</div>
+			
+			<p:commandButton id="pesquisar" size="3" icon="ui-icon-search" />
+		</div>
 		
-			<p:commandButton id="bloquear" value="Bloquear"
-				actionListener="#{buttonView.buttonAction}"
-				style="float:left;"/>
-				
-			</p:panel>
-	</div>
-		
-	<div class="ui-fluid">
-		<p:panel id="painelGerenciar" style="margin-top:25px; margin-bottom:25px;">
-			<p:messages id="message" />
+	</h:form>
+	
+	<h:form>
+	
+		<div>
+			<p:panel id="painelStatus" style="margin-top:50px; margin-bottom:10px;">
+			
+				<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 
-			<h:panelGrid columns="2" cellpadding="5">
+       				<h:outputText value="Status:" />
+       				<p:selectOneButton value="#{selectOneView.option}">
+       				
+       					<f:selectItem itemLabel="BLOQUEADO" itemValue="BLOQUEADO" />
+       					<f:selectItem itemLabel="ATIVO" itemValue="ATIVO" />
+
+       				</p:selectOneButton>
+ 
+       				<p:commandButton value="Alterar" update="opcaoAtual" icon="ui-icon-check" />
+       				<p:spacer />
+ 
+       				<h:outputText value="Atual: " />
+       				<h:outputText id="opcaoAtual" value="#{selectOneView.option}" style="font-weight: bold" />
+
+       			</h:panelGrid>
+					
+			</p:panel>
+		</div>
+		
+	</h:form>
 	
-				<h:outputLabel for="primeiroNome" value="Primeiro Nome"/>
-				<h:outputLabel id="primeiroNome" required="true" rows="1" cols="100"/>
-				
-				<h:outputLabel for="segundoNome" value="Segundo Nome"/>
-				<h:outputLabel id="segundoNome" required="true" rows="1" cols="100"/>
-				
-				<h:outputLabel for="nickname" value="Nickname"/>
-				<h:outputLabel id="nickname" required="true" rows="1" cols="100"/>
-				
-				<h:outputLabel for="email" value="Email"/>
-				<h:outputLabel id="email" rows="1" cols="100"/>
-				
-				<h:outputLabel for="dataCadastro" value="Cadastrado em"/>
-				<h:outputLabel id="dataCadastro" rows="1" cols="100"/>
-				
-			</h:panelGrid>
-		</p:panel>
-	</div>
+	<h:form>
 	
+		<div class="ui-fluid">
+			<p:panel id="painelGerenciar" style="margin-top:5px; margin-bottom:25px;">
+				<p:messages id="message" />
+	
+				<h:panelGrid columns="2" cellpadding="5">
+		
+					<h:outputLabel for="primeiroNome" value="Primeiro Nome: "/>
+					<h:outputLabel id="primeiroNome" required="true"/>
+					
+					<h:outputLabel for="segundoNome" value="Segundo Nome: "/>
+					<h:outputLabel id="segundoNome" required="true"/>
+					
+					<h:outputLabel for="nickname" value="Nickname: "/>
+					<h:outputLabel id="nickname" required="true"/>
+					
+					<h:outputLabel for="email" value="Email: "/>
+					<h:outputLabel id="email" required="true"/>
+					
+				</h:panelGrid>
+			</p:panel>
+		</div>
+		
+	</h:form>
 </h:body>
 </html>

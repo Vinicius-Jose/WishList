@@ -11,7 +11,7 @@
 </h:head>
 
 <h:body>
-	
+
 	<ui:insert name="cabecalho">
 		<ui:include src="/cabecalho.xhtml"></ui:include>
 	</ui:insert>
@@ -30,40 +30,46 @@
 		</div>
 	</h:form>
 
-	<div class="ui-fluid">
-		<p:panel id="painelEditarDados" style="margin-top:25px; margin-bottom:25px;">
-			<p:messages id="message" />
-
-			<h:panelGrid columns="2" cellpadding="5">
+	<h:form>
 	
-				<h:outputLabel for="primeiroNome" value="Primeiro Nome"/>
-				<p:inputText id="primeiroNome" required="true" rows="1" cols="100" value="#{usuarioBean.usuarioLogado.primeiroNome}"/>
-				
-				<h:outputLabel for="segundoNome" value="Segundo Nome"/>
-				<p:inputText id="segundoNome" required="true" rows="1" cols="100" value="#{usuarioBean.usuarioLogado.segundoNome}"/>
-				
-				<h:outputLabel for="nickname" value="Nickname"/>
-				<p:inputText id="nickname" required="true" rows="1" cols="100" value="#{usuarioBean.usuarioLogado.nickName}"/>
-				
-				<h:outputLabel for="email" value="Email"/>
-				<p:inputText id="email" required="true" rows="1" cols="100" value="#{usuarioBean.usuarioLogado.email}"/>
-				
-				<h:outputLabel for="senhaAtual" value="Senha Atual"/>
-				<p:password id="senhaAtual"  feedback="true" required="true" rows="1" cols="100" value="#{usuarioBean.usuarioLogado.senha}"/>
-				
-				<h:outputLabel for="novaSenha" value="Nova Senha"/>
-				<p:inputText id="novaSenha" required="true" rows="1" cols="100" value="#{usuarioBean.usuarioLogado.senha}"/>
-				
-			</h:panelGrid>
-		</p:panel>
-	</div>
+		<div class="ui-fluid">
+			<p:panel id="painelEditarDados" style="margin-top:25px; margin-bottom:25px;">
+				<p:messages id="message" />
 	
-	<p:commandButton id="atualizar" value="Atualizar" update="painelEditarDados"
-		actionListener="#{buttonView.buttonAction}" icon="ui-icon-disk" 
-		style="float:right;"/>
-	<p:commandButton id="cancelar" value="Cancelar"
-		actionListener="#{buttonView.buttonAction}" 
-		style="float:right;"/>
-
+				<h:panelGrid columns="2" cellpadding="5">
+		
+					<h:outputLabel for="primeiroNome" value="Primeiro Nome"/>
+					<p:inputText id="primeiroNome" required="true"/>
+					
+					<h:outputLabel for="segundoNome" value="Segundo Nome"/>
+					<p:inputText id="segundoNome" required="true"/>
+					
+					<h:outputLabel for="nickname" value="Nickname"/>
+					<p:inputText id="nickname" required="true"/>
+					
+					<h:outputLabel for="email" value="Email"/>
+					<p:inputText id="email" required="true"/>
+					
+					<h:outputLabel for="senhaAtual" value="Senha Atual"/>
+					<p:password id="senhaAtual" value="#{passwordView.password}" feedback="false" required="true"/>
+					
+					<h:outputLabel for="novaSenha" value="Nova Senha"/>
+					<p:password id="novaSenha" value="#{passwordView.password}" feedback="true" required="true"/>
+					
+				</h:panelGrid>
+				
+				<p:keyFilter for="email" mask="	/[a-z0-9_\.\-@]/i" />
+				
+			</p:panel>
+		</div>
+		
+		<p:commandButton id="atualizar" value="Atualizar" update="painelEditarDados"
+			actionListener="#{buttonView.buttonAction}" icon="ui-icon-disk" 
+			style="float:right;"/>
+		<p:commandButton id="cancelar" value="Cancelar"
+			actionListener="#{buttonView.buttonAction}" 
+			style="float:right;"/>
+			
+	</h:form>
 </h:body>
 </html>

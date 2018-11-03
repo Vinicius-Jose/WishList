@@ -11,60 +11,63 @@
 </h:head>
 
 <h:body>
-
-	<div class="ui-fluid">
-		<p:panel id="painelRecuperarSenha" style="margin-top:80px; margin-bottom:0px;">
-			<p:messages id="message" />
-
-			<h:panelGrid columns="2" cellpadding="5">
+	<h:form>
 	
-				<h:outputLabel for="usuario" value="Nickaname / Email"/>
-				<p:inputText id="usuario" required="true" rows="1" cols="100"/>
-				
-				<h:outputLabel for="codigo" value="Codigo"/>
-				<p:inputText id="codigo" required="true" rows="1" cols="100"/>
-				
-				<h:outputLabel for="novaSenha" value="Nova senha"/>
-				<p:inputText id="novaSenha" required="true" rows="1" cols="100"/>
-				
-				<h:outputLabel for="confirmarNovaSenha" value="Confirme a nova senha"/>
-				<p:inputText id="confirmarNovaSenha" required="true" rows="1" cols="100"/>
-				
-			</h:panelGrid>
-		</p:panel>
-	</div>
+		<div class="ui-fluid">
+			<p:panel id="painelRecuperarSenha" style="margin-top:80px; margin-bottom:0px;">
+				<p:messages id="message" />
 	
-	<div>
-		<p:panel id="painelLogin" style="margin-top:3px; margin-bottom:25px;">
-
-			<h:panelGrid columns="2" cellpadding="5">
-			
-				<p:commandButton id="recuperar" value="Recuperar"
-					actionListener="#{buttonView.buttonAction}"
-					style="float:center;"/>
+				<h:panelGrid columns="2" cellpadding="5">
 		
-				<p:commandButton id="cancelar" value="Cancelar"
-					actionListener="#{buttonView.buttonAction}" 
-					style="float:right;"/>
+					<h:outputLabel for="email" value="Digite seu email: "/>
+					<p:inputText id="email" required="true"/>
 					
-			</h:panelGrid>
-		</p:panel>
-	</div>
-	
-	<div>
-		<p:panel id="painelCadastrar" style="margin-top:30px; margin-bottom:25px;">
-
-			<h:panelGrid columns="2" cellpadding="5">
-			
-				<h:outputLabel value="Não é cadastrado?"/>
+				</h:panelGrid>
 				
-				<p:commandButton id="cadastrar" value="Cadastrar!"
-					actionListener="#{buttonView.buttonAction}"
-					style="float:right;"/>
+				<h:outputLabel value="Você receberá sua nova senha no email informado acima"/>
+				
+			</p:panel>
+			
+			<p:keyFilter for="email" mask="	/[a-z0-9_\.\-@]/i" />
+			
+		</div>
 		
-			</h:panelGrid>
-		</p:panel>
-	</div>
-
+		<div>
+			<p:panel id="painelLogin" style="margin-top:3px; margin-bottom:25px;">
+	
+				<h:panelGrid columns="2" cellpadding="5">
+				
+					<p:commandButton id="recuperar" value="Recuperar"
+						actionListener="#{buttonView.buttonAction}"
+						style="float:center;"/>
+			
+					<p:commandButton id="cancelar" value="Cancelar"
+						actionListener="#{buttonView.buttonAction}" 
+						style="float:right;"/>
+						
+				</h:panelGrid>
+			</p:panel>
+		</div>
+		
+	</h:form>
+	
+	<h:form>
+	
+		<div>
+			<p:panel id="painelCadastrar" style="margin-top:30px; margin-bottom:25px;">
+	
+				<h:panelGrid columns="2" cellpadding="5">
+				
+					<h:outputLabel value="Não é cadastrado?"/>
+					
+					<p:commandButton id="cadastrar" value="Cadastrar!"
+						actionListener="#{buttonView.buttonAction}"
+						style="float:right;"/>
+			
+				</h:panelGrid>
+			</p:panel>
+		</div>
+		
+	</h:form>
 </h:body>
 </html>
