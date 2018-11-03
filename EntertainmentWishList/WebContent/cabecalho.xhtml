@@ -62,7 +62,7 @@
 				<p:menubar
 					style="font-size:14px; padding:0.03px;  font-align:'center'; height:25px;">
 					<p:submenu
-						style=" background-image: url('#{cabecalhoController.image}'); background-size: 100px 40px; height:25px; ">
+						style=" background-image:url('#{usuarioBean.arquivoImagem}'); background-size: 100px 40px; height:25px; " >
 						<p:menuitem style="width:80%" value="Editar Dados" outcome="/editarDados.xhtml"></p:menuitem>
 						<p:menuitem style="width:80%" value="Logout" icon="ui-icon-close" action="#{usuarioBean.logout}"></p:menuitem>
 					</p:submenu>

@@ -34,6 +34,7 @@ public class UsuarioDAOImpl implements UsuarioDAO  {
 			em.persist(usuario);
 			em.getTransaction().commit();
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new UserException(usuario.getEmail());
 		} finally {
 			em.close();

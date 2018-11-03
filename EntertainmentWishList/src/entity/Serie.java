@@ -12,20 +12,19 @@ import com.google.gson.annotations.SerializedName;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "Entretenimentoid")
-public class Serie extends Entretenimento implements Serializable{
+public class Serie extends Entretenimento implements Serializable {
 
-	@Column(length=200)
+	@Column(length = 200)
 	private String nomePortugues;
+
 	
-	@SerializedName("totalSeasons")
-	@Expose
 	private int numeroEpisodios;
-	
+
 	private int temporadas;
-	
-	@Column(nullable=true)
+
+	@Column(nullable = true)
 	private int rottenTomatoes;
-	
+
 	private Date dataFinal;
 
 	public String getNomePortugues() {

@@ -20,27 +20,40 @@ public class OMDBDeserializer implements JsonDeserializer<HashMap<String, Object
 			throws JsonParseException {
 		JsonObject jsonObject = element.getAsJsonObject();
 		JsonElement name = jsonObject.get("Metascore");
-		HashMap<String,Object> dadosOMDB = new HashMap<>();
-		
+
+		HashMap<String, Object> dadosOMDB = new HashMap<>();
+
 		int i;
 		try {
-			i  = Integer.parseInt(name.getAsString());
-		}catch(Exception e) {
+			i = Integer.parseInt(name.getAsString());
+		} catch (Exception e) {
 			i = 0;
 		}
-		dadosOMDB.put("metascore",i);
+		dadosOMDB.put("metascore", i);
+
+		name = jsonObject.get("totalSeason");
+		int temporadas;
+		try {
+			temporadas = Integer.parseInt(name.getAsString());
+		} catch (Exception e) {
+			temporadas = 0;
+		}
+
+		dadosOMDB.put("temporadas", temporadas);
+
 		name = jsonObject.get("Released");
-		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy",new Locale("en"));
+		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", new Locale("en"));
 		Date sql = null;
 		try {
 			java.util.Date data = null;
 			data = sdf.parse(name.getAsString());
-			 sql = new Date(data.getTime());
+			sql = new Date(data.getTime());
 		} catch (ParseException e) {
-			e.printStackTrace();
+			sql = null;
+		} finally {
+			dadosOMDB.put("dataLancamento", sql);
+			return dadosOMDB;
 		}
-		dadosOMDB.put("dataLancamento", sql);
-		return dadosOMDB;
 	}
 
 }

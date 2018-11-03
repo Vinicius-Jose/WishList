@@ -14,8 +14,10 @@
 	<ui:insert name="cabecalho">
 		<ui:include src="/cabecalho.xhtml"></ui:include>
 	</ui:insert>
+	
 	<div class="ui-fluid">
 		<h:form id="form" style="margin-top:25px">
+			<p:growl autoUpdate="true" id="messages" showDetail="true" sticky="true"></p:growl>
 			<p:dataGrid var="usuario" value="#{usuarioBean.usuarios}" columns="6"
 				layout="grid" rows="12" paginator="true" id="entretenimentos"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -26,16 +28,19 @@
         	</f:facet>
 
 				<div class="card" style="width: 3; length: 3rem" align="center">
-					<h:graphicImage class="card-img-top"
-						value="https://image.freepik.com/icones-gratis/perfil-macho-utilizador-sombra_318-40244.jpg"
-						alt="Card image cap" style="width: 200px ;length: 200px"></h:graphicImage>
+					<p:graphicImage id="imagem" class="card-img-top"
+						value="#{usuarioBean.imageSelected}" alt="Imagem do Usuário"
+						style="width: 200px ;length: 200px">
+					</p:graphicImage>
+					
+					
 					<div class="card-body">
 						<p class="card-title">#{usuario.primeiroNome}</p>
 						<p class="card-text" style="font-size: 12px">
 							Nick Name: #{usuario.nickName} <br />Email: #{usuario.email}
 						</p>
 						<p:commandButton action="#{usuarioBean.enviarSolicitacao}"
-							value="Enviar Solicitação" id="Ajax">
+							value="Enviar Solicitação" id="Ajax" >
 							<f:setPropertyActionListener target="#{usuarioBean.selected}"
 								value="#{usuario}" />
 						</p:commandButton>

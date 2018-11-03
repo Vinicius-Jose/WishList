@@ -31,7 +31,7 @@ public class Entretenimento implements Serializable {
 	@Expose
 	private String nomeOriginal;
 	
-	@SerializedName("aggregated_rating")
+	
 	private int metacritic;
 
 	@Transient

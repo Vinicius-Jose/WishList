@@ -24,11 +24,14 @@ public class TMDBDeserializer implements JsonDeserializer<HashMap<String, String
 		JsonArray jsonArray = jsonObject.getAsJsonArray("results");
 		if (jsonArray.size() > 0) {
 			JsonElement name = jsonArray.get(0).getAsJsonObject().get("backdrop_path");
-			System.out.println("https://image.tmdb.org/t/p/w300" +name.getAsString());
+			
 			dadosTMDB.put("background", "https://image.tmdb.org/t/p/w300" +name.getAsString());
 			name = jsonArray.get(0).getAsJsonObject().get("overview");
 			dadosTMDB.put("sinopse", name.getAsString());
 			name = jsonArray.get(0).getAsJsonObject().get("title");
+			if(name==null) {
+				name = jsonArray.get(0).getAsJsonObject().get("name");
+			}
 			dadosTMDB.put("nomePt", name.getAsString());
 		}
 		return dadosTMDB;

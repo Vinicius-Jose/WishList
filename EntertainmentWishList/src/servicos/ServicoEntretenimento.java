@@ -36,12 +36,17 @@ public class ServicoEntretenimento {
 					novo = gson.fromJson(json, Serie.class);
 				}
 
-				
 				if (novo.getNomeOriginal() != null) {
 					HashMap<String, Object> dados = gson.fromJson(json, HashMap.class);
-					novo.setDataLancamento((Date) dados.get("dataLancamento"));
+					Date sqlDate = (Date) dados.get("dataLancamento");
+					if (sqlDate == null)
+						sqlDate = e.getDataLancamento();
+					
+					novo.setDataLancamento(sqlDate);
 					novo.setMetacritic((int) dados.get("metascore"));
-
+					if(e instanceof Serie)
+						((Serie) novo).setTemporadas((int) dados.get("temporadas"));
+					
 					builder.registerTypeAdapter(HashMap.class, new TMDBDeserializer());
 					gson = builder.create();
 					json = buscaJSON(criaURITMDB(novo));
@@ -50,9 +55,10 @@ public class ServicoEntretenimento {
 						novo.setSinopse((String) dados.get("sinopse"));
 						novo.setImagemFundo((String) dados.get("background"));
 						if (e instanceof Filme) {
-							((Filme)novo).setNomePortugues((String) dados.get("nomePt"));
+							((Filme) novo).setNomePortugues((String) dados.get("nomePt"));
 						} else if (e instanceof Serie) {
-							((Serie)novo).setNomePortugues((String) dados.get("nomePt"));
+							((Serie) novo).setNomePortugues((String) dados.get("nomePt"));
+							
 						}
 					}
 					return novo;
@@ -77,7 +83,12 @@ public class ServicoEntretenimento {
 		} else if (e instanceof Serie) {
 			uri += "&type=series&";
 		}
-		uri += "plot=full&apikey=7fd1758d";
+		if (e.getDataLancamento() != null) {
+			Calendar c = Calendar.getInstance();
+			c.setTime(e.getDataLancamento());
+			uri += "y=" + c.get(Calendar.YEAR);
+		}
+		uri += "&plot=full&apikey=7fd1758d";
 
 		return uri;
 	}
@@ -94,7 +105,7 @@ public class ServicoEntretenimento {
 		c.setTime(e.getDataLancamento());
 		uri = "https://api.themoviedb.org/3/search/" + tipo
 				+ "?api_key=a5e03bab2b046c01727a5cc5699556bd&language=pt-BR&query="
-				+ URLEncoder.encode(e.getNomeOriginal(), "UTF-8") + "&page=1&year="+ c.get(Calendar.YEAR);
+				+ URLEncoder.encode(e.getNomeOriginal(), "UTF-8") + "&page=1&year=" + c.get(Calendar.YEAR);
 
 		return uri;
 	}

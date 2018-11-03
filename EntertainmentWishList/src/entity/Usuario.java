@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 import enumeradas.StatusAmigo;
@@ -28,7 +29,10 @@ public class Usuario implements Serializable{
 	private String email;
 	
 	private String senha;
-	private Byte[] foto;
+	
+	@Lob
+	@Column(columnDefinition="longblob")
+	private byte[] foto;
 	
 	@Column(length = 1)
 	private char permissao;
@@ -97,11 +101,11 @@ public class Usuario implements Serializable{
 		this.senha = senha;
 	}
 
-	public Byte[] getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
 
-	public void setFoto(Byte[] foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
 
