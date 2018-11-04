@@ -34,12 +34,12 @@ public class UsuarioBean {
 
 
 	public UsuarioBean() {
-		try {
-			usuarioLogado = new UsuarioDAOImpl().validarUsuario("joana@yahoo.com.br", "12345");
-		} catch (UserException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			usuarioLogado = new UsuarioDAOImpl().validarUsuario("joana@yahoo.com.br", "12345");
+//		} catch (UserException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	public void buttonBuscaAmigo() {
