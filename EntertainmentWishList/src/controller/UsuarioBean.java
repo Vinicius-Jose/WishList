@@ -25,7 +25,7 @@ import excecoes.UserException;
 @ManagedBean
 public class UsuarioBean {
 	private Usuario usuarioLogado = new Usuario();
-	
+	private String option;
 
 	private List<Usuario> usuarios = new ArrayList<>();
 	private Usuario selected=new Usuario();
@@ -34,12 +34,12 @@ public class UsuarioBean {
 
 
 	public UsuarioBean() {
-//		try {
-//			usuarioLogado = new UsuarioDAOImpl().validarUsuario("rodrigo.cdl1997@gmail.com", "123456");
-//		} catch (UserException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			usuarioLogado = new UsuarioDAOImpl().validarUsuario("joana@yahoo.com.br", "12345");
+		} catch (UserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void buttonBuscaAmigo() {
@@ -77,7 +77,12 @@ public class UsuarioBean {
 		UsuarioDAO udao = new UsuarioDAOImpl();
 		try {
 			usuarioLogado = udao.validarUsuario(usuarioLogado.getEmail(), usuarioLogado.getSenha());
-			FacesContext.getCurrentInstance().getExternalContext().redirect("./index.xhtml");
+			if(usuarioLogado.isStatusUsuario())
+				FacesContext.getCurrentInstance().getExternalContext().redirect("./index.xhtml");
+			else {
+				FacesMessage msgError = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Este Login está bloqueado entre em contato com wishList@gmail.com para mais informações");
+				FacesContext.getCurrentInstance().addMessage(null, msgError);
+			}
 		} catch (UserException | IOException e) {
 			usuarioLogado.setEmail(null);
 			FacesMessage msgError = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", e.getMessage());
@@ -110,7 +115,20 @@ public class UsuarioBean {
 	}
 
 	public void recuperar() {
-
+		UsuarioDAO udao = new UsuarioDAOImpl();
+		try {
+			usuarioLogado = udao.buscarUsuarioEspecifico(usuarioLogado.getEmail());
+//			servicoSenha
+			udao.alterar(usuarioLogado);
+			usuarioLogado = new Usuario();
+			FacesContext.getCurrentInstance().getExternalContext().redirect("./loginUsuario.xhtml");
+		} catch (UserException | IOException e1) {
+			FacesMessage msgErro = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e1.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, msgErro);
+			e1.printStackTrace();
+		}
+		
+		
 	}
 
 	public boolean getPermissao() {
@@ -142,9 +160,32 @@ public class UsuarioBean {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
+	
+	
+	public void buscarUsuarioEmail() {
+		UsuarioDAO udao = new UsuarioDAOImpl();
+		try {
+			selected = udao.buscarUsuarioEspecifico(txtBuscaUsuario);
+		} catch (UserException e) {
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", e.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+		}
+	}
+	
+	
+	public void atualizarUsuario() {
+		UsuarioDAO udao = new UsuarioDAOImpl();
+		System.out.println(selected.getEmail());
+		if(option.equals("BLOQUEADO")) selected.setStatusUsuario(false);
+		else selected.setStatusUsuario(true);
+		udao.alterar(selected);
+		selected = new Usuario();
+		txtBuscaUsuario = null;
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Dados Atualizados com sucesso");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+	
 	
 
 	public List<Usuario> getUsuarios() {
@@ -177,6 +218,19 @@ public class UsuarioBean {
 
 	public void setTxtBuscaUsuario(String txtBuscaUsuario) {
 		this.txtBuscaUsuario = txtBuscaUsuario;
+	}
+
+	public String getOption() {
+		if(selected!=null) {
+			if(!selected.isStatusUsuario()) return "BLOQUEADO";
+			else return "ATIVO";
+				
+		}
+		return null;
+	}
+
+	public void setOption(String option) {
+		this.option = option;
 	}
 	
 	

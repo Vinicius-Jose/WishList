@@ -23,6 +23,7 @@ public class FavoritosBean {
 
 	private List<ItemFavoritos> favoritos = new LinkedList<>();
 	private Entretenimento selected;
+	
 
 	@ManagedProperty(value = "#{usuarioBean.usuarioLogado}")
 	private Usuario usuario;
@@ -57,6 +58,7 @@ public class FavoritosBean {
 
 	public void visualizar() {
 		ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
+		System.out.println(usuario.getEmail());
 		try {
 			if (selected instanceof Serie)
 				ex.redirect("./infoSerie.xhtml");

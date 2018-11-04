@@ -35,7 +35,7 @@ public class UsuarioDAOImpl implements UsuarioDAO  {
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new UserException(usuario.getEmail());
+			throw new UserException(usuario.getEmail(),usuario.getPrimeiroNome());
 		} finally {
 			em.close();
 		}
@@ -121,6 +121,23 @@ public class UsuarioDAOImpl implements UsuarioDAO  {
 			throw new FriendException(amigo.getUsuario());
 		}
 			
+	}
+	
+	
+	@Override
+	public Usuario buscarUsuarioEspecifico(String email) throws UserException {
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Usuario> query = em.createQuery(
+				"select u from Usuario u where email = :email ", Usuario.class);
+		query.setParameter("email", email);
+		Usuario usuario = null;
+		try {
+			usuario = query.getSingleResult();
+			em.close();
+			return usuario;
+		} catch (NoResultException no) {
+			throw new UserException(email);
+		}
 	}
 
 }

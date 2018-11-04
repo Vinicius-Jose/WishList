@@ -28,4 +28,7 @@ public interface UsuarioDAO {
 
 	void adicionarAmigo(Usuario user, Amigo amigo) throws FriendException;
 
+
+	Usuario buscarUsuarioEspecifico(String email) throws UserException;
+
 }
