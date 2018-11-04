@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html 	xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:h="http://java.sun.com/jsf/html"
-		xmlns:f="http://java.sun.com/jsf/core"
-		xmlns:p="http://primefaces.org/ui"
-		xmlns:ui="http://java.sun.com/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Editar Dados</title>
@@ -15,61 +15,76 @@
 	<ui:insert name="cabecalho">
 		<ui:include src="/cabecalho.xhtml"></ui:include>
 	</ui:insert>
-	
+
 	<h:form enctype="multipart/form-data">
 		<div class="ui-fluid">
-				<p:panel id="painelEditarDados" style="margin-top:25px; margin-bottom:25px;">
+			<p:panel id="painelEditarDados"
+				style="margin-top:25px; margin-bottom:25px;">
+
+				<p:growl id="messages" showDetail="true" autoUpdate="true" showSummary="true" />
+
+				<p:fileUpload value="#{fileUploadUserBean.file}" mode="simple"
+					skinSimple="true" accept=".jpg" />
+				<p:graphicImage style="width:200px;heigth:200px" id="imagemUsuario"
+					value="#{fileUploadUserBean.imagemUsuario}"></p:graphicImage>
+				<p:commandButton value="Enviar imagem" ajax="false"
+					actionListener="#{fileUploadUserBean.upload}" disabled="false"
+					update="imagemUsuario"/>
 				
-				    <p:growl id="messages" showDetail="true" />
-				 
-				    <p:fileUpload value="#{fileUploadView.file}" mode="simple" skinSimple="true"/>
-				 
-				 	<p:commandButton value="Enviar imagem" ajax="false" actionListener="#{fileUploadView.upload}" disabled="false" />
-				 	
-				</p:panel>
+
+			</p:panel>
 		</div>
 	</h:form>
 
 	<h:form>
-	
+
 		<div class="ui-fluid">
-			<p:panel id="painelEditarDados" style="margin-top:25px; margin-bottom:25px;">
+			<p:panel id="painelEditarDados"
+				style="margin-top:25px; margin-bottom:25px;">
 				<p:messages id="message" />
-	
+
 				<h:panelGrid columns="2" cellpadding="5">
-		
-					<h:outputLabel for="primeiroNome" value="Primeiro Nome"/>
-					<p:inputText id="primeiroNome" required="true" value="#{usuarioBean.usuarioLogado.primeiroNome}"/>
-					
-					<h:outputLabel for="segundoNome" value="Segundo Nome" value="#{usuarioBean.usuarioLogado.segundoNome}"/>
-					<p:inputText id="segundoNome" required="true"/>
-					
-					<h:outputLabel for="nickname" value="Nickname" value="#{usuarioBean.usuarioLogado.nickName}"/>
-					<p:inputText id="nickname" required="true"/>
-					
-					<h:outputLabel for="email" value="Email"/>
-					<p:inputText id="email" required="true" value="#{usuarioBean.usuarioLogado.email}"/>
-					
-					<h:outputLabel for="senhaAtual" value="Senha Atual"/>
-					<p:password id="senhaAtual" value="#{usuarioBean.usuarioLogado.senha}" feedback="false" required="true"/>
-					
-					<h:outputLabel for="novaSenha" value="Nova Senha"/>
-					<p:password id="novaSenha" value="#{usuarioBean.usuarioLogado.senha}" feedback="true" required="true"/>
-					
+
+					<h:outputLabel for="primeiroNome" value="Primeiro Nome" />
+					<p:inputText id="primeiroNome" required="true"
+						value="#{usuarioBean.usuarioLogado.primeiroNome}" />
+
+					<h:outputLabel for="segundoNome" value="Segundo Nome" />
+					<p:inputText id="segundoNome" required="true"
+						value="#{usuarioBean.usuarioLogado.segundoNome}" />
+
+					<h:outputLabel for="nickname" value="Nickname" />
+					<p:inputText id="nickname" required="true"
+						value="#{usuarioBean.usuarioLogado.nickName}" />
+
+					<h:outputLabel for="email" value="Email" />
+					<p:inputText id="email" required="true"
+						value="#{usuarioBean.usuarioLogado.email}" />
+
+					<h:outputLabel for="senhaAtual" value="Senha Atual" />
+					<p:password id="senhaAtual"
+						value="#{usuarioBean.usuarioLogado.senha}" feedback="false"
+						required="true" />
+
+					<h:outputLabel for="novaSenha" value="Nova Senha" />
+					<p:password id="novaSenha"
+						value="#{usuarioBean.usuarioLogado.senha}" feedback="true"
+						required="true" />
+
 				</h:panelGrid>
-				
+
 				<p:keyFilter for="email" mask="	/[a-z0-9_\.\-@]/i" />
-				
+
 			</p:panel>
 		</div>
-		
-		<p:commandButton id="atualizar" value="Atualizar" update="painelEditarDados"
-			actionListener="#{buttonView.buttonAction}" icon="ui-icon-disk" 
-			style="float:right;"/>
-		<p:commandButton id="cancelar" value="Cancelar"
-			action="/index.xhtml" immediate="true"
-			style="float:right;"/>
-			
+
+		<p:commandButton id="atualizar" value="Atualizar"
+			update="painelEditarDados"
+			actionListener="#{usuarioBean.atualizarDados}" icon="ui-icon-disk"
+			style="float:right;" />
+		<p:commandButton id="cancelar" value="Cancelar" action="/index.xhtml"
+			immediate="true" style="float:right;" />
+
 	</h:form>
 </h:body>
 </html>

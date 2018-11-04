@@ -1,10 +1,7 @@
 package controller;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,51 +25,21 @@ import excecoes.UserException;
 @ManagedBean
 public class UsuarioBean {
 	private Usuario usuarioLogado = new Usuario();
+	
+
 	private List<Usuario> usuarios = new ArrayList<>();
-	private Usuario selected;
+	private Usuario selected=new Usuario();
 	private String txtBuscaUsuario;
-	private DefaultStreamedContent imageSelected;
 	private int i = 0;
 
+
 	public UsuarioBean() {
-		try {
-			usuarioLogado = new UsuarioDAOImpl().validarUsuario("rodrigo.cdl1997@gmail.com", "123456");
-		} catch (UserException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public List<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
-
-	public Usuario getSelected() {
-		return selected;
-	}
-
-	public void setSelected(Usuario selected) {
-		this.selected = selected;
-	}
-
-	public Usuario getUsuarioLogado() {
-		return usuarioLogado;
-	}
-
-	public void setUsuarioLogado(Usuario usuarioLogado) {
-		this.usuarioLogado = usuarioLogado;
-	}
-
-	public String getTxtBuscaUsuario() {
-		return txtBuscaUsuario;
-	}
-
-	public void setTxtBuscaUsuario(String txtBuscaUsuario) {
-		this.txtBuscaUsuario = txtBuscaUsuario;
+//		try {
+//			usuarioLogado = new UsuarioDAOImpl().validarUsuario("rodrigo.cdl1997@gmail.com", "123456");
+//		} catch (UserException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	public void buttonBuscaAmigo() {
@@ -110,7 +77,6 @@ public class UsuarioBean {
 		UsuarioDAO udao = new UsuarioDAOImpl();
 		try {
 			usuarioLogado = udao.validarUsuario(usuarioLogado.getEmail(), usuarioLogado.getSenha());
-
 			FacesContext.getCurrentInstance().getExternalContext().redirect("./index.xhtml");
 		} catch (UserException | IOException e) {
 			usuarioLogado.setEmail(null);
@@ -130,41 +96,88 @@ public class UsuarioBean {
 		}
 	}
 
-	public DefaultStreamedContent getImageUsuarioLogado() throws IOException {
-		return new DefaultStreamedContent(new ByteArrayInputStream(usuarioLogado.getFoto()), "image/jpg");
-	}
+	
 
 	public DefaultStreamedContent getImageSelected() throws IOException {
 		if (i == usuarios.size())
 			i = 0;
 		Usuario u = usuarios.get(i);
 		i++;
-		System.out.println(i);
-		imageSelected = new DefaultStreamedContent(new ByteArrayInputStream(u.getFoto()), "image/jpg");
+		DefaultStreamedContent imageSelected = new DefaultStreamedContent(new ByteArrayInputStream(u.getFoto()),
+				"image/jpg");
 
 		return imageSelected;
-	}
-
-	public void setImageSelected(DefaultStreamedContent imageSelected) {
-		this.imageSelected = imageSelected;
-	}
-
-	public String getArquivoImagem() throws IOException {
-		String endImagem =  usuarioLogado.getEmail() + ".jpg";
-		InputStream is  = new ByteArrayInputStream(usuarioLogado.getFoto());
-		OutputStream os = new FileOutputStream(endImagem);
-		int length;
-		while ((length = is.read(usuarioLogado.getFoto())) != -1) {
-			os.write(usuarioLogado.getFoto(), 0, length);
-		}
-
-		is.close();
-		os.close();
-		return endImagem;
 	}
 
 	public void recuperar() {
 
 	}
 
+	public boolean getPermissao() {
+		if (usuarioLogado.getPermissao() == 'c')
+			return false;
+		else
+			return true;
+	}
+	
+	public void atualizarDados() {
+		UsuarioDAO udao = new UsuarioDAOImpl();
+		udao.alterar(usuarioLogado);
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Dados Atualizados com sucesso");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+	
+	public void cadastrar() {
+		UsuarioDAO udao = new UsuarioDAOImpl();
+		try {
+			udao.adicionar(usuarioLogado);
+			usuarioLogado = new Usuario();
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Cadastro realizado com sucesso");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			FacesContext.getCurrentInstance().getExternalContext().redirect("./loginUsuario.xhtml");
+		} catch (UserException e1) {
+			FacesMessage msgErro = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e1.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, msgErro);
+			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	public Usuario getSelected() {
+		return selected;
+	}
+
+	public void setSelected(Usuario selected) {
+		this.selected = selected;
+	}
+
+	public Usuario getUsuarioLogado() {
+		return usuarioLogado;
+	}
+
+	public void setUsuarioLogado(Usuario usuarioLogado) {
+		this.usuarioLogado = usuarioLogado;
+	}
+
+	public String getTxtBuscaUsuario() {
+		return txtBuscaUsuario;
+	}
+
+	public void setTxtBuscaUsuario(String txtBuscaUsuario) {
+		this.txtBuscaUsuario = txtBuscaUsuario;
+	}
+	
+	
 }

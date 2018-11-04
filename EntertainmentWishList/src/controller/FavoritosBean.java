@@ -57,7 +57,6 @@ public class FavoritosBean {
 
 	public void visualizar() {
 		ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
-
 		try {
 			if (selected instanceof Serie)
 				ex.redirect("./infoSerie.xhtml");

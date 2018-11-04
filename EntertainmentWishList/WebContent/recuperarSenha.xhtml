@@ -42,8 +42,9 @@
 						style="float:center;"/>
 			
 					<p:commandButton id="cancelar" value="Cancelar"
-						action="/loginUsuario.xhtml" 
+						action="/loginUsuario.xhtml" immediate="true"
 						style="float:right;"/>
+						
 						
 				</h:panelGrid>
 			</p:panel>
@@ -61,7 +62,7 @@
 					<h:outputLabel value="Não é cadastrado?"/>
 					
 					<p:commandButton id="cadastrar" value="Cadastrar!"
-						actionListener="#{buttonView.buttonAction}"
+						action="/cadastroUsuario.xhtml" immediate="true"
 						style="float:right;"/>
 			
 				</h:panelGrid>

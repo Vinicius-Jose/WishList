@@ -16,7 +16,7 @@
 	
 		<div class="ui-fluid">
 			<p:panel id="painelLogin" style="margin-top:95px; margin-bottom:25px;">
-				<p:messages id="message" autoUpdate="true"/>
+				<p:messages id="message" autoUpdate="true" showDetail="true" showSummary="true"/>
 	
 				<h:panelGrid columns="2" cellpadding="5">
 		
@@ -49,7 +49,8 @@
 					<p:commandButton id="esqueciSenha" value="Esqueci minha Senha"
 						action="/recuperarSenha.xhtml" immediate="true"
 						style="float:right;"/>
-						
+					
+
 				</h:panelGrid>
 			</p:panel>
 		</div>
@@ -65,8 +66,8 @@
 				
 					<h:outputLabel value="Não é cadastrado?"/>
 					
-					<p:commandButton id="cadastrar" value="Cadastrar!"
-						action="/cadastroUsuario.xhtml"
+					<p:commandButton id="cadastrarLogin" value="Cadastrar!"
+						action="/cadastroUsuario.xhtml" immediate="true" 
 						style="float:right;"/>
 			
 				</h:panelGrid>

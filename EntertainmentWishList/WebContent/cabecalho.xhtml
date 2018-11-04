@@ -26,7 +26,7 @@
 			</p:menuitem>
 			<p:menuitem style="padding:0px;">
 				<f:param name="i" value="3" />
-				<p:menubar
+				<p:menubar rendered="#{usuarioBean.permissao}"
 					style="font-size:14px; padding:02px;  font-align:'center'; height:25px;display:flex;justify-content:center"
 					styleClass="ui-tabmenuitem ui-state-default ui-corner-top ui-tabmenuitem-hasicon">
 					<p:submenu label="Cadastrar" style="height:20px;"
@@ -42,7 +42,7 @@
 				</p:menubar>
 			</p:menuitem>
 			<p:menuitem value="Gerenciar Usuários" outcome="/index.xhtml"
-				icon="ui-icon-person">
+				icon="ui-icon-person" rendered="#{usuarioBean.permissao}">
 				<f:param name="i" value="4" />
 			</p:menuitem>
 			<p:menuitem style="padding:1px; height:30px">
@@ -62,7 +62,7 @@
 				<p:menubar
 					style="font-size:14px; padding:0.03px;  font-align:'center'; height:25px;">
 					<p:submenu
-						style=" background-image:url('./#{usuarioBean.arquivoImagem}'); background-size: 100px 40px; height:25px; " >
+						style=" background-image:url(''); background-size: 100px 40px; height:25px; " >
 						<p:menuitem style="width:80%" value="Editar Dados" outcome="/editarDados.xhtml"></p:menuitem>
 						<p:menuitem style="width:80%" value="Logout" icon="ui-icon-close" action="#{usuarioBean.logout}"></p:menuitem>
 					</p:submenu>

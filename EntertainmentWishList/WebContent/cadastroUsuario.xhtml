@@ -15,16 +15,20 @@
 	
 		<div class="ui-fluid">
 				<p:panel id="painelEditarDados" style="margin-top:25px; margin-bottom:25px;">
-				
 				    <p:growl id="messages" showDetail="true" />
 				 
-				    <p:fileUpload value="#{fileUploadView.file}" mode="simple" skinSimple="true"/>
-				 
-				 	<p:commandButton value="Enviar imagem" ajax="false" actionListener="#{fileUploadView.upload}" disabled="false" />
+				    <p:fileUpload value="#{fileUploadUserBean.file}" mode="simple"
+					skinSimple="true" accept=".jpg" />
+				<p:graphicImage style="width:200px;heigth:200px" id="imagemUsuario"
+					value="#{fileUploadUserBean.imagemUsuario}"></p:graphicImage>
+				<p:commandButton value="Enviar imagem" ajax="false"
+					actionListener="#{fileUploadUserBean.upload}" disabled="false"
+					update="imagemUsuario"/>
 				 	
 				</p:panel>
 		</div>
-	
+	</h:form>
+	<h:form>
 		<div class="ui-fluid">
 			<p:panel id="painelCadastro" style="margin-top:25px; margin-bottom:25px;">
 				<p:messages id="message" />
@@ -32,22 +36,22 @@
 				<h:panelGrid columns="2" cellpadding="5">
 		
 					<h:outputLabel for="primeiroNome" value="Primeiro Nome *"/>
-					<p:inputText id="primeiroNome" required="true"/>
+					<p:inputText id="primeiroNome" required="true" value="#{usuarioBean.usuarioLogado.primeiroNome}"/>
 					
 					<h:outputLabel for="segundoNome" value="Segundo Nome *"/>
-					<p:inputText id="segundoNome" required="true"/>
+					<p:inputText id="segundoNome" required="true" value="#{usuarioBean.usuarioLogado.segundoNome}"/>
 					
 					<h:outputLabel for="nickname" value="Nickname *"/>
-					<p:inputText id="nickname" required="true"/>
+					<p:inputText id="nickname" required="true" value="#{usuarioBean.usuarioLogado.nickName}"/>
 					
 					<h:outputLabel for="email" value="Email *"/>
-					<p:inputText id="email" required="true"/>
+					<p:inputText id="email" required="true" value="#{usuarioBean.usuarioLogado.email}"/>
 					
 					<h:outputLabel for="senha" value="Senha *"/>
-					<p:password id="senha" value="#{passwordView.password}" feedback="true" match="confirmarSenha" required="true"/>
+					<p:password id="senha" value="#{usuarioBean.usuarioLogado.senha}" feedback="true" match="confirmarSenha" required="true"/>
 					
 					<h:outputLabel for="confirmarSenha" value="Confirmar Senha *"/>
-					<p:password id="confirmarSenha" value="#{passwordView.password}" feedback="false" required="true"/>
+					<p:password id="confirmarSenha" value="#{usuarioBean.usuarioLogado.senha}" feedback="false" required="true"/>
 					
 				</h:panelGrid>
 				
@@ -57,11 +61,11 @@
 		</div>
 		
 		<p:commandButton id="cadastrar" value="Cadastrar" update="painelCadastro"
-			actionListener="#{buttonView.buttonAction}" icon="ui-icon-disk" 
+			actionListener="#{usuarioBean.cadastrar}" icon="ui-icon-disk" 
 			style="float:right;"/>
 		<p:commandButton id="cancelar" value="Cancelar"
 			action="/loginUsuario.xhtml" 
-			style="float:right;"/>
+			style="float:right;" immediate="true"/>
 			
 	</h:form>
 </h:body>

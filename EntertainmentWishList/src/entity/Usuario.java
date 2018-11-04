@@ -35,10 +35,10 @@ public class Usuario implements Serializable{
 	private byte[] foto;
 	
 	@Column(length = 1)
-	private char permissao;
+	private char permissao = 'c';
 	
 	
-	private boolean statusUsuario;
+	private boolean statusUsuario= true;
 	
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "Usuarioemail")
