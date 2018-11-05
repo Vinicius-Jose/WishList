@@ -4,18 +4,22 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import dao.EntretenimentoDAO;
+import dao.EntretenimentoDAOImpl;
 import entity.Entretenimento;
 import entity.Filme;
 import entity.Game;
 import entity.ItemFavoritos;
 import entity.Serie;
 import entity.Usuario;
+import excecoes.NotEvaluatedException;
 
 @SessionScoped
 @ManagedBean
@@ -66,6 +70,13 @@ public class FavoritosBean {
 				ex.redirect("./infoJogo.xhtml");
 			} else if (selected instanceof Filme) {
 				ex.redirect("./infoFilme.xhtml");
+			}
+			EntretenimentoDAO edao = new EntretenimentoDAOImpl();
+			try {
+				selected = edao.buscarMediaUsuarios(selected);
+			} catch (NotEvaluatedException e) {
+				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", e.getMessage());
+				FacesContext.getCurrentInstance().addMessage(null, msg);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

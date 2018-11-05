@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import entity.Entretenimento;
 import entity.ItemFavoritos;
 import entity.Usuario;
 
@@ -14,5 +15,7 @@ public interface ItemFavoritoDAO {
 	List<ItemFavoritos> buscarFavoritos(Usuario user);
 
 	void remover(ItemFavoritos itemFavoritos);
+
+	List<ItemFavoritos> buscarCriticas(Entretenimento entretenimento);
 
 }

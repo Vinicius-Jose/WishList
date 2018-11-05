@@ -1,13 +1,6 @@
 package dao;
 
-import java.sql.Date;
-import java.util.Calendar;
-
 import entity.Entretenimento;
-import entity.Estudio;
-import entity.Serie;
-import enumeradas.Etaria;
-import servicos.ServicoEntretenimento;
 
 public class DriverTeste {
 
@@ -40,6 +33,10 @@ public class DriverTeste {
 //		 SerieDAOImpl fd = new SerieDAOImpl();
 //		 fd.adicionar(a);
 		//
+		ItemFavoritoDAO idao = new ItemFavoritoDAOImpl();
+		Entretenimento e1 = new Entretenimento();
+		e1.setId(14);
+		System.out.println(idao.buscarCriticas(e1).get(0).getCritica());
 		
 		EntretenimentoDAO edao = new EntretenimentoDAOImpl();
 		for(Entretenimento e: edao.maisBuscados()) {
