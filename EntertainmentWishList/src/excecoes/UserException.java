@@ -10,6 +10,6 @@ public class UserException extends Exception {
 	}
 
 	public UserException(String email, String primeiroNome) {
-		super("Este email ja está cadastrado, caso tenha esquecido a senha tente recuperá-la");
+		super("Este email ja está cadastrado, caso tenha esquecido a senha tente recuperá-la email:"+email);
 	}
 }

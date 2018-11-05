@@ -30,7 +30,6 @@ public class IndicacaoBean {
 	public List<Indicacao> getRecebidas() {
 		IndicacaoDAO idao = new IndicacaoDAOImpl();
 		recebidas = idao.buscarIndicacaoRecebida(usuario);
-		System.out.println(recebidas.get(0).getEntretenimento().getPoster());
 		return recebidas;
 	}
 
