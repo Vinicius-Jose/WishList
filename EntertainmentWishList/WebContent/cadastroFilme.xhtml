@@ -142,11 +142,11 @@
 		</div>
 		
 		<p:commandButton id="cadastrar" value="Cadastrar" update="painelCadastro"
-			actionListener="#{buttonView.buttonAction}" icon="ui-icon-disk" 
+			actionListener="#{CadastroFilmeBean.cadastrar}" icon="ui-icon-disk" 
 			style="float:right;"/>
 		<p:commandButton id="cancelar" value="Cancelar"
-			actionListener="#{buttonView.buttonAction}" 
-			style="float:right;"/>
+			action="/index.xhtml" 
+			style="float:right;" immediate="true"/>
 			
 	</h:form>
 </h:body>
