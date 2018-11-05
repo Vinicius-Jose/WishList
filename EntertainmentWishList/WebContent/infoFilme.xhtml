@@ -11,88 +11,126 @@
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 		crossorigin="anonymous"></link>
-		
-	
-	<link rel="stylesheet" media = "screen" href="css/estilo.css" type="text/css"/>
-	
+
+
+	<link rel="stylesheet" media="screen" href="css/estilo.css"
+		type="text/css" />
+
 	<title>Informações</title>
 </h:head>
 <h:body>
 	<ui:insert name="cabecalho">
 		<ui:include src="/cabecalho.xhtml"></ui:include>
 	</ui:insert>
-	
-	<h:form>
-		<div class="card" style="width: 8rem; margin-left: 10rem;  margin-top: 2rem;">
-			<h:graphicImage class="card-img-top"
-				value="#{infoBean.poster}" 
-				alt="Card image cap"></h:graphicImage>
-		</div>		
-	
-		<div style="margin-top: -12rem;">
-			<p:outputLabel id="add-list" style="margin-left: 28rem;  ">add lista</p:outputLabel>
-			<p:outputLabel id="recomendado" style="margin-left: 13rem; ">recomendar</p:outputLabel>
-		</div>
-	
-		<div class="sinopse" style="margin-top: 12rem;">
-			<p:outputLabel id="sinopse" style="margin-left: 10rem; ">Sinopse </p:outputLabel><br/>   
-			<p:outputLabel id="sinopse-desc" style="margin-left: 10rem; " value="#{infoBean.selected.sinopse}"></p:outputLabel><br />
-		</div>
-		
-		<div style="margin-top: -12rem; margin-left: 20rem;">
-			<p:outputLabel id="nome-original" value="#{infoBean.selected.nomeOriginal}"></p:outputLabel> <br />
-			<p:outputLabel id="nome-usuario" >Homem morcego contra Super Homem</p:outputLabel><br />
-			<p:outputLabel id="genero" >Genero:</p:outputLabel>
-			
-		</div>
-		
-		<div style="margin-left: 33rem; margin-top: -2rem;">
-			<p:outputLabel id="etaria" >Etaria: #{infoBean.selected.classificacaoEtaria}</p:outputLabel>
-		</div>
-		
-		<div style="margin-top: -7rem; text-align: right; margin-right: 7rem;">
-		<p:outputLabel id="nota1" style="margin-left: 50rem; ">ndfota1</p:outputLabel><br />
-		<p:outputLabel id="nota2" style="margin-left: 50rem; ">adsadsata2</p:outputLabel><br />
-		<p:outputLabel id="nota3" style="margin-left: 50rem; ">not3</p:outputLabel><br />
-		<p:outputLabel id="nota4" style="margin-left: 50rem; ">notxzza4</p:outputLabel><br />
-		</div>
-		
-		<div style="margin-left: 55rem; margin-top: 5rem;" >
-			<p:outputLabel>Minha nota: 
-				<h:selectOneMenu id="tipoEnderecoId" >
-	                  <f:selectItem itemValue="1" itemLabel="1"/>
-	                  <f:selectItem itemValue="2" itemLabel="2"/>
-	                  <f:selectItem itemValue="1" itemLabel="3"/>
-	                  <f:selectItem itemValue="1" itemLabel="4"/>
-	                  <f:selectItem itemValue="1" itemLabel="5"/>
-	                  <f:selectItem itemValue="1" itemLabel="6"/>
-	                  <f:selectItem itemValue="1" itemLabel="7"/>
-	                  <f:selectItem itemValue="1" itemLabel="8"/>
-	                  <f:selectItem itemValue="1" itemLabel="9"/>
-	                  <f:selectItem itemValue="1" itemLabel="10"/>
-	                  
-	            </h:selectOneMenu>
-            </p:outputLabel>
-		</div>
-	
-		<div style="margin-left: 10rem;">
-			<p:outputLabel>Duração:</p:outputLabel><br />
-			<p:outputLabel>Estudio:</p:outputLabel>
-			
-		</div>
-		
-		<div style="margin-left: 30rem; margin-top: -4rem;">
-			<p:outputLabel>Data de lançamento:</p:outputLabel> <br />
-			<p:outputLabel>Diretor:</p:outputLabel>
-		</div>
-	
-		<div style="margin-left: 10rem;">
-			<p:inputTextarea rows="3" cols="77" autoResize="false"/>
-		</div>
-	</h:form>
-	
-	<div style="margin-left: 59rem;">
-		<p:commandButton id="postar" value="Postar" ></p:commandButton>
+
+
+	<div class="ui-fluid" style="width: 50rem; margin-left: 20%;">
+		<h:form>
+			<div class="card"
+				style="width: 10rem; margin-left: 0rem; margin-top: 2rem;">
+				<h:graphicImage class="card-img-top"
+					value="#{buscaBean.selected.poster}" alt="Card image cap"></h:graphicImage>
+			</div>
+
+
+			<div style="margin-top: -15rem;">
+				<div style="margin-left: 11rem; width: 15rem; height: 10rem;">
+
+					<p:commandButton id="add-list" value="Adicionar na lista" />
+					<br /> <br /> <br /> <br />
+
+					<p:outputLabel id="nome-original"
+						value="#{buscaBean.selected.nomeOriginal}" />
+					<br />
+					<p:outputLabel id="nome-portugues" value="dfgdfgdfggh" />
+					<br />
+					<p:outputLabel id="genero" value="Genero: " />
+					<br />
+
+					<p:outputLabel id="etaria" value="colocar faixa etaria" />
+
+				</div>
+
+				<div
+					style="text-align: right; margin-left: 38rem; width: 12rem; height: 10rem; margin-top: -10rem;">
+
+					<p:commandButton id="recomendado" value="Recomendar" />
+					<br /> <br /> <br /> <br />
+
+					<p:outputLabel id="metacritic"
+						value="metacritic: #{buscaBean.selected.metacritic}" />
+					<br />
+					<p:outputLabel id="Imdb" value="Imdb: " />
+					<br />
+					<p:outputLabel id="RouttenTomatoes" value="RouttenTomatoes:" />
+					<br />
+					<p:outputLabel id="usuario" value="Nota Usuários: #{buscaBean.selected.notaUsuario}"/>
+					<br />
+				</div>
+
+			</div>
+			<div class="sinopse"
+				style="margin-top: 6rem; width: 50rem; height: 19rem; margin-left: 0rem;">
+				<p:outputLabel id="sinopse">
+				Sinopse
+				</p:outputLabel>
+				<br />
+				<p:outputLabel id="sinopse-desc"
+					value="#{buscaBean.selected.sinopse}" />
+				<br />
+			</div>
+
+			<div style="margin-top: -3rem;">
+				<div style="margin-left: 40rem; margin-top: 5rem;">
+					<p:outputLabel>Minha nota: 
+				<h:selectOneMenu id="tipoEnderecoId">
+							<f:selectItem itemValue="1" itemLabel="1" />
+							<f:selectItem itemValue="2" itemLabel="2" />
+							<f:selectItem itemValue="1" itemLabel="3" />
+							<f:selectItem itemValue="1" itemLabel="4" />
+							<f:selectItem itemValue="1" itemLabel="5" />
+							<f:selectItem itemValue="1" itemLabel="6" />
+							<f:selectItem itemValue="1" itemLabel="7" />
+							<f:selectItem itemValue="1" itemLabel="8" />
+							<f:selectItem itemValue="1" itemLabel="9" />
+							<f:selectItem itemValue="1" itemLabel="10" />
+
+						</h:selectOneMenu>
+					</p:outputLabel>
+				</div>
+
+
+				<div style="margin-left: 0rem;">
+					<p:outputLabel value="Duração: " />
+					<br />
+					<p:outputLabel value="Estudio: #{buscaBean.selected.estudio}" />
+
+				</div>
+
+				<div style="margin-left: 30rem; margin-top: -4.5rem;">
+					<p:outputLabel
+						value="Data de lançamento: #{buscaBean.selected.dataLancamento}" />
+					<br />
+					<p:outputLabel value="Diretor: " />
+				</div>
+			</div>
+
+
+			<div style="margin-top: 1rem;">
+				<p:inputTextarea id="comentario" rows="3" cols="77"
+					autoResize="false" />
+
+			</div>
+			<div style="width: 8rem;">
+				<p:commandButton id="add-comentario" value="Postar" />
+			</div>
+
+
+
+		</h:form>
+
+
+
 	</div>
 </h:body>
 </html>
