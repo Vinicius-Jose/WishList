@@ -3,12 +3,16 @@ package controller;
 import java.io.IOException;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import dao.GameDAO;
 import dao.GameDAOImpl;
 import entity.Game;
 
+@SessionScoped
+@ManagedBean
 public class GameBean {
 
 	private Game game = new Game();
