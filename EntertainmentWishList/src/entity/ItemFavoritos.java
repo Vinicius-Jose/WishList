@@ -6,15 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.ColumnDefault;
-
 @Entity
-public class ItemFavoritos implements Serializable{
-
-	@ColumnDefault(value="null")
+public class ItemFavoritos implements Serializable {
 
 	private int nota;
-	
+
 	private String critica;
 
 	@Id
