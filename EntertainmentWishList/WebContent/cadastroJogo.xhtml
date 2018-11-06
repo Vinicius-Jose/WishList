@@ -25,34 +25,38 @@
 				<h:panelGrid columns="2" cellpadding="5">
 					
 					<h:outputLabel for="nome" value="Nome *"/>
-					<p:inputText id="nome" required="true" rows="1" cols="80"/>
+					<p:inputText id="nome" required="true" value="#{gameBean.game.nomeOriginal}"/>
 					
-					<h:outputLabel for="urlImage" value="URL da Imagem *"/>
-					<p:inputText id="urlImage" required="true" rows="1" cols="80"/>
+					<h:outputLabel for="urlImagePoster" value="URL da Imagem de Poster *" />
+					<p:inputText id="urlImagePoster" value="#{gameBean.game.poster}"/>
+					
+					<h:outputLabel for="urlImageFundo" value="URL da Imagem de Fundo *" />
+					<p:inputText id="urlImageFundo" value="#{gameBean.game.imagemFundo}"/>
 						
 					<h:outputLabel for="genero" value="Genero *"/>
-					<p:inputText id="genero" required="true" rows="1" cols="30"/>
+					<p:inputText id="genero" required="true" value="#{gameBean.game.genero}"/>
 					
 					<p:outputLabel for="etaria" value="Etaria *" />
-					<p:selectOneMenu id="etaria" value="" effect="fold" editable="true">
+					<p:selectOneMenu id="etaria" value="" effect="fold" editable="true" value="#{gameBean.game.classificacaoEtaria}">
 						<f:selectItem itemLabel="L" itemValue="L" />
 						<f:selectItems value="L" />
 					</p:selectOneMenu>
 					
 					<h:outputLabel for="numPlayers" value="Nº de Jogadores *"/>
-					<p:inputText id="numPlayers" required="true" rows="1" cols="30"/>
+					<p:inputText id="numPlayers" required="true" value="#{gameBean.game.numeroJogadores}"/>
 					
 					<p:outputLabel for="dataLancamento" value="Data de Lançamento *" />
-					<p:calendar id="dataLancamento" value="#{calendarView.date}" mask="99/99/9999"/>
+					<p:calendar id="dataLancamento" value="#{calendarView.date}" mask="99/99/9999" value="#{gameBean.game.dataLancamento}"/>
 	        
 					<h:outputLabel for="estudio" value="Estudio *"/>
-					<p:inputText id="estudio" required="true" rows="1" cols="80"/>
+					<p:inputText id="estudio" required="true" value="#{gameBean.game.estudio}"/>
 	
 					<h:outputLabel for="plataforma" value="Plataforma *"/>
-					<p:inputText id="plataforma" required="true" rows="1" cols="80"/>
+					<p:inputText id="plataforma" required="true" value="#{gameBean.game.plataformas}"/>
 	
 					<h:outputLabel for="sinopse" value="Sinopse *"/>
-					<p:inputTextarea id="sinopse" required="true" rows="5" cols="80"/>
+					<p:inputTextarea id="sinopse" required="true" value="#{gameBean.game.sinopse}"
+					rows="5" cols="80"/>
 					
 				</h:panelGrid>
 				
@@ -60,41 +64,25 @@
 				
 			</p:panel>
 		</div>
-		
+	</h:form>
+	
+	<h:form>
 		<div class="ui-fluid">
 			<p:panel id="painelCadastroNotas" style="margin-top:25px; margin-bottom:25px;">
 				<h:panelGrid columns="2" cellpadding="5">
 					
 					<p:outputLabel for="notaMetacritic" value="Metacritic " />
-					<p:selectOneMenu id="notaMetacritic" value="" effect="fold" editable="true">
-						<f:selectItem itemLabel="1" itemValue="1" />
-						<f:selectItems value="1" />
-						<f:selectItem itemLabel="2" itemValue="2" />
-						<f:selectItems value="2" />
-						<f:selectItem itemLabel="3" itemValue="3" />
-						<f:selectItems value="3" />
-						<f:selectItem itemLabel="4" itemValue="4" />
-						<f:selectItems value="4" />
-						<f:selectItem itemLabel="5" itemValue="5" />
-						<f:selectItems value="5" />
-						<f:selectItem itemLabel="6" itemValue="6" />
-						<f:selectItems value="6" />
-						<f:selectItem itemLabel="7" itemValue="7" />
-						<f:selectItems value="7" />
-						<f:selectItem itemLabel="8" itemValue="8" />
-						<f:selectItems value="8" />
-						<f:selectItem itemLabel="9" itemValue="9" />
-						<f:selectItems value="9" />
-						<f:selectItem itemLabel="10" itemValue="10" />
-						<f:selectItems value="10" />
-					</p:selectOneMenu>
+					<p:inputText id="notaMetacritic" value="#{sliderView.number1}" />
+					<p:slider for="notaMetacritic" style="width: 200px" />
 					
 				</h:panelGrid>
 			</p:panel>
 		</div>
-		
+	</h:form>
+	
+	<h:form>
 		<p:commandButton id="cadastrar" value="Cadastrar" update="painelCadastro"
-			actionListener="#{CadastroGameBean.cadastrar}" icon="ui-icon-disk" 
+			action="#{gameBean.cadastrar}" icon="ui-icon-disk" 
 			style="float:right;"/>
 		<p:commandButton id="cancelar" value="Cancelar"
 			action="/index.xhtml"  
