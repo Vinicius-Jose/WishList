@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.TypedQuery;
 
@@ -28,10 +29,11 @@ public class EntretenimentoDAOImpl implements EntretenimentoDAO {
 				Double.class);
 		try {
 			query.setParameter("id",  + entretenimento.getId());
+			System.out.println(entretenimento.getNomeOriginal());
 			entretenimento.setNotaUsuario(query.getSingleResult());
 			em.close();
 			return entretenimento;
-		} catch (NonUniqueResultException e) {
+		} catch (NonUniqueResultException |NullPointerException| NoResultException e) {
 			throw new NotEvaluatedException(entretenimento);
 		}
 	}
