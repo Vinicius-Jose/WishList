@@ -15,17 +15,9 @@
 	<ui:insert name="cabecalho">
 		<ui:include src="/cabecalho.xhtml"></ui:include>
 	</ui:insert>
+	<p:importEnum type="enumeradas.Etaria" var="etaria" allSuffix="ALL_VALUES" />  
 	
-	<h:form>
-		<div>
-		<p:commandButton id="buscar" value="Buscar na API" 
-			action="#{serieBean.cadastrar}" icon="ui-icon-disk" 
-			style="float:right;" />
-		</div>
-	</h:form>
-	
-	<h:form>
-	
+	<h:form id="painelCadastro">
 		<div class="ui-fluid">
 			<p:panel id="painelCadastro" style="margin-top:25px; margin-bottom:25px;">
 				<p:messages id="message" />
@@ -46,26 +38,30 @@
 					
 					<p:outputLabel for="etaria" value="Etaria *" />
 					<p:selectOneMenu id="etaria" effect="fold" editable="true" value="#{gameBean.game.classificacaoEtaria}">
-						<f:selectItem itemLabel="L" itemValue="L" />
-						<f:selectItems value="L" />
+						<f:selectItem itemLabel="Classificação Etária" itemValue="etaria.L" />
+						<f:selectItems value="#{etaria.ALL_VALUES}" />
 					</p:selectOneMenu>
 					
 					<h:outputLabel for="numPlayers" value="Nº de Jogadores *"/>
 					<p:inputText id="numPlayers" required="true" value="#{gameBean.game.numeroJogadores}"/>
 					
 					<p:outputLabel for="dataLancamento" value="Data de Lançamento *" />
-					<p:calendar id="dataLancamento" mask="99/99/9999" value="#{gameBean.game.dataLancamento}"/>
+					<p:calendar id="dataLancamento" mask="99/99/9999" value="#{gameBean.data}"/>
 	        
 					<h:outputLabel for="estudio" value="Estudio *"/>
-					<p:inputText id="estudio" required="true" value="#{gameBean.game.estudio}"/>
+					<p:inputText id="estudio" required="true" value="#{gameBean.game.estudio.nome}"/>
 	
 					<h:outputLabel for="plataforma" value="Plataforma *"/>
 					<p:inputText id="plataforma" required="true" value="#{gameBean.game.plataformas}"/>
 	
 					<h:outputLabel for="sinopse" value="Sinopse *"/>
 					<p:inputTextarea id="sinopse" required="true" value="#{gameBean.game.sinopse}"
-					rows="5" cols="80"/>
+						rows="5" cols="80"/>
 					
+					<p:commandButton id="buscar" value="Buscar na API"
+						action="#{gameBean.buscaAPI}" icon="ui-icon-disk"
+						style="float:right;" update="painelCadastro painelCadastroNotas"  partialSubmit="true" process="nomeOriginal buscar dataLancamento"/>
+			
 				</h:panelGrid>
 				
 				<p:keyFilter for="dataLancamento" mask="num" />
@@ -77,7 +73,7 @@
 			<p:panel id="painelCadastroNotas" style="margin-top:25px; margin-bottom:25px;">
 				<h:panelGrid columns="1">		
 					<p:outputLabel for="notaMetacritic" value="Metacritic " />
-					<p:inputText id="notaMetacritic" value="#{gameBean.metaCritic}" />
+					<p:inputText id="notaMetacritic" value="#{gameBean.game.metacritic}" />
 					<p:slider for="notaMetacritic" style="width: 200px" />
 				</h:panelGrid>
 			</p:panel>

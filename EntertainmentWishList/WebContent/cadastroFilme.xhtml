@@ -55,11 +55,11 @@
 	
 					<h:outputLabel for="sinopse" value="Sinopse *"/>
 					<p:inputTextarea id="sinopse" required="true" value="#{filmeBean.filme.sinopse}"
-					rows="5" cols="80"/>
+						rows="5" cols="80"/>
 					
 					<p:commandButton id="buscar" value="Buscar na API"
-					action="#{filmeBean.buscaAPI}" icon="ui-icon-disk"
-					style="float:right;" update="painelCadastro painelCadastroNotas"  partialSubmit="true" process="nomeOriginal buscar dataLancamento"/>
+						action="#{filmeBean.buscaAPI}" icon="ui-icon-disk"
+						style="float:right;" update="painelCadastro painelCadastroNotas"  partialSubmit="true" process="nomeOriginal buscar dataLancamento"/>
 				
 				</h:panelGrid>
 				

@@ -15,14 +15,9 @@
 	<ui:insert name="cabecalho">
 		<ui:include src="/cabecalho.xhtml"></ui:include>
 	</ui:insert>
+	<p:importEnum type="enumeradas.Etaria" var="etaria" allSuffix="ALL_VALUES" />  
 
-	<h:form>
-		<div>
-		<p:commandButton id="buscar" value="Buscar na API" update="painelCadastro"
-			action="#{servicoEntretenimento.criaURIOMDB}" icon="ui-icon-disk" 
-			style="float:right;" />
-		</div>
-	
+	<h:form id="painelCadastro">
 		<div class="ui-fluid">
 			<p:panel id="painelCadastro" style="margin-top:25px; margin-bottom:25px;">
 				<p:messages id="message" />
@@ -43,8 +38,8 @@
 	
 					<p:outputLabel for="etaria" value="Etaria *" />
 					<p:selectOneMenu id="etaria" effect="fold" editable="true" value="#{serieBean.serie.classificacaoEtaria}">
-						<f:selectItem itemLabel="L" itemValue="L" />
-						<f:selectItems value="L" />
+						<f:selectItem itemLabel="Classificação Etária" itemValue="etaria.L" />
+						<f:selectItems value="#{etaria.ALL_VALUES}" />
 					</p:selectOneMenu>
 	
 					<h:outputLabel for="temporada" value="Temporada *" />
@@ -54,17 +49,21 @@
 					<p:inputText id="episodios" required="true" value="#{serieBean.serie.numeroEpisodios}"/>
 	
 					<p:outputLabel for="dataLancamento" value="Data de Lançamento *" />
-					<p:calendar id="dataLancamento" mask="99/99/9999" value="#{serieBean.serie.dataLancamento}"/>
+					<p:calendar id="dataLancamento" mask="99/99/9999" value="#{serieBean.data}"/>
  
 					<p:outputLabel for="dataTermino" value="Data de Termino *" />
-					<p:calendar id="dataTermino" mask="99/99/9999" value="#{serieBean.serie.dataFinal}"/>
+					<p:calendar id="dataTermino" mask="99/99/9999" value="#{serieBean.dateFinal}"/>
 
 					<h:outputLabel for="estudio" value="Estudio *" />
-					<p:inputText id="estudio" required="true" value="#{serieBean.serie.estudio}"/>
+					<p:inputText id="estudio" required="true" value="#{serieBean.serie.estudio.nome}"/>
 	
 					<h:outputLabel for="sinopse" value="Sinopse *" />
 					<p:inputTextarea id="sinopse" required="true" value="#{serieBean.serie.sinopse}"
-					rows="5" cols="80" />
+						rows="5" cols="80" />
+					
+					<p:commandButton id="buscar" value="Buscar na API"
+						action="#{serieBean.buscaAPI}" icon="ui-icon-disk"
+						style="float:right;" update="painelCadastro painelCadastroNotas"  partialSubmit="true" process="nomeOriginal buscar dataLancamento"/>
 					
 				</h:panelGrid>
 
@@ -78,14 +77,14 @@
 			<p:panel id="painelCadastroNotas" style="margin-top:25px; margin-bottom:25px;">
 				<h:panelGrid columns="1">
 					<p:outputLabel for="notaRottenTomatoes" value="RottenTomatoes " />
-					<h:outputText id="notaRottenTomatoes" value="#{serieBean.rottenTomatoes}%" />
-					<h:inputHidden id="notaRottenTomatoes" value="#{sliderView.number4}" />
-					<p:slider for="notaRottenTomatoes" display="notaRottenTomatoes" style="width: 200px" displayTemplate="{value}%" />
+					<h:outputText id="notaRottenTomatoes" value="#{serieBean.serie.rottenTomatoes}%" />
+					<h:inputHidden id="nota" value="#{serieBean.serie.rottenTomatoes}" />
+					<p:slider for="nota" display="notaRottenTomatoes" style="width: 200px" displayTemplate="{value}%" />
 				</h:panelGrid>
 				
 				<h:panelGrid columns="1">		
 					<p:outputLabel for="notaMetacritic" value="Metacritic " />
-					<p:inputText id="notaMetacritic" value="#{serieBean.metaCritic}" />
+					<p:inputText id="notaMetacritic" value="#{serieBean.serie.metacritic}" />
 					<p:slider for="notaMetacritic" style="width: 200px" />
 				</h:panelGrid>
 			</p:panel>
