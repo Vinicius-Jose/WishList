@@ -21,10 +21,10 @@
 					style="font-size:20px; font-family:Gill Sans,Arial,sans-serif;color:#2c4359" />
 			</div>
 
-			<p:contentFlow value="#{indicacaoBean.recebidas}" var="indicacao.entretenimento" 
+			<p:contentFlow value="#{indicacaoBean.recebidas}" var="indicacao" 
 				style=" height:200px; width:700px; ">
-				<h:graphicImage  value="#{entretenimento.poster}"  styleClass="content" />
-				<div class="caption" style="color: black">#{entretenimento.nomeOriginal}</div>
+				<h:graphicImage  value="#{indicacao.entretenimento.poster}"  styleClass="content" />
+				<div class="caption" style="color: black">#{indicacao.entretenimento.nomeOriginal}</div>
 			</p:contentFlow>
 			<div style="margin-top: 25px;">
 				<h:outputLabel value="Mais Procurados"

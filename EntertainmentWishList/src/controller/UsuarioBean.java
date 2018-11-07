@@ -20,6 +20,7 @@ import entity.Usuario;
 import enumeradas.StatusAmigo;
 import excecoes.FriendException;
 import excecoes.UserException;
+import servicos.ServicoEmail;
 import servicos.ServicoSenha;
 
 @SessionScoped
@@ -36,12 +37,7 @@ public class UsuarioBean {
 
 
 	public UsuarioBean() {
-		try {
-			usuarioLogado = new UsuarioDAOImpl().validarUsuario("vinijosenog@hotmail.com", "12345");
-		} catch (UserException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
 	}
 
 	public List<Usuario> getUsuarios() {
@@ -183,7 +179,10 @@ public class UsuarioBean {
 			ServicoSenha senha = new ServicoSenha();
 			usuarioLogado.setSenha(senha.gerarSenha());
 			udao.alterar(usuarioLogado);
+			ServicoEmail semail = new ServicoEmail();
+			semail.servicoEmail(usuarioLogado);
 			usuarioLogado = new Usuario();
+			
 			FacesContext.getCurrentInstance().getExternalContext().redirect("./loginUsuario.xhtml");
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Info",
 					"Uma nova senha foi enviada para o seu email");

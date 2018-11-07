@@ -45,7 +45,8 @@
 					</p:selectOneMenu>
 					
 					<p:outputLabel for="dataLancamento" value="Data de Lançamento *" />
-					<p:calendar id="dataLancamento" mask="99/99/9999" value="#{filmeBean.data}"/>
+					<p:calendar id="dataLancamento" mask="99/99/9999" value="#{filmeBean.data}" pattern="dd/MM/yyyy"/>
+			
 	        
 					<h:outputLabel for="estudio" value="Estudio *"/>
 					<p:inputText id="estudio" required="true" value="#{filmeBean.filme.estudio.nome}"/>

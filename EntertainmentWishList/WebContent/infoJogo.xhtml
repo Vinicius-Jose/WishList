@@ -42,10 +42,10 @@
 					<p:outputLabel id="nome-original"
 						value="#{favoritosBean.game.nomeOriginal}" />
 					<br />
-					<p:outputLabel id="genero" value="Genero: " />
+					<p:outputLabel id="genero" value="Genero: #{favoritosBean.game.genero} " />
 					<br />
 
-					<p:outputLabel id="numero_player" value="nº de player" />
+					<p:outputLabel id="numero_player" value="nº de player #{favoritosBean.game.numeroJogadores}" />
 
 				</div>
 
@@ -82,14 +82,14 @@
 				<h:selectOneMenu id="tipoEnderecoId" value="#{favoritosBean.item.nota}">
 							<f:selectItem itemValue="1" itemLabel="1" />
 							<f:selectItem itemValue="2" itemLabel="2" />
-							<f:selectItem itemValue="1" itemLabel="3" />
-							<f:selectItem itemValue="1" itemLabel="4" />
-							<f:selectItem itemValue="1" itemLabel="5" />
-							<f:selectItem itemValue="1" itemLabel="6" />
-							<f:selectItem itemValue="1" itemLabel="7" />
-							<f:selectItem itemValue="1" itemLabel="8" />
-							<f:selectItem itemValue="1" itemLabel="9" />
-							<f:selectItem itemValue="1" itemLabel="10" />
+							<f:selectItem itemValue="3" itemLabel="3" />
+							<f:selectItem itemValue="4" itemLabel="4" />
+							<f:selectItem itemValue="5" itemLabel="5" />
+							<f:selectItem itemValue="6" itemLabel="6" />
+							<f:selectItem itemValue="7" itemLabel="7" />
+							<f:selectItem itemValue="8" itemLabel="8" />
+							<f:selectItem itemValue="9" itemLabel="9" />
+							<f:selectItem itemValue="10" itemLabel="10" />
 
 						</h:selectOneMenu>
 					</p:outputLabel>
@@ -97,7 +97,7 @@
 
 
 				<div style="margin-left: 0rem;">
-					<p:outputLabel value="Duração: " />
+					<p:outputLabel value="Estúdio: #{favoritosBean.game.estudio.nome}" />
 					<br />
 					<p:outputLabel value="Disponivel nas plataformas: " />
 					<ui:repeat var="plat" value="#{favoritosBean.game.plataformas}">
