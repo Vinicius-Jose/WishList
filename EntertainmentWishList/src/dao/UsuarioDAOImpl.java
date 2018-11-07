@@ -5,10 +5,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import entity.Amigo;
 import entity.Usuario;
+import enumeradas.StatusAmigo;
 import excecoes.FriendException;
 import excecoes.UserException;
 
@@ -139,5 +141,24 @@ public class UsuarioDAOImpl implements UsuarioDAO  {
 			throw new UserException(email);
 		}
 	}
+	
+	@Override
+	public void atualizarAmizade(String usuarioEmail, String usuarioEmail2, StatusAmigo status) {
+		EntityManager em = emf.createEntityManager();
+		Query query = em.createQuery("update Amigo set status = :status where usuarioEmail = :user and usuarioEmail2 = :user2");
+		query.setParameter("user",  usuarioEmail);
+		query.setParameter("user2", usuarioEmail2);
+		query.setParameter("status", status);
+		em.getTransaction().begin();
+		query.executeUpdate();
+		em.getTransaction().commit();
+		em.close();
+	}
+	
+	
+	
+
+	
+	
 
 }

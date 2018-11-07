@@ -14,41 +14,54 @@
 	<ui:insert name="cabecalho">
 		<ui:include src="/cabecalho.xhtml"></ui:include>
 	</ui:insert>
-	
+	<p:importEnum type="enumeradas.StatusAmigo" var="status"
+		allSuffix="ALL_VALUES" />
+
 	<div class="ui-fluid">
 		<h:form id="form" style="margin-top:25px">
-			<p:growl autoUpdate="true" id="messages" showDetail="true" sticky="true"></p:growl>
-			<p:dataGrid var="usuario" value="#{usuarioBean.usuarios}" columns="6"
-				layout="grid" rows="12" paginator="true" id="usuarios"
+			<p:growl autoUpdate="true" id="messages" showDetail="true"
+				sticky="true"></p:growl>
+			<p:dataGrid var="amigo" value="#{usuarioBean.usuarioLogado.amigos}"
+				columns="6" layout="grid" rows="12" paginator="true" id="amigos"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-				rowsPerPageTemplate="6,12,18">
+				rowsPerPageTemplate="4,8">
 
 				<f:facet name="header">
-           		 Os Resultados da sua busca
+           		 Os seus Amigos
         	</f:facet>
 
 				<div class="card" style="width: 3; length: 3rem" align="center">
 					<p:graphicImage id="imagem" class="card-img-top"
-						value="#{usuarioBean.imageSelected}" alt="Imagem do Usuário"
+						value="#{usuarioBean.imageAmigoSelected}" alt="Imagem do Usuário"
 						style="width: 200px ;length: 200px">
 					</p:graphicImage>
-					
-					
+
+
 					<div class="card-body">
-						<p class="card-title">#{usuario.primeiroNome}</p>
+						<p class="card-title">#{amigo.usuario.primeiroNome}</p>
 						<p class="card-text" style="font-size: 12px">
-							Nick Name: #{usuario.nickName} <br />Email: #{usuario.email}
+							Nick Name: #{amigo.usuario.nickName} <br />Email:
+							#{amigo.usuario.email}
 						</p>
-						<p:commandButton action="#{usuarioBean.enviarSolicitacao}"
-							value="Enviar Solicitação" id="Ajax" >
+
+						<p:selectOneMenu id="statusAmigo" effect="fold" editable="true"
+							value="#{amigo.status}">
+							<f:selectItem itemLabel="ATIVO" itemValue="status.ATIVO" />
+							<f:selectItem itemLabel="BLOQUEADO" itemValue="status.BLOQUEADO" />
+						</p:selectOneMenu>
+
+						<p:commandButton action="#{usuarioBean.removerAmigo}"
+							value="Remover Amigo" id="removerAmigo" update="form">
 							<f:setPropertyActionListener target="#{usuarioBean.selected}"
-								value="#{usuario}" />
+								value="#{amigo.usuario}" />
+						</p:commandButton>
+						<p:commandButton action="#{usuarioBean.atualizarAmizade}"
+							value="Salvar Atualização" id="atualizarUsuario" update="form">
+							<f:setPropertyActionListener target="#{usuarioBean.selected}"
+								value="#{amigo.usuario}" />
 						</p:commandButton>
 					</div>
 				</div>
-
-
-
 			</p:dataGrid>
 
 		</h:form>

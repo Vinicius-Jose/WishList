@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -42,7 +43,7 @@ public class Usuario implements Serializable{
 	
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "Usuarioemail")
-	private Set<Amigo> amigos;
+	private List<Amigo> amigos;
 	
 
 	public void adicionarAmigo(Amigo a) {
@@ -50,7 +51,14 @@ public class Usuario implements Serializable{
 	}
 
 	public void remover(Amigo a) {
-		amigos.remove(a);
+		Amigo removido = null;
+		for(Amigo b : amigos) {
+			if(b.getUsuario().getEmail().equals(a.getUsuario().getEmail())) {
+				removido =b;
+			}
+		}
+		amigos.remove(removido);
+		
 	}
 
 	public void bloquear(String nome) {
@@ -125,11 +133,11 @@ public class Usuario implements Serializable{
 		this.statusUsuario = statusUsuario;
 	}
 
-	public Set<Amigo> getAmigos() {
+	public List<Amigo> getAmigos() {
 		return amigos;
 	}
 
-	public void setAmigos(Set<Amigo> amigos) {
+	public void setAmigos(List<Amigo> amigos) {
 		this.amigos = amigos;
 	}
 

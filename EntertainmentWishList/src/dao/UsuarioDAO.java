@@ -4,6 +4,7 @@ import java.util.List;
 
 import entity.Amigo;
 import entity.Usuario;
+import enumeradas.StatusAmigo;
 import excecoes.FriendException;
 import excecoes.UserException;
 
@@ -30,5 +31,13 @@ public interface UsuarioDAO {
 
 
 	Usuario buscarUsuarioEspecifico(String email) throws UserException;
+
+
+
+
+	void atualizarAmizade(String usuarioEmail, String usuarioEmail2, StatusAmigo status);
+
+
+
 
 }

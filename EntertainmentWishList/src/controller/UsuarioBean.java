@@ -34,13 +34,60 @@ public class UsuarioBean {
 	private int i = 0;
 
 	public UsuarioBean() {
-		// try {
-		// usuarioLogado = new UsuarioDAOImpl().validarUsuario("joana@yahoo.com.br",
-		// "12345");
-		// } catch (UserException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
+		 try {
+		 usuarioLogado = new UsuarioDAOImpl().validarUsuario("vinijosenog@hotmail.com",
+		 "12345");
+		 } catch (UserException e) {
+		 // TODO Auto-generated catch block
+		 e.printStackTrace();
+		 }
+	}
+	
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	public Usuario getSelected() {
+		return selected;
+	}
+
+	public void setSelected(Usuario selected) {
+		this.selected = selected;
+	}
+
+	public Usuario getUsuarioLogado() {
+		return usuarioLogado;
+	}
+
+	public void setUsuarioLogado(Usuario usuarioLogado) {
+		this.usuarioLogado = usuarioLogado;
+	}
+
+	public String getTxtBuscaUsuario() {
+		return txtBuscaUsuario;
+	}
+
+	public void setTxtBuscaUsuario(String txtBuscaUsuario) {
+		this.txtBuscaUsuario = txtBuscaUsuario;
+	}
+
+	public String getOption() {
+		if (selected != null) {
+			if (!selected.isStatusUsuario())
+				return "BLOQUEADO";
+			else
+				return "ATIVO";
+
+		}
+		return null;
+	}
+
+	public void setOption(String option) {
+		this.option = option;
 	}
 
 	public void buttonBuscaAmigo() {
@@ -115,6 +162,18 @@ public class UsuarioBean {
 
 		return imageSelected;
 	}
+	
+	public DefaultStreamedContent getImageAmigoSelected() throws IOException {
+		if (i == usuarioLogado.getAmigos().size())
+			i = 0;
+		Usuario u = usuarioLogado.getAmigos().get(i).getUsuario();
+		i++;
+		DefaultStreamedContent imageSelected = new DefaultStreamedContent(new ByteArrayInputStream(u.getFoto()),
+				"image/jpg");
+
+		return imageSelected;
+	}
+	
 
 	public void recuperar() {
 		UsuarioDAO udao = new UsuarioDAOImpl();
@@ -191,51 +250,31 @@ public class UsuarioBean {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
-	public List<Usuario> getUsuarios() {
-		return usuarios;
+	
+	public void removerAmigo() {
+		Amigo am = new Amigo();
+		am.setUsuario(selected);
+		usuarioLogado.remover(am);
+		UsuarioDAO udao = new UsuarioDAOImpl();
+		udao.alterar(usuarioLogado);
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Removido com sucesso");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
-
-	public Usuario getSelected() {
-		return selected;
-	}
-
-	public void setSelected(Usuario selected) {
-		this.selected = selected;
-	}
-
-	public Usuario getUsuarioLogado() {
-		return usuarioLogado;
-	}
-
-	public void setUsuarioLogado(Usuario usuarioLogado) {
-		this.usuarioLogado = usuarioLogado;
-	}
-
-	public String getTxtBuscaUsuario() {
-		return txtBuscaUsuario;
-	}
-
-	public void setTxtBuscaUsuario(String txtBuscaUsuario) {
-		this.txtBuscaUsuario = txtBuscaUsuario;
-	}
-
-	public String getOption() {
-		if (selected != null) {
-			if (!selected.isStatusUsuario())
-				return "BLOQUEADO";
-			else
-				return "ATIVO";
-
+	
+	public void atualizarAmizade() {
+		UsuarioDAO udao = new UsuarioDAOImpl();
+		StatusAmigo novo = null;
+		for(Amigo a: usuarioLogado.getAmigos()) {
+			if(a.getUsuario().getEmail().equals(selected.getEmail())) {
+				novo = a.getStatus();
+			}
 		}
-		return null;
+		udao.atualizarAmizade(usuarioLogado.getEmail(), selected.getEmail(), novo);
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Dados Atualizados com sucesso");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
+	
+	
 
-	public void setOption(String option) {
-		this.option = option;
-	}
 
 }

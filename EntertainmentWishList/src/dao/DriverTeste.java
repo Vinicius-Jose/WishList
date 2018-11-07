@@ -1,17 +1,14 @@
 package dao;
 
-import java.sql.Date;
-import java.util.Calendar;
-
-import entity.Estudio;
+import entity.Amigo;
 import entity.Plataforma;
-import entity.Serie;
-import enumeradas.Etaria;
-import servicos.ServicoEntretenimento;
+import entity.Usuario;
+import enumeradas.StatusAmigo;
+import excecoes.UserException;
 
 public class DriverTeste {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UserException {
 //		 Serie a = new Serie();
 //		 a.setNomeOriginal("Flash");
 //		 Calendar c = Calendar.getInstance();
@@ -51,7 +48,7 @@ public class DriverTeste {
 //			System.out.println(edao.maisBuscados().size());
 //		}
 //
-////		UsuarioDAO udao = new UsuarioDAOImpl();
+		UsuarioDAO udao = new UsuarioDAOImpl();
 ////		Usuario u = new Usuario();
 ////		try {
 ////			u = udao.validarUsuario("pedro@hotmail.com", "12345");
@@ -90,12 +87,20 @@ public class DriverTeste {
 		// System.out.println(i.getNota());
 		// }
 		//
+//		Usuario u = udao.buscarUsuarioEspecifico("vinijosenog@hotmail.com");
+//		Amigo am = new Amigo();
+//		Usuario user = new Usuario();
+//		user.setEmail("pedro@hotmail.com");
+//		am.setUsuario(user);
+//		u.remover(am);
+//		udao.alterar(u);
+		udao.atualizarAmizade("vinijosenog@hotmail.com", "pedro@hotmail.com", StatusAmigo.SOLICITADO);
 		
-		PlataformaDAO pdao = new PlataformaDAOImpl();
-		Plataforma pla = new Plataforma();
-		pla.setEmpresa("SONY");
-		pla.setNome("PS3");
-		pdao.adicionar(pla);
+//		PlataformaDAO pdao = new PlataformaDAOImpl();
+//		Plataforma pla = new Plataforma();
+//		pla.setEmpresa("SONY");
+//		pla.setNome("PS3");
+//		pdao.adicionar(pla);
 	}
 
 }
