@@ -31,18 +31,19 @@ public class UsuarioBean {
 	private List<Usuario> usuarios = new ArrayList<>();
 	private Usuario selected = new Usuario();
 	private String txtBuscaUsuario;
+
 	private int i = 0;
 
+
 	public UsuarioBean() {
-		 try {
-		 usuarioLogado = new UsuarioDAOImpl().validarUsuario("vinijosenog@hotmail.com",
-		 "12345");
-		 } catch (UserException e) {
-		 // TODO Auto-generated catch block
-		 e.printStackTrace();
-		 }
+		try {
+			usuarioLogado = new UsuarioDAOImpl().validarUsuario("vinijosenog@hotmail.com", "12345");
+		} catch (UserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
+
 	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
@@ -162,7 +163,7 @@ public class UsuarioBean {
 
 		return imageSelected;
 	}
-	
+
 	public DefaultStreamedContent getImageAmigoSelected() throws IOException {
 		if (i == usuarioLogado.getAmigos().size())
 			i = 0;
@@ -173,7 +174,6 @@ public class UsuarioBean {
 
 		return imageSelected;
 	}
-	
 
 	public void recuperar() {
 		UsuarioDAO udao = new UsuarioDAOImpl();
@@ -250,7 +250,6 @@ public class UsuarioBean {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
-	
 	public void removerAmigo() {
 		Amigo am = new Amigo();
 		am.setUsuario(selected);
@@ -260,12 +259,12 @@ public class UsuarioBean {
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Removido com sucesso");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-	
+
 	public void atualizarAmizade() {
 		UsuarioDAO udao = new UsuarioDAOImpl();
 		StatusAmigo novo = null;
-		for(Amigo a: usuarioLogado.getAmigos()) {
-			if(a.getUsuario().getEmail().equals(selected.getEmail())) {
+		for (Amigo a : usuarioLogado.getAmigos()) {
+			if (a.getUsuario().getEmail().equals(selected.getEmail())) {
 				novo = a.getStatus();
 			}
 		}
@@ -273,8 +272,6 @@ public class UsuarioBean {
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Dados Atualizados com sucesso");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-	
-	
 
-
+	
 }

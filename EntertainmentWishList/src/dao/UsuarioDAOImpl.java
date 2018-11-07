@@ -102,7 +102,7 @@ public class UsuarioDAOImpl implements UsuarioDAO  {
 	@Override
 	public List<Amigo> buscarSolicitacao(Usuario user){
 		EntityManager em = emf.createEntityManager();
-		TypedQuery<Amigo> query = em.createQuery("select a from Amigo a where usuario = :email ", Amigo.class);
+		TypedQuery<Amigo> query = em.createQuery("select a from Amigo a where usuario.email = :email and status = 2", Amigo.class);
 		query.setParameter("email",user.getEmail());
 		List<Amigo> usuarios = query.getResultList();
 		em.close();
