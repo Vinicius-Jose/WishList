@@ -29,7 +29,7 @@ public class FavoritosBean {
 
 	private List<ItemFavoritos> favoritos = new LinkedList<>();
 	private Entretenimento selected;
-	private ItemFavoritos item;
+	private ItemFavoritos item = new ItemFavoritos();
 	private List<ItemFavoritos> critica;
 
 	@ManagedProperty(value = "#{usuarioBean.usuarioLogado}")
@@ -111,13 +111,26 @@ public class FavoritosBean {
 		idao.remover(item);
 	}
 	
-	public void postar(){
+	public void postar(int i){
+		
 		item.setUsuario(usuario);
+		item.setEntretenimento(selected);
+		System.out.println(selected.getNomeOriginal());
 		ItemFavoritoDAO idao = new ItemFavoritoDAOImpl();
 		try{
-		idao.adicionar(item);
+			idao.adicionar(item);
+			if(i == 0)
+				item.setNota(0);
+			idao.alterar(item);
 		}catch(Exception e){
 			idao.alterar(item);
+		}
+		EntretenimentoDAO edao = new EntretenimentoDAOImpl();
+		try {
+			selected =edao.buscarMediaUsuarios(selected);
+		} catch (NotEvaluatedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}

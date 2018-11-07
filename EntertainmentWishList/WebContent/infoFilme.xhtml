@@ -36,7 +36,7 @@
 			<div style="margin-top: -15rem;">
 				<div style="margin-left: 11rem; width: 15rem; height: 10rem;">
 
-					<p:commandButton id="add-list" value="Adicionar na lista" />
+					<p:commandButton id="add-list" value="Adicionar na lista" action="#{favoritosBean.postar(0)}" />
 					<br /> <br /> <br /> <br />
 
 					<p:outputLabel id="nome-original"
@@ -47,7 +47,8 @@
 					<p:outputLabel id="genero" value="Genero: " />
 					<br />
 
-					<p:outputLabel id="etaria" value="#{favoritosBean.filme.classificacaoEtaria}" />
+					<p:outputLabel id="etaria"
+						value="#{favoritosBean.filme.classificacaoEtaria}" />
 
 				</div>
 
@@ -64,7 +65,8 @@
 					<br />
 					<p:outputLabel id="RouttenTomatoes" value="RouttenTomatoes:" />
 					<br />
-					<p:outputLabel id="usuario" value="Nota Usuários: #{favoritosBean.filme.notaUsuario}"/>
+					<p:outputLabel id="usuario"
+						value="Nota Usuários: #{favoritosBean.filme.notaUsuario}" />
 					<br />
 				</div>
 
@@ -83,7 +85,8 @@
 			<div style="margin-top: -3rem;">
 				<div style="margin-left: 40rem; margin-top: 5rem;">
 					<p:outputLabel>Minha nota: 
-				<h:selectOneMenu id="tipoEnderecoId" value="#{favoritosBean.item.nota}">
+				<h:selectOneMenu id="tipoEnderecoId"
+							value="#{favoritosBean.item.nota}">
 							<f:selectItem itemValue="1" itemLabel="1" />
 							<f:selectItem itemValue="2" itemLabel="2" />
 							<f:selectItem itemValue="1" itemLabel="3" />
@@ -111,29 +114,30 @@
 					<p:outputLabel
 						value="Data de lançamento: #{favoritosBean.filme.dataLancamento}" />
 					<br />
-					<p:outputLabel value="Diretor: " />
+					<p:outputLabel value="Diretor: #{favoritosBean.filme.diretor}" />
 				</div>
 			</div>
 
 
 			<div style="margin-top: 1rem;">
 				<p:inputTextarea id="comentario" rows="3" cols="77"
-					autoResize="false" value="#{favoritosBean.item.critica}"/>
+					autoResize="false" value="#{favoritosBean.item.critica}" />
 
 			</div>
 			<div style="width: 8rem;">
-				<p:commandButton id="add-comentario" value="Postar" action="#{favoritosBean.postar}" update="formEnt"/>
+				<p:commandButton id="add-comentario" value="Postar"
+					action="#{favoritosBean.postar(1)}" update="formEnt" />
 			</div>
-			
+			<ui:repeat var="item" value="#{favoritosBean.critica}" >
+				<h:outputLabel value="Por: #{item.usuario.primeiroNome}" style="margin-top:10px; font-size:20px"/><br/>
+				<h:outputLabel value="Nota: #{item.nota}" style="font-size:20px"/><br/>
+				<h:outputLabel value="Critica: #{item.critica}" style="font-size:20px"/><br/>
+			</ui:repeat>
 
 
 
 		</h:form>
-			<ui:repeat var="item" value="#{favoritosBean.critica}">
-				<h:outputLabel value="Por: #{item.usuario.primeiroNome}"></h:outputLabel>
-				<h:outputLabel value="Nota: #{item.nota}"></h:outputLabel>
-				<h:outputLabel value="Critica: #{item.critica}"></h:outputLabel>
-			</ui:repeat>
+
 
 
 	</div>
