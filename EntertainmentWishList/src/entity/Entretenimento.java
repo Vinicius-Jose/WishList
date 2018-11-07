@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,7 +51,7 @@ public class Entretenimento implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "Estudioid")
-	private Estudio estudio;
+	private Estudio estudio = new Estudio();
 	
 	private String imagemFundo;
 

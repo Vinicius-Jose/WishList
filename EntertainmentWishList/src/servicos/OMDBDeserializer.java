@@ -38,8 +38,16 @@ public class OMDBDeserializer implements JsonDeserializer<HashMap<String, Object
 		} catch (Exception e) {
 			temporadas = 0;
 		}
+		name = jsonObject.get("totalSeason");
+		double imdb;
+		try {
+			imdb = Double.parseDouble(name.getAsString());
+		} catch (Exception e) {
+			imdb = 0;
+		}
+		
 
-		dadosOMDB.put("temporadas", temporadas);
+		dadosOMDB.put("imdb", imdb);
 
 		name = jsonObject.get("Released");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", new Locale("en"));

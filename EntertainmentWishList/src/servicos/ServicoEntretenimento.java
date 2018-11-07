@@ -46,7 +46,8 @@ public class ServicoEntretenimento {
 					novo.setMetacritic((int) dados.get("metascore"));
 					if(e instanceof Serie)
 						((Serie) novo).setTemporadas((int) dados.get("temporadas"));
-					
+					if(e instanceof Filme)
+						((Filme) novo).setImdb(((double) dados.get("imdb")));
 					builder.registerTypeAdapter(HashMap.class, new TMDBDeserializer());
 					gson = builder.create();
 					json = buscaJSON(criaURITMDB(novo));

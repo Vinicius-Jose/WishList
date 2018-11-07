@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ public class Serie extends Entretenimento implements Serializable {
 	@Column(nullable = true)
 	private int rottenTomatoes;
 
-	private Date dataFinal;
+	private Date dataFinal = new Date(Calendar.getInstance().getTimeInMillis());
 
 	public String getNomePortugues() {
 		return nomePortugues;

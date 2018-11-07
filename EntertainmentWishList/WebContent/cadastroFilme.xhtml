@@ -15,26 +15,12 @@
 	<ui:insert name="cabecalho">
 		<ui:include src="/cabecalho.xhtml"></ui:include>
 	</ui:insert>
+	<p:importEnum type="enumeradas.Etaria" var="etaria" allSuffix="ALL_VALUES" />  
 	
-	<h:form>
-		<div>
-		<p:commandButton id="buscar" value="Buscar na API"
-			action="#{filmeBean.buscaAPI}" icon="ui-icon-disk"
-			style="float:right;" 
-			for="urlImagePoster" value="#{filmeBean.filme.poster}"
-			for="urlImageFundo" value=#{filmeBean.filme.imagemFundo}"
-			for="nomePortugues" value="#{filmeBean.filme.nomePortugues}"
-			for="etaria" value="#{filmeBean.filme.classificacaoEtaria}"
-			for="dataLancamento" value="#{filmeBean.filme.dataLancamento}"
-			for="estudio" value="#{filmeBean.filme.estudio}"
-			for="diretor" value="#{filmeBean.filme.diretor}"
-			for="sinopse" value="#{filmeBean.filme.sinopse}"/>
-		</div>
-	</h:form>
 	
-	<h:form>
+	<h:form id="painelCadastro">
 		<div class="ui-fluid">
-			<p:panel id="painelCadastro" style="margin-top:25px; margin-bottom:25px;">
+			<p:panel  style="margin-top:25px; margin-bottom:25px;">
 				<p:messages id="message" />
 	
 				<h:panelGrid columns="2" cellpadding="5">
@@ -53,15 +39,16 @@
 						
 					<p:outputLabel for="etaria" value="Etaria *" />
 					<p:selectOneMenu id="etaria" effect="fold" editable="true" value="#{filmeBean.filme.classificacaoEtaria}">
-						<f:selectItem itemLabel="L" itemValue="L" />
-						<f:selectItems value="L" />
+						<f:selectItem itemLabel="Classificação Etária" itemValue="etaria.L" />
+						<f:selectItems value="#{etaria.ALL_VALUES}" />
+	
 					</p:selectOneMenu>
 					
 					<p:outputLabel for="dataLancamento" value="Data de Lançamento *" />
-					<p:calendar id="dataLancamento" mask="99/99/9999" value="#{filmeBean.filme.dataLancamento}"/>
+					<p:calendar id="dataLancamento" mask="99/99/9999" value="#{filmeBean.data}"/>
 	        
 					<h:outputLabel for="estudio" value="Estudio *"/>
-					<p:inputText id="estudio" required="true" value="#{filmeBean.filme.estudio}"/>
+					<p:inputText id="estudio" required="true" value="#{filmeBean.filme.estudio.nome}"/>
 	
 					<h:outputLabel for="diretor" value="Diretor *"/>
 					<p:inputText id="diretor" required="true" value="#{filmeBean.filme.diretor}"/>
@@ -70,6 +57,10 @@
 					<p:inputTextarea id="sinopse" required="true" value="#{filmeBean.filme.sinopse}"
 					rows="5" cols="80"/>
 					
+					<p:commandButton id="buscar" value="Buscar na API"
+					action="#{filmeBean.buscaAPI}" icon="ui-icon-disk"
+					style="float:right;" update="painelCadastro painelCadastroNotas"  partialSubmit="true" process="nomeOriginal buscar dataLancamento"/>
+				
 				</h:panelGrid>
 				
 				<p:keyFilter for="dataLancamento" mask="num" />
@@ -80,21 +71,21 @@
 		<div class="ui-fluid">
 			<p:panel id="painelCadastroNotas" style="margin-top:25px; margin-bottom:25px;">
 				<h:panelGrid columns="1">
-					<p:inputNumber id="imdb" value="#{filmeBean.imdb}" minValue="0.0" maxValue="10.0">  
+					<p:inputNumber id="imdb" value="#{filmeBean.filme.imdb}" minValue="0.0" maxValue="10.0">  
 						<p:ajax update="imdb" />  
 					</p:inputNumber>  
 				</h:panelGrid>
 					
 				<h:panelGrid columns="1">
 					<p:outputLabel for="notaRottenTomatoes" value="RottenTomatoes " />
-					<h:outputText id="notaRottenTomatoes" value="#{filmeBean.rottenTomatoes}%" />
-					<h:inputHidden id="nota" value="#{filmeBean.rottenTomatoes}" />
+					<h:outputText id="notaRottenTomatoes" value="#{filmeBean.filme.rottenTomatoes}%" />
+					<h:inputHidden id="nota" value="#{filmeBean.filme.rottenTomatoes}" />
 					<p:slider for="nota" display="notaRottenTomatoes" style="width: 200px" displayTemplate="{value}%" />
 				</h:panelGrid>
 				
 				<h:panelGrid columns="1">		
 					<p:outputLabel for="notaMetacritic" value="Metacritic " />
-					<p:inputText id="notaMetacritic" value="#{filmeBean.metaCritic}" />
+					<p:inputText id="notaMetacritic" value="#{filmeBean.filme.metacritic}" />
 					<p:slider for="notaMetacritic" style="width: 200px" />
 				</h:panelGrid>
 			</p:panel>

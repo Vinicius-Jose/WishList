@@ -1,12 +1,16 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import dao.EstudioDAO;
+import dao.EstudioDAOImpl;
 import dao.FilmeDAO;
 import dao.FilmeDAOImpl;
 import entity.Filme;
@@ -18,27 +22,39 @@ public class FilmeBean {
 
 	private Filme filme = new Filme();
 	private ServicoEntretenimento se = new ServicoEntretenimento();
-	
-	private int metaCritic;
-	private int rottenTomatoes;
-	private double imdb;
-	
+
 	public Filme getFilme() {
 		return filme;
 	}
-	
+
 	public void setFilme(Filme filme) {
 		this.filme = filme;
 	}
-	
+
+	public Date getData() {
+		Calendar c = Calendar.getInstance();
+		if(filme.getDataLancamento()!=null) {
+		c.setTime(filme.getDataLancamento());
+		return c.getTime();
+		}else {
+			return null;
+		}
+	}
+
+	public void setData(Date data) {
+		if (data != null)
+			filme.setDataLancamento(new java.sql.Date(data.getTime()));
+	}
+
 	public void cadastrar() {
 		FilmeDAO fdao = new FilmeDAOImpl();
-		
+		EstudioDAO edao = new EstudioDAOImpl();
 		try {
+			edao.adicionar(filme.getEstudio());
 			fdao.adicionar(filme);
 			filme = new Filme();
-			
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "info", "Cadastro de filme realizado com sucesso");
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "info",
+					"Cadastro de filme realizado com sucesso");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			FacesContext.getCurrentInstance().getExternalContext().redirect("./index.xhtml");
 		} catch (IOException e) {
@@ -47,41 +63,11 @@ public class FilmeBean {
 			e.printStackTrace();
 		}
 	}
-	
-	public int getMetaCritic() {
-		return metaCritic;
-	}
-	public void setMetaCritic(int metaCritic) {
-        this.metaCritic = metaCritic;
-	}
-	
-	public int getRottenTomatoes() {
-		return rottenTomatoes;
-	}
-	public void setRottenTomatoes(int rottenTomatoes) {
-        this.rottenTomatoes = rottenTomatoes;
-	}
-	
-	public double getImdb() {
-		return imdb;
-	}
-	public void setImdb(double imdb) {
-        this.imdb = imdb;
-	}
-	
+
 	public void buscaAPI() {
-		
-		filme = (Filme) se.servicoEntretenimento(filme);
-		
-		filme.getPoster();
-		filme.getImagemFundo();
-		filme.getNomePortugues();
-		filme.getClassificacaoEtaria();
-		filme.getDataLancamento();
-		filme.getEstudio();
-		filme.getDiretor();
-		filme.getSinopse();
-		
 		System.out.println(filme.getNomeOriginal());
+		System.out.println("buscando...");
+		filme = (Filme) se.servicoEntretenimento(filme);
+
 	}
 }

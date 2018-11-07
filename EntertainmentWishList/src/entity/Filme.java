@@ -15,8 +15,7 @@ public class Filme extends Entretenimento implements Serializable{
 
 	private String nomePortugues;
 	
-	@SerializedName("imdbRating")
-	@Expose
+	
 	private double imdb; 
 	
 
