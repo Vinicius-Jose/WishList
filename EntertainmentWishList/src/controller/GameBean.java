@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -9,28 +11,49 @@ import javax.faces.context.FacesContext;
 
 import dao.GameDAO;
 import dao.GameDAOImpl;
+import dao.PlataformaDAO;
+import dao.PlataformaDAOImpl;
+import entity.Filme;
 import entity.Game;
+import entity.Plataforma;
+import servicos.ServicoEntretenimento;
 
 @SessionScoped
 @ManagedBean
 public class GameBean {
 
 	private Game game = new Game();
-	
-	private int metaCritic;
+	private ServicoEntretenimento se = new ServicoEntretenimento();
 	
 	public Game getGame() {
 		return game;
 	}
-	
 	public void setGame(Game game) {
 		this.game = game;
 	}
 	
+	public Date getData() {
+		Calendar c = Calendar.getInstance();
+		
+		if(game.getDataLancamento()!=null) {
+			c.setTime(game.getDataLancamento());
+		return c.getTime();
+		
+		} else {
+			return null;
+		}
+	}
+	public void setData(Date data) {
+		if (data != null)
+			game.setDataLancamento(new java.sql.Date(data.getTime()));
+	}
+	
 	public void cadastrar() {
 		GameDAO gdao = new GameDAOImpl();
+		PlataformaDAO pdao = new PlataformaDAOImpl();
 		
 		try {
+			pdao.adicionar((Plataforma) game.getPlataformas());
 			gdao.adicionar(game);
 			game = new Game();
 			
@@ -44,10 +67,9 @@ public class GameBean {
 		}
 	}
 	
-	public int getMetaCritic() {
-		return metaCritic;
-	}
-	public void setMetaCritic(int metaCritic) {
-        this.metaCritic = metaCritic;
+	public void buscaAPI() {
+		System.out.println(game.getNomeOriginal());
+		System.out.println("buscando...");
+		game = (Game) se.servicoEntretenimento(game);
 	}
 }

@@ -1,37 +1,73 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import dao.EstudioDAO;
+import dao.EstudioDAOImpl;
 import dao.SerieDAO;
 import dao.SerieDAOImpl;
 import entity.Serie;
+import servicos.ServicoEntretenimento;
 
 @SessionScoped
 @ManagedBean
 public class SerieBean {
 
 	private Serie serie = new Serie();
-	
-	private int metaCritic;
-	private int rottenTomatoes;
+	private ServicoEntretenimento se = new ServicoEntretenimento();
 	
 	public Serie getSerie() {
 		return serie;
 	}
-	
 	public void setSerie(Serie serie) {
 		this.serie = serie;
 	}
 	
+	public Date getData() {
+		Calendar c = Calendar.getInstance();
+		
+		if(serie.getDataLancamento()!=null) {
+			c.setTime(serie.getDataLancamento());
+		return c.getTime();
+		
+		} else {
+			return null;
+		}
+	}
+	public void setData(Date dataLancamento) {
+		if (dataLancamento != null)
+			serie.setDataLancamento(new java.sql.Date(dataLancamento.getTime()));
+	}
+	
+	public Date getDateFinal() {
+		Calendar c = Calendar.getInstance();
+		
+		if(serie.getDataFinal()!=null) {
+			c.setTime(serie.getDataFinal());
+		return c.getTime();
+		
+		} else {
+			return null;
+		}
+	}
+	public void setDateFinal(Date dataFinal) {
+		if (dataFinal != null)
+			serie.setDataFinal(new java.sql.Date(dataFinal.getTime()));
+	}
+	
 	public void cadastrar() {
 		SerieDAO sdao = new SerieDAOImpl();
+		EstudioDAO edao = new EstudioDAOImpl();
 		
 		try {
+			edao.adicionar(serie.getEstudio());
 			sdao.adicionar(serie);
 			serie = new Serie();
 			
@@ -45,17 +81,9 @@ public class SerieBean {
 		}
 	}
 	
-	public int getMetaCritic() {
-		return metaCritic;
-	}
-	public void setMetaCritic(int metaCritic) {
-        this.metaCritic = metaCritic;
-	}
-	
-	public int getRottenTomatoes() {
-		return rottenTomatoes;
-	}
-	public void setRottenTomatoes(int rottenTomatoes) {
-        this.rottenTomatoes = rottenTomatoes;
+	public void buscaAPI() {
+		System.out.println(serie.getNomeOriginal());
+		System.out.println("buscando...");
+		serie = (Serie) se.servicoEntretenimento(serie);
 	}
 }

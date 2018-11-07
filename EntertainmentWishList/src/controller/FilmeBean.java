@@ -26,21 +26,21 @@ public class FilmeBean {
 	public Filme getFilme() {
 		return filme;
 	}
-
 	public void setFilme(Filme filme) {
 		this.filme = filme;
 	}
 
 	public Date getData() {
 		Calendar c = Calendar.getInstance();
+		
 		if(filme.getDataLancamento()!=null) {
-		c.setTime(filme.getDataLancamento());
+			c.setTime(filme.getDataLancamento());
 		return c.getTime();
-		}else {
+		
+		} else {
 			return null;
 		}
 	}
-
 	public void setData(Date data) {
 		if (data != null)
 			filme.setDataLancamento(new java.sql.Date(data.getTime()));
@@ -53,6 +53,7 @@ public class FilmeBean {
 			edao.adicionar(filme.getEstudio());
 			fdao.adicionar(filme);
 			filme = new Filme();
+			
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "info",
 					"Cadastro de filme realizado com sucesso");
 			FacesContext.getCurrentInstance().addMessage(null, message);
@@ -68,6 +69,5 @@ public class FilmeBean {
 		System.out.println(filme.getNomeOriginal());
 		System.out.println("buscando...");
 		filme = (Filme) se.servicoEntretenimento(filme);
-
 	}
 }
