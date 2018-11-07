@@ -17,6 +17,14 @@
 	</ui:insert>
 	
 	<h:form>
+		<div>
+		<p:commandButton id="buscar" value="Buscar na API" 
+			action="#{serieBean.cadastrar}" icon="ui-icon-disk" 
+			style="float:right;" />
+		</div>
+	</h:form>
+	
+	<h:form>
 	
 		<div class="ui-fluid">
 			<p:panel id="painelCadastro" style="margin-top:25px; margin-bottom:25px;">
@@ -37,7 +45,7 @@
 					<p:inputText id="genero" required="true" value="#{gameBean.game.genero}"/>
 					
 					<p:outputLabel for="etaria" value="Etaria *" />
-					<p:selectOneMenu id="etaria" value="" effect="fold" editable="true" value="#{gameBean.game.classificacaoEtaria}">
+					<p:selectOneMenu id="etaria" effect="fold" editable="true" value="#{gameBean.game.classificacaoEtaria}">
 						<f:selectItem itemLabel="L" itemValue="L" />
 						<f:selectItems value="L" />
 					</p:selectOneMenu>
@@ -46,7 +54,7 @@
 					<p:inputText id="numPlayers" required="true" value="#{gameBean.game.numeroJogadores}"/>
 					
 					<p:outputLabel for="dataLancamento" value="Data de Lançamento *" />
-					<p:calendar id="dataLancamento" value="#{calendarView.date}" mask="99/99/9999" value="#{gameBean.game.dataLancamento}"/>
+					<p:calendar id="dataLancamento" mask="99/99/9999" value="#{gameBean.game.dataLancamento}"/>
 	        
 					<h:outputLabel for="estudio" value="Estudio *"/>
 					<p:inputText id="estudio" required="true" value="#{gameBean.game.estudio}"/>
@@ -64,30 +72,23 @@
 				
 			</p:panel>
 		</div>
-	</h:form>
 	
-	<h:form>
 		<div class="ui-fluid">
 			<p:panel id="painelCadastroNotas" style="margin-top:25px; margin-bottom:25px;">
-				<h:panelGrid columns="2" cellpadding="5">
-					
+				<h:panelGrid columns="1">		
 					<p:outputLabel for="notaMetacritic" value="Metacritic " />
-					<p:inputText id="notaMetacritic" value="#{sliderView.number1}" />
+					<p:inputText id="notaMetacritic" value="#{gameBean.metaCritic}" />
 					<p:slider for="notaMetacritic" style="width: 200px" />
-					
 				</h:panelGrid>
 			</p:panel>
 		</div>
-	</h:form>
 	
-	<h:form>
 		<p:commandButton id="cadastrar" value="Cadastrar" update="painelCadastro"
 			action="#{gameBean.cadastrar}" icon="ui-icon-disk" 
 			style="float:right;"/>
 		<p:commandButton id="cancelar" value="Cancelar"
 			action="/index.xhtml"  
 			style="float:right;" immediate="true"/>
-		
 	</h:form>
 </h:body>
 </html>

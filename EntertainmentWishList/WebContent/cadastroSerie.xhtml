@@ -17,6 +17,11 @@
 	</ui:insert>
 
 	<h:form>
+		<div>
+		<p:commandButton id="buscar" value="Buscar na API" update="painelCadastro"
+			action="#{servicoEntretenimento.criaURIOMDB}" icon="ui-icon-disk" 
+			style="float:right;" />
+		</div>
 	
 		<div class="ui-fluid">
 			<p:panel id="painelCadastro" style="margin-top:25px; margin-bottom:25px;">
@@ -68,33 +73,24 @@
 
 			</p:panel>
 		</div>
-	</h:form>
 	
-	<h:form>
 		<div class="ui-fluid">
 			<p:panel id="painelCadastroNotas" style="margin-top:25px; margin-bottom:25px;">
-				<h:panelGrid columns="2" cellpadding="5">
-	
+				<h:panelGrid columns="1">
 					<p:outputLabel for="notaRottenTomatoes" value="RottenTomatoes " />
+					<h:outputText id="notaRottenTomatoes" value="#{serieBean.rottenTomatoes}%" />
 					<h:inputHidden id="notaRottenTomatoes" value="#{sliderView.number4}" />
-					<p:slider for="notaRottenTomatoes" display="output" style="width: 200px" displayTemplate="Set ratio to %{value}" />
-					
+					<p:slider for="notaRottenTomatoes" display="notaRottenTomatoes" style="width: 200px" displayTemplate="{value}%" />
+				</h:panelGrid>
+				
+				<h:panelGrid columns="1">		
 					<p:outputLabel for="notaMetacritic" value="Metacritic " />
-					<p:inputText id="notaMetacritic" value="#{sliderView.number1}" />
+					<p:inputText id="notaMetacritic" value="#{serieBean.metaCritic}" />
 					<p:slider for="notaMetacritic" style="width: 200px" />
-					
 				</h:panelGrid>
 			</p:panel>
 		</div>
-	</h:form>
-	
-	<h:form>
-		<p:commandButton id="buscar" value="Buscar na API" update="painelCadastro" 
-			action="#{serieBean.cadastrar}" icon="ui-icon-disk" 
-			style="float:right;" />
-	</h:form>
-	
-	<h:form>
+		
 		<p:commandButton id="cadastrar" value="Cadastrar" update="painelCadastro" 
 			action="#{serieBean.cadastrar}" icon="ui-icon-disk" 
 			style="float:right;" />
@@ -102,6 +98,6 @@
 			action="/index.xhtml" 
 			style="float:right;" immediate="true"/>
 		
-	</h:form>
+	</h:form>		
 </h:body>
 </html>
