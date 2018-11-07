@@ -10,12 +10,18 @@ import javax.faces.context.FacesContext;
 import dao.FilmeDAO;
 import dao.FilmeDAOImpl;
 import entity.Filme;
+import servicos.ServicoEntretenimento;
 
 @SessionScoped
 @ManagedBean
 public class FilmeBean {
 
 	private Filme filme = new Filme();
+	private ServicoEntretenimento se = new ServicoEntretenimento();
+	
+	private int metaCritic;
+	private int rottenTomatoes;
+	private double imdb;
 	
 	public Filme getFilme() {
 		return filme;
@@ -40,5 +46,42 @@ public class FilmeBean {
 			FacesContext.getCurrentInstance().addMessage(null, messageError);
 			e.printStackTrace();
 		}
+	}
+	
+	public int getMetaCritic() {
+		return metaCritic;
+	}
+	public void setMetaCritic(int metaCritic) {
+        this.metaCritic = metaCritic;
+	}
+	
+	public int getRottenTomatoes() {
+		return rottenTomatoes;
+	}
+	public void setRottenTomatoes(int rottenTomatoes) {
+        this.rottenTomatoes = rottenTomatoes;
+	}
+	
+	public double getImdb() {
+		return imdb;
+	}
+	public void setImdb(double imdb) {
+        this.imdb = imdb;
+	}
+	
+	public void buscaAPI() {
+		
+		filme = (Filme) se.servicoEntretenimento(filme);
+		
+		filme.getPoster();
+		filme.getImagemFundo();
+		filme.getNomePortugues();
+		filme.getClassificacaoEtaria();
+		filme.getDataLancamento();
+		filme.getEstudio();
+		filme.getDiretor();
+		filme.getSinopse();
+		
+		System.out.println(filme.getNomeOriginal());
 	}
 }

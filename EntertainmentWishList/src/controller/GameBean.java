@@ -17,6 +17,8 @@ public class GameBean {
 
 	private Game game = new Game();
 	
+	private int metaCritic;
+	
 	public Game getGame() {
 		return game;
 	}
@@ -40,5 +42,12 @@ public class GameBean {
 			FacesContext.getCurrentInstance().addMessage(null, messageError);
 			e.printStackTrace();
 		}
+	}
+	
+	public int getMetaCritic() {
+		return metaCritic;
+	}
+	public void setMetaCritic(int metaCritic) {
+        this.metaCritic = metaCritic;
 	}
 }

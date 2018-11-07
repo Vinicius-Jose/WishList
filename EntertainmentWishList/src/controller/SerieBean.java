@@ -17,6 +17,9 @@ public class SerieBean {
 
 	private Serie serie = new Serie();
 	
+	private int metaCritic;
+	private int rottenTomatoes;
+	
 	public Serie getSerie() {
 		return serie;
 	}
@@ -40,5 +43,19 @@ public class SerieBean {
 			FacesContext.getCurrentInstance().addMessage(null, messageError);
 			e.printStackTrace();
 		}
+	}
+	
+	public int getMetaCritic() {
+		return metaCritic;
+	}
+	public void setMetaCritic(int metaCritic) {
+        this.metaCritic = metaCritic;
+	}
+	
+	public int getRottenTomatoes() {
+		return rottenTomatoes;
+	}
+	public void setRottenTomatoes(int rottenTomatoes) {
+        this.rottenTomatoes = rottenTomatoes;
 	}
 }
