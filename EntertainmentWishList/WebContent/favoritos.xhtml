@@ -37,15 +37,15 @@
 						<li class="scene">
 							<div class="movie">
 								<div class="poster"
-									style="background-image: url('#{favorito.poster}')"></div>
+									style="background-image: url('#{favorito.entretenimento.poster}')"></div>
 								<div class="info">
 									<header
-										style="background-image:url('#{favorito.imagemFundo}')">
-									<h1>#{favorito.nomeOriginal}</h1>
-									<span class="year">#{favorito.dataLancamento} </span> <span
-										class="rating">#{favorito.classificacaoEtaria}</span> </header>
+										style="background-image:url('#{favorito.entretenimento.imagemFundo}')">
+									<h1>#{favorito.entretenimento.nomeOriginal}</h1>
+									<span class="year">#{favorito.entretenimento.dataLancamento} </span> <span
+										class="rating">#{favorito.entretenimento.classificacaoEtaria}</span> </header>
 									<p
-										style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical;">#{favorito.sinopse}</p>
+										style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical;">#{favorito.entretenimento.sinopse}</p>
 									<p:commandButton action="#{favoritosBean.visualizar}" 
 										value="Visualizar" id="Ajax">
 										<f:setPropertyActionListener target="#{favoritosBean.selected}"
@@ -53,9 +53,9 @@
 									</p:commandButton>
 									
 									<p:commandButton action="#{favoritosBean.remover}" 
-										value="Remover" id="remover">
+										value="Remover" id="remover" update="form">
 										<f:setPropertyActionListener target="#{favoritosBean.selected}"
-											value="#{favorito}" />
+											value="#{favorito.entretenimento}" />
 									</p:commandButton>
 								</div>
 							</div>

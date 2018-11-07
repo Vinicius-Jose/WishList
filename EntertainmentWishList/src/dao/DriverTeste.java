@@ -1,6 +1,7 @@
 package dao;
 
 import entity.Amigo;
+import entity.Game;
 import entity.Plataforma;
 import entity.Usuario;
 import enumeradas.StatusAmigo;
@@ -94,13 +95,20 @@ public class DriverTeste {
 //		am.setUsuario(user);
 //		u.remover(am);
 //		udao.alterar(u);
-		udao.atualizarAmizade("vinijosenog@hotmail.com", "pedro@hotmail.com", StatusAmigo.SOLICITADO);
-		
-//		PlataformaDAO pdao = new PlataformaDAOImpl();
+//		udao.atualizarAmizade("vinijosenog@hotmail.com", "pedro@hotmail.com", StatusAmigo.SOLICITADO);
+//		
+		PlataformaDAO pdao = new PlataformaDAOImpl();
 //		Plataforma pla = new Plataforma();
-//		pla.setEmpresa("SONY");
-//		pla.setNome("PS3");
+//		pla.setEmpresa("MICROSOFT");
+//		pla.setNome("XBOX 360");
 //		pdao.adicionar(pla);
+		
+		Game g = new Game();
+		g.setId(8);
+		g.setPlataformas(pdao.buscarPlataformas(g));
+		for(Plataforma p : g.getPlataformas()){
+			System.out.println(p.getNome());
+		}
 	}
 
 }

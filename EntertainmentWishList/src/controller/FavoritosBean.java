@@ -15,6 +15,8 @@ import dao.EntretenimentoDAO;
 import dao.EntretenimentoDAOImpl;
 import dao.ItemFavoritoDAO;
 import dao.ItemFavoritoDAOImpl;
+import dao.PlataformaDAO;
+import dao.PlataformaDAOImpl;
 import entity.Entretenimento;
 import entity.Filme;
 import entity.Game;
@@ -48,6 +50,7 @@ public class FavoritosBean {
 	}
 
 	public List<ItemFavoritos> getFavoritos() {
+		favoritos  = new ItemFavoritoDAOImpl().buscarFavoritos(usuario);
 		return favoritos;
 	}
 
@@ -70,6 +73,7 @@ public class FavoritosBean {
 		return (Serie)selected;
 	}
 	public Game getGame() {
+		Game g = (Game) selected;
 		return (Game)selected;
 	}
 
@@ -107,8 +111,10 @@ public class FavoritosBean {
 	
 	public void remover() {
 		item.setUsuario(usuario);
+		item.setEntretenimento(selected);
 		ItemFavoritoDAO idao = new ItemFavoritoDAOImpl();
 		idao.remover(item);
+		favoritos = idao.buscarFavoritos(usuario);
 	}
 	
 	public void postar(int i){

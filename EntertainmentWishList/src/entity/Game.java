@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -18,7 +19,7 @@ public class Game extends Entretenimento implements Serializable{
 	
 	private int numeroJogadores;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Plataforma> plataformas;
 
 	public String getGenero() {

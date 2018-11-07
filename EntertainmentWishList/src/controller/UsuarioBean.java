@@ -134,6 +134,7 @@ public class UsuarioBean {
 				FacesMessage msgError = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO",
 						"Este Login está bloqueado entre em contato com wishList@gmail.com para mais informações");
 				FacesContext.getCurrentInstance().addMessage(null, msgError);
+				usuarioLogado = new Usuario();
 			}
 		} catch (UserException | IOException e) {
 			usuarioLogado.setEmail(null);

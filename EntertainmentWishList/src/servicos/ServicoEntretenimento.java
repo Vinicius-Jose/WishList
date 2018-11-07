@@ -102,12 +102,18 @@ public class ServicoEntretenimento {
 		} else if (e instanceof Serie) {
 			tipo = "tv";
 		}
-		Calendar c = Calendar.getInstance();
-		c.setTime(e.getDataLancamento());
+	
+		
 		uri = "https://api.themoviedb.org/3/search/" + tipo
 				+ "?api_key=a5e03bab2b046c01727a5cc5699556bd&language=pt-BR&query="
-				+ URLEncoder.encode(e.getNomeOriginal(), "UTF-8") + "&page=1&year=" + c.get(Calendar.YEAR);
+				+ URLEncoder.encode(e.getNomeOriginal(), "UTF-8") + "&page=1";
 
+				
+		if(e.getDataLancamento() !=null){
+			Calendar c = Calendar.getInstance();
+			c.setTime(e.getDataLancamento());
+			uri+="&year=" + c.get(Calendar.YEAR);
+		}	
 		return uri;
 	}
 

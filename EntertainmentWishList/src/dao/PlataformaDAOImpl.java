@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
+import entity.Game;
 import entity.Plataforma;
 
 public class PlataformaDAOImpl implements PlataformaDAO {
@@ -51,5 +52,16 @@ public class PlataformaDAOImpl implements PlataformaDAO {
 		em.close();
 		return plataformas;
 	}
+	
+	@Override
+	public List<Plataforma> buscarPlataformas(Game g) {
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Plataforma> query = em.createQuery("select p from Plataforma p  game.plataformas.id= p.id and game.id =   :game ", Plataforma.class);
+		query.setParameter("game",g.getId());
+		List<Plataforma> plataformas = query.getResultList();
+		em.close();
+		return plataformas;
+	}
+	
 
 }
