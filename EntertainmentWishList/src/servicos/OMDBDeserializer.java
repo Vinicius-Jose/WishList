@@ -31,14 +31,16 @@ public class OMDBDeserializer implements JsonDeserializer<HashMap<String, Object
 		}
 		dadosOMDB.put("metascore", i);
 
-		name = jsonObject.get("totalSeason");
+		name = jsonObject.get("totalSeasons");
 		int temporadas;
 		try {
 			temporadas = Integer.parseInt(name.getAsString());
 		} catch (Exception e) {
 			temporadas = 0;
 		}
-		name = jsonObject.get("totalSeason");
+		dadosOMDB.put("temporadas", temporadas);
+		
+		name = jsonObject.get("imdbRating");
 		double imdb;
 		try {
 			imdb = Double.parseDouble(name.getAsString());
