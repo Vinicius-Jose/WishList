@@ -59,6 +59,16 @@ public class FavoritosBean {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	
+	public Filme getFilme() {
+		return (Filme)selected;
+	}
+	public Serie getSerie() {
+		return (Serie)selected;
+	}
+	public Game getGame() {
+		return (Game)selected;
+	}
 
 	public void visualizar() {
 		ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
@@ -82,6 +92,10 @@ public class FavoritosBean {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void remover() {
+		
 	}
 
 }

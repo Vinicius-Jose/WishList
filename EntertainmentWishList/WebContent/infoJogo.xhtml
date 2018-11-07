@@ -29,7 +29,7 @@
 			<div class="card"
 				style="width: 10rem; margin-left: 0rem; margin-top: 2rem;">
 				<h:graphicImage class="card-img-top"
-					value="#{buscaBean.selected.poster}" alt="Card image cap"></h:graphicImage>
+					value="#{favoritosBean.selected.poster}" alt="Card image cap"></h:graphicImage>
 			</div>
 
 
@@ -40,7 +40,7 @@
 					<br /> <br /> <br /> <br />
 
 					<p:outputLabel id="nome-original"
-						value="#{buscaBean.selected.nomeOriginal}" />
+						value="#{favoritosBean.selected.nomeOriginal}" />
 					<br />
 					<p:outputLabel id="genero" value="Genero: " />
 					<br />
@@ -56,10 +56,10 @@
 					<br /> <br /> <br /> <br />
 
 					<p:outputLabel id="nota1"
-						value="metacritic: #{buscaBean.selected.metacritic}" />
+						value="metacritic: #{favoritosBean.selected.metacritic}" />
 					<br />
 					<p:outputLabel id="nota2"
-						value="Nota Usuários: #{buscaBean.selected.notaUsuario}" />
+						value="Nota Usuários: #{favoritosBean.selected.notaUsuario}" />
 					<br />
 
 				</div>
@@ -72,7 +72,7 @@
 				</p:outputLabel>
 				<br />
 				<p:outputLabel id="sinopse-desc"
-					value="#{buscaBean.selected.sinopse}" />
+					value="#{favoritosBean.selected.sinopse}" />
 				<br />
 			</div>
 
@@ -105,9 +105,9 @@
 
 				<div style="margin-left: 30rem; margin-top: -4.5rem;">
 					<p:outputLabel
-						value="Data de lançamento: #{buscaBean.selected.dataLancamento}" />
+						value="Data de lançamento: #{favoritosBean.selected.dataLancamento}" />
 					<br />
-					<p:outputLabel id="etaria" value="colocar faixa etaria" />
+					<p:outputLabel id="etaria" value="Etaria: #{favoritosBean.selected.classificacaoEtaria}" />
 				</div>
 			</div>
 

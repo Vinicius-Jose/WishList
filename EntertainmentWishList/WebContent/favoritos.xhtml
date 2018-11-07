@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+	<title>Favoritos</title>
+</h:head>
+
+<h:body>
+	<ui:insert name="cabecalho">
+		<link type="text/css" rel="stylesheet"
+			href="javax.faces.resource/theme.css" />
+		<ui:include src="/cabecalho.xhtml" />
+	</ui:insert>
+
+	<div class="ui-fluid">
+		<h:form id="form" style="margin-top:25px">
+			<p:dataGrid var="favorito" value="#{favoritosBean.favoritos}"
+				columns="4" layout="grid" rows="12" paginator="true"
+				id="favoritos"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="8,12,16">
+
+				<f:facet name="header">
+           		 Seus favoritos
+        		</f:facet>
+				<h:outputScript library="js" name="modernizr.custom.js" />
+				<h:outputStylesheet library="css" name="component.css" />
+				<h:outputStylesheet library="css" name="demo.css" />
+				<div class="wrapper" style="margin: 5px">
+					<ul class="stage clearfix">
+						<li class="scene">
+							<div class="movie">
+								<div class="poster"
+									style="background-image: url('#{favorito.poster}')"></div>
+								<div class="info">
+									<header
+										style="background-image:url('#{favorito.imagemFundo}')">
+									<h1>#{favorito.nomeOriginal}</h1>
+									<span class="year">#{favorito.dataLancamento} </span> <span
+										class="rating">#{favorito.classificacaoEtaria}</span> </header>
+									<p
+										style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical;">#{favorito.sinopse}</p>
+									<p:commandButton action="#{favoritosBean.visualizar}" 
+										value="Visualizar" id="Ajax">
+										<f:setPropertyActionListener target="#{favoritosBean.selected}"
+											value="#{favorito}" />
+									</p:commandButton>
+									
+									<p:commandButton action="#{favoritosBean.remover}" 
+										value="Remover" id="remover">
+										<f:setPropertyActionListener target="#{favoritosBean.selected}"
+											value="#{favorito}" />
+									</p:commandButton>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</p:dataGrid>
+
+		</h:form>
+	</div>
+</h:body>
+</html>
