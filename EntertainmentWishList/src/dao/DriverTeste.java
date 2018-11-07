@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.Calendar;
 
 import entity.Estudio;
+import entity.Plataforma;
 import entity.Serie;
 import enumeradas.Etaria;
 import servicos.ServicoEntretenimento;
@@ -11,11 +12,11 @@ import servicos.ServicoEntretenimento;
 public class DriverTeste {
 
 	public static void main(String[] args) {
-		 Serie a = new Serie();
-		 a.setNomeOriginal("Flash");
-		 Calendar c = Calendar.getInstance();
-		 c.set(2014, 1, 15);
-		 a.setDataLancamento(new Date(c.getTimeInMillis()));
+//		 Serie a = new Serie();
+//		 a.setNomeOriginal("Flash");
+//		 Calendar c = Calendar.getInstance();
+//		 c.set(2014, 1, 15);
+//		 a.setDataLancamento(new Date(c.getTimeInMillis()));
 		
 		// Game b = new Game();
 		// b.setId(2);
@@ -27,17 +28,17 @@ public class DriverTeste {
 		// gd.adicionar(a);
 		// gd.adicionar(b);
 
-		 ServicoEntretenimento so = new ServicoEntretenimento();
-		 a = (Serie) so.servicoEntretenimento(a);
-		 a.setClassificacaoEtaria(Etaria.PG12);
-		 Estudio es = new Estudio();
-		 es.setLocalizacao("USA");
-		 es.setNome("Universal");
-		 EstudioDAO ed = new EstudioDAOImpl();
-		 ed.adicionar(es);
-		 a.setEstudio(es);
-		 SerieDAOImpl fd = new SerieDAOImpl();
-		 fd.adicionar(a);
+//		 ServicoEntretenimento so = new ServicoEntretenimento();
+//		 a = (Serie) so.servicoEntretenimento(a);
+//		 a.setClassificacaoEtaria(Etaria.PG12);
+//		 Estudio es = new Estudio();
+//		 es.setLocalizacao("USA");
+//		 es.setNome("Universal");
+//		 EstudioDAO ed = new EstudioDAOImpl();
+//		 ed.adicionar(es);
+//		 a.setEstudio(es);
+//		 SerieDAOImpl fd = new SerieDAOImpl();
+//		 fd.adicionar(a);
 		//
 //		ItemFavoritoDAO idao = new ItemFavoritoDAOImpl();
 //		Entretenimento e1 = new Entretenimento();
@@ -89,6 +90,12 @@ public class DriverTeste {
 		// System.out.println(i.getNota());
 		// }
 		//
+		
+		PlataformaDAO pdao = new PlataformaDAOImpl();
+		Plataforma pla = new Plataforma();
+		pla.setEmpresa("SONY");
+		pla.setNome("PS3");
+		pdao.adicionar(pla);
 	}
 
 }

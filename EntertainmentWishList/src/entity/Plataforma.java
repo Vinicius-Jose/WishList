@@ -9,15 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Plataforma implements Serializable{
+public class Plataforma implements Serializable {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	@Column(length=100)
+
+	@Column(length = 100)
 	private String nome;
-	
-	@Column(length=100)
+
+	@Column(length = 100)
 	private String empresa;
 
 	public String getNome() {
@@ -36,4 +37,11 @@ public class Plataforma implements Serializable{
 		this.empresa = empresa;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 }

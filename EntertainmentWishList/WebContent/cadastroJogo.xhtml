@@ -43,7 +43,7 @@
 					</p:selectOneMenu>
 					
 					<h:outputLabel for="numPlayers" value="Nº de Jogadores *"/>
-					<p:inputText id="numPlayers" required="true" value="#{gameBean.game.numeroJogadores}"/>
+					<p:inputNumber decimalPlaces="0" maxValue="200" minValue="1" id="numPlayers" required="true" value="#{gameBean.game.numeroJogadores}"/>
 					
 					<p:outputLabel for="dataLancamento" value="Data de Lançamento *" />
 					<p:calendar id="dataLancamento" mask="99/99/9999" value="#{gameBean.data}"/>
@@ -51,16 +51,15 @@
 					<h:outputLabel for="estudio" value="Estudio *"/>
 					<p:inputText id="estudio" required="true" value="#{gameBean.game.estudio.nome}"/>
 	
-					<h:outputLabel for="plataforma" value="Plataforma *"/>
-					<p:inputText id="plataforma" required="true" value="#{gameBean.game.plataformas}"/>
-	
+					<h:outputLabel for="plataformaCampo" value="Plataforma *"/>
+					<p:selectManyCheckbox id="plataformaCampo" value="#{gameBean.plataformaSelected}" layout="grid" columns="3">
+       					 <f:selectItems value="#{gameBean.plataformasBanco}" var="plataforma" itemLabel="#{plataforma.nome} (#{plataforma.empresa})" itemValue="#{plataforma.nome}" />
+   					 </p:selectManyCheckbox>
+   					 
 					<h:outputLabel for="sinopse" value="Sinopse *"/>
 					<p:inputTextarea id="sinopse" required="true" value="#{gameBean.game.sinopse}"
 						rows="5" cols="80"/>
 					
-					<p:commandButton id="buscar" value="Buscar na API"
-						action="#{gameBean.buscaAPI}" icon="ui-icon-disk"
-						style="float:right;" update="painelCadastro painelCadastroNotas"  partialSubmit="true" process="nomeOriginal buscar dataLancamento"/>
 			
 				</h:panelGrid>
 				

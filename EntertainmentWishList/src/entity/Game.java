@@ -1,11 +1,11 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -19,7 +19,7 @@ public class Game extends Entretenimento implements Serializable{
 	private int numeroJogadores;
 
 	@ManyToMany
-	private Set<Plataforma> plataformas;
+	private List<Plataforma> plataformas;
 
 	public String getGenero() {
 		return genero;
@@ -37,11 +37,11 @@ public class Game extends Entretenimento implements Serializable{
 		this.numeroJogadores = numeroJogadores;
 	}
 
-	public Set<Plataforma> getPlataformas() {
+	public List<Plataforma> getPlataformas() {
 		return plataformas;
 	}
 
-	public void setPlataformas(Set<Plataforma> plataformas) {
+	public void setPlataformas(List<Plataforma> plataformas) {
 		this.plataformas = plataformas;
 	}
 
