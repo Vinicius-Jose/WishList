@@ -60,8 +60,12 @@ public class ItemFavoritoDAOImpl implements ItemFavoritoDAO {
 	@Override
 	public void remover(ItemFavoritos itemFavoritos) {
 		EntityManager em = emf.createEntityManager();
+		TypedQuery<ItemFavoritos> qr = em.createQuery("select i from ItemFavoritos i where i.usuario.email = :email and i.entretenimento.id = :idEnt",ItemFavoritos.class);
+		qr.setParameter("email",itemFavoritos.getUsuario().getEmail());
+		qr.setParameter("idEnt", itemFavoritos.getEntretenimento().getId());
+		ItemFavoritos item = qr.getSingleResult();
 		em.getTransaction().begin();
-		em.remove(itemFavoritos);
+		em.remove(item);
 		em.getTransaction().commit();
 		em.close();
 	}

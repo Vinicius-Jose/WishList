@@ -50,20 +50,20 @@ public class Usuario implements Serializable{
 		amigos.add(a);
 	}
 
-	public void remover(Amigo a) {
+	public Amigo remover(Amigo a) {
 		Amigo removido = null;
 		for(Amigo b : amigos) {
-			if(b.getUsuario().getEmail().equals(a.getUsuario().getEmail())) {
+			if(b.getAmigoPk().getUsuarioEmail2().equals(a.getAmigoPk().getUsuarioEmail2())) {
 				removido =b;
 			}
 		}
 		amigos.remove(removido);
-		
+		return removido;
 	}
 
 	public void bloquear(String nome) {
 		for (Amigo b : amigos) {
-			if (b.getUsuario().getPrimeiroNome().equals(nome)) {
+			if (b.getAmigoPk().getUsuarioEmail2().equals(nome)) {
 				b.setStatus(StatusAmigo.BLOQUEADO);
 			}
 		}

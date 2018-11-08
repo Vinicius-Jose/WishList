@@ -13,9 +13,12 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.model.DefaultStreamedContent;
 
+import dao.AmigoDAO;
+import dao.AmigoDAOImpl;
 import dao.UsuarioDAO;
 import dao.UsuarioDAOImpl;
 import entity.Amigo;
+import entity.AmigoPK;
 import entity.Usuario;
 import enumeradas.StatusAmigo;
 import excecoes.FriendException;
@@ -104,12 +107,14 @@ public class UsuarioBean {
 
 	public void enviarSolicitacao() {
 		Amigo amigo = new Amigo();
-		amigo.setUsuario(selected);
+		AmigoPK pk = new AmigoPK();
+		pk.setUsuarioEmail(usuarioLogado.getEmail());
+		pk.setUsuarioEmail2(selected.getEmail());
+		amigo.setAmigoPk(pk);;
 		amigo.setStatus(StatusAmigo.SOLICITADO);
-		usuarioLogado.getAmigos().add(amigo);
-		UsuarioDAO udao = new UsuarioDAOImpl();
+		AmigoDAO udao = new AmigoDAOImpl();
 		try {
-			udao.adicionarAmigo(usuarioLogado, amigo);
+			udao.adicionarAmigo(amigo);
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Solicitação Enviada com sucesso");
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		} catch (FriendException e) {
@@ -161,16 +166,7 @@ public class UsuarioBean {
 		return imageSelected;
 	}
 
-	public DefaultStreamedContent getImageAmigoSelected() throws IOException {
-		if (i == usuarioLogado.getAmigos().size())
-			i = 0;
-		Usuario u = usuarioLogado.getAmigos().get(i).getUsuario();
-		i++;
-		DefaultStreamedContent imageSelected = new DefaultStreamedContent(new ByteArrayInputStream(u.getFoto()),
-				"image/jpg");
-
-		return imageSelected;
-	}
+	
 
 	public void recuperar() {
 		UsuarioDAO udao = new UsuarioDAOImpl();
@@ -250,21 +246,13 @@ public class UsuarioBean {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
-	public void removerAmigo() {
-		Amigo am = new Amigo();
-		am.setUsuario(selected);
-		usuarioLogado.remover(am);
-		UsuarioDAO udao = new UsuarioDAOImpl();
-		udao.alterar(usuarioLogado);
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Removido com sucesso");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-	}
+	
 
 	public void atualizarAmizade() {
-		UsuarioDAO udao = new UsuarioDAOImpl();
+		AmigoDAO udao = new AmigoDAOImpl();
 		StatusAmigo novo = null;
 		for (Amigo a : usuarioLogado.getAmigos()) {
-			if (a.getUsuario().getEmail().equals(selected.getEmail())) {
+			if (a.getAmigoPk().getUsuarioEmail2().equals(selected.getEmail())) {
 				novo = a.getStatus();
 			}
 		}

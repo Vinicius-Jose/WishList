@@ -2,10 +2,8 @@ package entity;
 
 import java.io.Serializable;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import enumeradas.StatusAmigo;
 
@@ -13,13 +11,21 @@ import enumeradas.StatusAmigo;
 public class Amigo implements Serializable {
 	
 	
-	@Id
-	@JoinColumn(name = "Usuarioemail2")
-	@ManyToOne
-	private Usuario usuario;
+	@EmbeddedId
+	private AmigoPK amigoPk;
 	
+
 	private StatusAmigo status;
 
+	
+
+	public AmigoPK getAmigoPk() {
+		return amigoPk;
+	}
+
+	public void setAmigoPk(AmigoPK amigoPk) {
+		this.amigoPk = amigoPk;
+	}
 	public StatusAmigo getStatus() {
 		return status;
 	}
@@ -28,12 +34,6 @@ public class Amigo implements Serializable {
 		this.status = status;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 
 }

@@ -1,15 +1,19 @@
 package dao;
 
 import entity.Amigo;
+import entity.AmigoPK;
+import entity.Entretenimento;
 import entity.Game;
+import entity.ItemFavoritos;
 import entity.Plataforma;
 import entity.Usuario;
 import enumeradas.StatusAmigo;
+import excecoes.FriendException;
 import excecoes.UserException;
 
 public class DriverTeste {
 
-	public static void main(String[] args) throws UserException {
+	public static void main(String[] args) throws UserException, FriendException {
 //		 Serie a = new Serie();
 //		 a.setNomeOriginal("Flash");
 //		 Calendar c = Calendar.getInstance();
@@ -88,7 +92,15 @@ public class DriverTeste {
 		// System.out.println(i.getNota());
 		// }
 		//
-//		Usuario u = udao.buscarUsuarioEspecifico("vinijosenog@hotmail.com");
+		Usuario u = udao.buscarUsuarioEspecifico("antonio@outlook.com");
+		AmigoDAOImpl adao  = new AmigoDAOImpl();
+		Amigo am = new Amigo();
+		AmigoPK apk = new AmigoPK();
+		apk.setUsuarioEmail2("pedro@outlook.com");
+		am.setAmigoPk(apk);
+		adao.remover(u.remover(am));;
+		
+		
 //		Amigo am = new Amigo();
 //		Usuario user = new Usuario();
 //		user.setEmail("pedro@hotmail.com");
@@ -97,18 +109,19 @@ public class DriverTeste {
 //		udao.alterar(u);
 //		udao.atualizarAmizade("vinijosenog@hotmail.com", "pedro@hotmail.com", StatusAmigo.SOLICITADO);
 //		
-		PlataformaDAO pdao = new PlataformaDAOImpl();
+//		PlataformaDAO pdao = new PlataformaDAOImpl();
 //		Plataforma pla = new Plataforma();
 //		pla.setEmpresa("MICROSOFT");
 //		pla.setNome("XBOX 360");
 //		pdao.adicionar(pla);
-		
-		Game g = new Game();
-		g.setId(8);
-		g.setPlataformas(pdao.buscarPlataformas(g));
-		for(Plataforma p : g.getPlataformas()){
-			System.out.println(p.getNome());
-		}
+//		
+//		Game g = new Game();
+//		g.setId(8);
+//		g.setPlataformas(pdao.buscarPlataformas(g));
+//		for(Plataforma p : g.getPlataformas()){
+//			System.out.println(p.getNome());
+//		}
+	
 	}
 
 }
