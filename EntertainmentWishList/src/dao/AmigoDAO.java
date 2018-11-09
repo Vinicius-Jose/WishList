@@ -19,4 +19,6 @@ public interface AmigoDAO {
 
 	void remover(Amigo a);
 
+	void deletarSolicitacao(Amigo a);
+
 }

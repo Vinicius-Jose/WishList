@@ -101,6 +101,18 @@ public class AmigoDAOImpl implements AmigoDAO {
 		em.close();
 	}
 	
+	@Override
+	public void deletarSolicitacao(Amigo a) {
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Amigo> qry = em.createQuery("select a from Amigo a where usuarioEmail = :user and usuarioEmail2 = :user2",Amigo.class);
+		qry.setParameter("user", a.getAmigoPk().getUsuarioEmail());
+		qry.setParameter("user2", a.getAmigoPk().getUsuarioEmail2());
+		a = qry.getSingleResult();
+		em.getTransaction().begin();
+		em.remove(a);
+		em.getTransaction().commit();
+	}
+	
 	
 	
 }

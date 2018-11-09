@@ -21,6 +21,7 @@ import entity.Amigo;
 import entity.AmigoPK;
 import entity.Usuario;
 import enumeradas.StatusAmigo;
+import excecoes.FriendException;
 import excecoes.UserException;
 
 @SessionScoped
@@ -40,9 +41,97 @@ public class AmigoBean {
 
 	private StatusAmigo status;
 
-	private int i = -1;
+	public DefaultStreamedContent imageAmigoSelected(Usuario user) throws IOException {
+		DefaultStreamedContent imageSelected = null;
+		if (user.getFoto() != null)
+			imageSelected = new DefaultStreamedContent(new ByteArrayInputStream(user.getFoto()), "image/jpg");
 
-	private int tipo = 0;
+		return imageSelected;
+	}
+
+	public void removerAmigo() {
+		Amigo am = new Amigo();
+		AmigoPK pk = new AmigoPK();
+		pk.setUsuarioEmail(usuarioLogado.getEmail());
+		pk.setUsuarioEmail2(selected.getEmail());
+		am.setAmigoPk(pk);
+		AmigoDAO udao = new AmigoDAOImpl();
+		udao.remover(am);
+		atualizarUsuario();
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Removido com sucesso");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		atualizarUsuario();
+	}
+	public void recusar(int tipo) {
+		Amigo am = new Amigo();
+		AmigoPK pk = new AmigoPK();
+		if(tipo ==0) {
+		pk.setUsuarioEmail2(usuarioLogado.getEmail());
+		pk.setUsuarioEmail(selected.getEmail());
+		}else {
+			pk.setUsuarioEmail(usuarioLogado.getEmail());
+			pk.setUsuarioEmail2(selected.getEmail());
+		}
+		am.setAmigoPk(pk);
+		AmigoDAO udao = new AmigoDAOImpl();
+		udao.deletarSolicitacao(am);
+		atualizarUsuario();
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Removido com sucesso");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		atualizarUsuario();
+	}
+
+	public void atualizarAmizade() {
+		AmigoDAO udao = new AmigoDAOImpl();
+		StatusAmigo novo = null;
+		novo = status;
+		udao.atualizarAmizade(usuarioLogado.getEmail(), selected.getEmail(), novo);
+		atualizarUsuario();
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Dados Atualizados com sucesso");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		atualizarUsuario();
+	}
+
+	private void atualizarUsuario() {
+		try {
+			usuarioLogado = new UsuarioDAOImpl().buscarUsuarioEspecifico(usuarioLogado.getEmail());
+		} catch (UserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public StatusAmigo buscarStatus(Usuario user) {
+		for (Amigo a : usuarioLogado.getAmigos()) {
+			if (a.getAmigoPk().getUsuarioEmail2().equals(user.getEmail())) {
+				return a.getStatus();
+			}
+		}
+		return null;
+
+	}
+	
+	
+	public void adicionarAmigo() {
+		AmigoDAO adao = new AmigoDAOImpl();
+		adao.atualizarAmizade(selected.getEmail(), usuarioLogado.getEmail(), StatusAmigo.ATIVO);
+		Amigo amigo = new Amigo();
+		AmigoPK pk = new AmigoPK();
+		pk.setUsuarioEmail(usuarioLogado.getEmail());
+		pk.setUsuarioEmail2(selected.getEmail());
+		amigo.setAmigoPk(pk);
+		amigo.setStatus(StatusAmigo.ATIVO);
+		try {
+			adao.adicionarAmigo(amigo);
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Amigo adicionado com sucesso");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			atualizarUsuario();
+		} catch (FriendException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 
 	public StatusAmigo getStatus() {
 		return status;
@@ -52,15 +141,24 @@ public class AmigoBean {
 		this.status = status;
 	}
 
-	public int getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(int tipo) {
-		this.tipo = tipo;
-	}
-
 	public List<Usuario> getSolicitacoesEnviadas() {
+		UsuarioDAO udao = new UsuarioDAOImpl();
+		solicitacoesEnviadas = new ArrayList<Usuario>();
+		List<Amigo> enviados = new ArrayList<>();
+		AmigoDAO adao = new AmigoDAOImpl();
+		enviados = adao.buscarSolicitacaoEnviada(usuarioLogado);
+		for (Amigo a : enviados) {
+			Usuario user = new Usuario();
+			try {
+				user = udao.buscarUsuarioEspecifico(a.getAmigoPk().getUsuarioEmail2());
+				solicitacoesEnviadas.add(user);
+			} catch (UserException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+	
 		return solicitacoesEnviadas;
 	}
 
@@ -69,8 +167,26 @@ public class AmigoBean {
 	}
 
 	public List<Usuario> getSolicitacoesRecebidas() {
+		UsuarioDAO udao = new UsuarioDAOImpl();
+		solicitacoesRecebidas = new ArrayList<Usuario>();
+		List<Amigo> recebido = new ArrayList<>();
+		AmigoDAO adao = new AmigoDAOImpl();
+		recebido = adao.buscarSolicitacaoRecebida(usuarioLogado);
+		for (Amigo a : recebido) {
+			Usuario user = new Usuario();
+			try {
+				user = udao.buscarUsuarioEspecifico(a.getAmigoPk().getUsuarioEmail());
+				solicitacoesRecebidas.add(user);
+			} catch (UserException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
 		return solicitacoesRecebidas;
 	}
+	
+	
 
 	public void setSolicitacoesRecebidas(List<Usuario> solicitacoesRecebidas) {
 		this.solicitacoesRecebidas = solicitacoesRecebidas;
@@ -86,7 +202,6 @@ public class AmigoBean {
 
 	public List<Usuario> getAmigos() {
 		UsuarioDAO udao = new UsuarioDAOImpl();
-		i = -1;
 		amigos = new ArrayList<Usuario>();
 		for (Amigo a : usuarioLogado.getAmigos()) {
 			if (a.getStatus() != StatusAmigo.SOLICITADO) {
@@ -113,83 +228,6 @@ public class AmigoBean {
 
 	public void setSelected(Usuario selected) {
 		this.selected = selected;
-	}
-
-	public DefaultStreamedContent getImageAmigoSelected() throws IOException {
-		List<Usuario> lista = amigos;
-		i++;
-		if (i >= lista.size())
-			i = 0;
-		
-		if(lista.isEmpty()) {
-			return null;
-		}
-		Usuario u = lista.get(i);
-
-		DefaultStreamedContent imageSelected = new DefaultStreamedContent(new ByteArrayInputStream(u.getFoto()),
-				"image/jpg");
-
-		return imageSelected;
-	}
-	
-	public DefaultStreamedContent imageAmigoSelected(Usuario user) throws IOException {
-		
-		System.out.println("foi na imagem" + user.getEmail());
-		DefaultStreamedContent imageSelected = new DefaultStreamedContent(new ByteArrayInputStream(user.getFoto()),
-				"image/jpg");
-
-		return imageSelected;
-	}
-
-	
-
-	public void removerAmigo() {
-		i=-1;
-		Amigo am = new Amigo();
-		AmigoPK pk = new AmigoPK();
-		pk.setUsuarioEmail(usuarioLogado.getEmail());
-		pk.setUsuarioEmail2(selected.getEmail());
-		System.out.println(selected.getEmail());
-		am.setAmigoPk(pk);
-		AmigoDAO udao = new AmigoDAOImpl();
-		udao.remover(usuarioLogado.remover(am));
-		usuarioLogado.remover(am);
-		atualizarUsuario();
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Removido com sucesso");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-		atualizarUsuario();
-	}
-
-	public void atualizarAmizade() {
-		AmigoDAO udao = new AmigoDAOImpl();
-		StatusAmigo novo = null;
-		i=-1;
-		novo = status;
-
-		udao.atualizarAmizade(usuarioLogado.getEmail(), selected.getEmail(), novo);
-		atualizarUsuario();
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Dados Atualizados com sucesso");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-		atualizarUsuario();
-	}
-
-	private void atualizarUsuario() {
-		try {
-			usuarioLogado = new UsuarioDAOImpl().buscarUsuarioEspecifico(usuarioLogado.getEmail());
-		} catch (UserException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public StatusAmigo buscarStatus(Usuario user) {
-		for (Amigo a : usuarioLogado.getAmigos()) {
-			if (a.getAmigoPk().getUsuarioEmail2().equals(user.getEmail())) {
-				return a.getStatus();
-			}
-		}
-		return null;
-
 	}
 
 }

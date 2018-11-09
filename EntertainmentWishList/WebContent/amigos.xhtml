@@ -34,7 +34,7 @@
 				<div class="card" style="width: 3; length: 3rem; margin-left: 20px"
 					align="center">
 					<p:graphicImage id="imagem" class="card-img-top"
-						value="#{amigoBean.imageAmigoSelected(amigo)}"
+						value=""
 						alt="Imagem do Usuário" style="width: 200px ;length: 200px">
 					</p:graphicImage>
 
@@ -71,6 +71,94 @@
 		</div>
 	</div>
 
+<div class="ui-fluid">
+		<div style="margin-top: 25px">
+			<p:dataGrid var="solicitacao" value="#{amigoBean.solicitacoesRecebidas}"
+				emptyMessage="Você ainda não possui nenhuma solicitação de amizade" columns="6" 
+				layout="grid" rows="12" paginator="true" id="solicitacoesRecebidas"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="4,8">
+
+				<f:facet name="header">
+           		 Suas solicitações de Amizade
+        		</f:facet>
+
+				<div class="card" style="width: 3; length: 3rem; margin-left: 20px"
+					align="center">
+					<p:graphicImage id="imagem" class="card-img-top"
+						value=""
+						alt="Imagem do Usuário" style="width: 200px ;length: 200px">
+					</p:graphicImage>
+
+
+					<div class="card-body">
+						<p class="card-title">#{solicitacao.primeiroNome}</p>
+						<p class="card-text" style="font-size: 12px">
+							Nick Name: #{solicitacao.nickName} <br />Email: #{solicitacao.email}<br />
+						</p>
+
+						<h:form>
+
+							<p:commandButton action="#{amigoBean.recusar(0)}"
+								value="Recusar " id="remover" update="amigos solicitacoesRecebidas">
+								<f:setPropertyActionListener target="#{amigoBean.selected}"
+									value="#{solicitacao}" />
+							</p:commandButton>
+							<p:commandButton action="#{amigoBean.adicionarAmigo}"
+								value="Adicionar" id="adicionar" update="amigos solicitacoesRecebidas">
+								<f:setPropertyActionListener target="#{amigoBean.selected}"
+									value="#{solicitacao}" />
+							</p:commandButton>
+						</h:form>
+					</div>
+				</div>
+			</p:dataGrid>
+
+		</div>
+	</div>
+	
+	
+	<div class="ui-fluid">
+		<div style="margin-top: 25px">
+			<p:dataGrid var="enviada" value="#{amigoBean.solicitacoesEnviadas}"
+				emptyMessage="Você ainda não enviou nenhuma solicitação de amizade" columns="6" 
+				layout="grid" rows="12" paginator="true" id="solicitacoesEnviadas"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="4,8">
+
+				<f:facet name="header">
+           		 Suas solicitações de Amizade enviadas
+        		</f:facet>
+
+				<div class="card" style="width: 3; length: 3rem; margin-left: 20px"
+					align="center">
+					<p:graphicImage id="imagem" class="card-img-top"
+						value=""
+						alt="Imagem do Usuário" style="width: 200px ;length: 200px">
+					</p:graphicImage>
+
+
+					<div class="card-body">
+						<p class="card-title">#{enviada.primeiroNome}</p>
+						<p class="card-text" style="font-size: 12px">
+							Nick Name: #{enviada.nickName} <br />Email: #{enviada.email}<br />
+						</p>
+
+						<h:form>
+
+							<p:commandButton action="#{amigoBean.recusar(1)}"
+								value="Cancelar " id="cancelar" update="amigos solicitacoesRecebidas solicitacoesEnviadas">
+								<f:setPropertyActionListener target="#{amigoBean.selected}"
+									value="#{enviada}" />
+							</p:commandButton>
+			
+						</h:form>
+					</div>
+				</div>
+			</p:dataGrid>
+
+		</div>
+	</div>
 
 
 </h:body>
