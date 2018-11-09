@@ -2,6 +2,9 @@ package controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,12 +43,12 @@ public class UsuarioBean {
 
 
 	public UsuarioBean() {
-		try {
-			usuarioLogado = new UsuarioDAOImpl().buscarUsuarioEspecifico("vinijosenog@hotmail.com");
-		} catch (UserException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			usuarioLogado = new UsuarioDAOImpl().buscarUsuarioEspecifico("vinijosenog@hotmail.com");
+//		} catch (UserException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	public List<Usuario> getUsuarios() {
@@ -131,6 +134,7 @@ public class UsuarioBean {
 	public void logar() {
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso!", "Validando dados no servidor...");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+		criptografar();
 		UsuarioDAO udao = new UsuarioDAOImpl();
 		try {
 			usuarioLogado = udao.validarUsuario(usuarioLogado.getEmail(), usuarioLogado.getSenha());
@@ -205,6 +209,7 @@ public class UsuarioBean {
 
 	public void atualizarDados() {
 		UsuarioDAO udao = new UsuarioDAOImpl();
+		criptografar();
 		udao.alterar(usuarioLogado);
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Dados Atualizados com sucesso");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -213,6 +218,7 @@ public class UsuarioBean {
 	public void cadastrar() {
 		UsuarioDAO udao = new UsuarioDAOImpl();
 		try {
+			criptografar();
 			udao.adicionar(usuarioLogado);
 			usuarioLogado = new Usuario();
 			FacesContext.getCurrentInstance().getExternalContext().redirect("./loginUsuario.xhtml");
@@ -225,6 +231,24 @@ public class UsuarioBean {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void criptografar() {
+		MessageDigest algorithm;
+		try {
+			algorithm = MessageDigest.getInstance("SHA-256");
+			byte messageDigest[] = algorithm.digest(usuarioLogado.getSenha().getBytes("UTF-8"));
+			StringBuilder hexString = new StringBuilder();
+			for (byte b : messageDigest) {
+			  hexString.append(String.format("%02X", 0xFF & b));
+			}
+			usuarioLogado.setSenha(hexString.toString());
+		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 	public void buscarUsuarioEmail() {

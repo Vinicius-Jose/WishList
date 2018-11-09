@@ -1,5 +1,9 @@
 package dao;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import entity.Amigo;
 import entity.AmigoPK;
 import entity.Entretenimento;
@@ -13,7 +17,7 @@ import excecoes.UserException;
 
 public class DriverTeste {
 
-	public static void main(String[] args) throws UserException, FriendException {
+	public static void main(String[] args) throws UserException, FriendException, NoSuchAlgorithmException, UnsupportedEncodingException {
 //		 Serie a = new Serie();
 //		 a.setNomeOriginal("Flash");
 //		 Calendar c = Calendar.getInstance();
@@ -53,7 +57,7 @@ public class DriverTeste {
 //			System.out.println(edao.maisBuscados().size());
 //		}
 //
-		UsuarioDAO udao = new UsuarioDAOImpl();
+//		UsuarioDAO udao = new UsuarioDAOImpl();
 ////		Usuario u = new Usuario();
 ////		try {
 ////			u = udao.validarUsuario("pedro@hotmail.com", "12345");
@@ -92,14 +96,14 @@ public class DriverTeste {
 		// System.out.println(i.getNota());
 		// }
 		//
-		Usuario u = udao.buscarUsuarioEspecifico("antonio@outlook.com");
-		AmigoDAOImpl adao  = new AmigoDAOImpl();
+//		Usuario u = udao.buscarUsuarioEspecifico("antonio@outlook.com");
+//		AmigoDAOImpl adao  = new AmigoDAOImpl();
 //		Amigo am = new Amigo();
 //		AmigoPK apk = new AmigoPK();
 //		apk.setUsuarioEmail2("pedro@outlook.com");
 //		am.setAmigoPk(apk);
 //		adao.remover(u.getAmigos().get(0));;
-		System.out.println(adao.buscarSolicitacaoRecebida(u).get(0).getAmigoPk().getUsuarioEmail());
+//		System.out.println(adao.buscarSolicitacaoRecebida(u).get(0).getAmigoPk().getUsuarioEmail());
 		
 //		Amigo am = new Amigo();
 //		Usuario user = new Usuario();
@@ -121,6 +125,21 @@ public class DriverTeste {
 //		for(Plataforma p : g.getPlataformas()){
 //			System.out.println(p.getNome());
 //		}
+		
+		
+		MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
+		byte messageDigest[] = algorithm.digest("senha".getBytes("UTF-8"));
+		 
+		StringBuilder hexString = new StringBuilder();
+		for (byte b : messageDigest) {
+		  hexString.append(String.format("%02X", 0xFF & b));
+		}
+		String senha = hexString.toString();
+		System.out.println(senha);
+		
+		System.out.println(algorithm.isEqual(senha.getBytes(), "B7E94BE513E96E8C45CD23D162275E5A12EBDE9100A425C4EBCDD7FA4DCD897C".getBytes() ));
+		
+		
 	
 	}
 
