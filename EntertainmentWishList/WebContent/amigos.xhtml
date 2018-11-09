@@ -18,11 +18,12 @@
 		allSuffix="ALL_VALUES" />
 
 	<div class="ui-fluid">
-		<div style="margin-top:25px">
+		<div style="margin-top: 25px">
 			<p:growl autoUpdate="true" id="messages" showDetail="true"
 				sticky="true"></p:growl>
 			<p:dataGrid var="amigo" value="#{amigoBean.amigos}"
-				columns="6" layout="grid" rows="12" paginator="true" id="amigos"
+				emptyMessage="Você ainda não possui amigos adicionados" columns="6" 
+				layout="grid" rows="12" paginator="true" id="amigos"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="4,8">
 
@@ -30,37 +31,38 @@
            		 Os seus Amigos
         		</f:facet>
 
-				<div class="card" style="width: 3; length: 3rem; margin-left:20px" align="center">
+				<div class="card" style="width: 3; length: 3rem; margin-left: 20px"
+					align="center">
 					<p:graphicImage id="imagem" class="card-img-top"
-						value="#{amigoBean.imageAmigoSelected}" alt="Imagem do Usuário"
-						style="width: 200px ;length: 200px">
+						value="#{amigoBean.imageAmigoSelected(amigo)}"
+						alt="Imagem do Usuário" style="width: 200px ;length: 200px">
 					</p:graphicImage>
 
 
 					<div class="card-body">
 						<p class="card-title">#{amigo.primeiroNome}</p>
 						<p class="card-text" style="font-size: 12px">
-							Nick Name: #{amigo.nickName} <br />Email:
-							#{amigo.email}<br/> Status atual: #{amigoBean.buscarStatus(amigo)}
+							Nick Name: #{amigo.nickName} <br />Email: #{amigo.email}<br />
+							Status atual: #{amigoBean.buscarStatus(amigo)}
 						</p>
-				
-						<h:form>
-						<p:selectOneMenu id="statusAmigo" effect="fold" editable="true" var="status"
-							value="#{amigoBean.status}" >
-							<f:selectItem itemLabel="ATIVO" itemValue="status.ATIVO" />
-							<f:selectItem itemLabel="BLOQUEADO" itemValue="status.BLOQUEADO" />
-						</p:selectOneMenu>
 
-						<p:commandButton action="#{amigoBean.removerAmigo}"
-							value="Remover Amigo" id="removerAmigo" update="amigos">
-							<f:setPropertyActionListener target="#{amigoBean.selected}"
-								value="#{amigo}" />
-						</p:commandButton>
-						<p:commandButton action="#{amigoBean.atualizarAmizade}"
-							value="Salvar Atualização" id="atualizarUsuario" update="amigos">
-							<f:setPropertyActionListener target="#{amigoBean.selected}"
-								value="#{amigo}" />
-						</p:commandButton>
+						<h:form>
+							<p:selectOneMenu id="statusAmigo" effect="fold" editable="true"
+								value="#{amigoBean.status}">
+								<f:selectItem itemLabel="ATIVO" itemValue="status.ATIVO" />
+								<f:selectItem itemLabel="BLOQUEADO" itemValue="status.BLOQUEADO" />
+							</p:selectOneMenu>
+
+							<p:commandButton action="#{amigoBean.removerAmigo}"
+								value="Remover Amigo" id="removerAmigo" update="amigos">
+								<f:setPropertyActionListener target="#{amigoBean.selected}"
+									value="#{amigo}" />
+							</p:commandButton>
+							<p:commandButton action="#{amigoBean.atualizarAmizade}"
+								value="Salvar Atualização" id="atualizarUsuario" update="amigos">
+								<f:setPropertyActionListener target="#{amigoBean.selected}"
+									value="#{amigo}" />
+							</p:commandButton>
 						</h:form>
 					</div>
 				</div>
@@ -68,8 +70,8 @@
 
 		</div>
 	</div>
-	
-	
+
+
 
 </h:body>
 </html>

@@ -131,6 +131,15 @@ public class AmigoBean {
 
 		return imageSelected;
 	}
+	
+	public DefaultStreamedContent imageAmigoSelected(Usuario user) throws IOException {
+		
+		System.out.println("foi na imagem" + user.getEmail());
+		DefaultStreamedContent imageSelected = new DefaultStreamedContent(new ByteArrayInputStream(user.getFoto()),
+				"image/jpg");
+
+		return imageSelected;
+	}
 
 	
 
