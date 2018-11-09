@@ -9,15 +9,13 @@ import excecoes.FriendException;
 
 public interface AmigoDAO {
 
-	List<Amigo> buscarSolicitacao(Usuario user);
+	List<Amigo> buscarSolicitacaoRecebida(Usuario user);
 
-	
+	List<Amigo> buscarSolicitacaoEnviada(Usuario user);
 
 	void atualizarAmizade(String usuarioEmail, String usuarioEmail2, StatusAmigo status);
 
 	void adicionarAmigo(Amigo amigo) throws FriendException;
-
-
 
 	void remover(Amigo a);
 

@@ -40,7 +40,12 @@ public class UsuarioBean {
 
 
 	public UsuarioBean() {
-	
+		try {
+			usuarioLogado = new UsuarioDAOImpl().buscarUsuarioEspecifico("vinijosenog@hotmail.com");
+		} catch (UserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public List<Usuario> getUsuarios() {
@@ -248,18 +253,7 @@ public class UsuarioBean {
 
 	
 
-	public void atualizarAmizade() {
-		AmigoDAO udao = new AmigoDAOImpl();
-		StatusAmigo novo = null;
-		for (Amigo a : usuarioLogado.getAmigos()) {
-			if (a.getAmigoPk().getUsuarioEmail2().equals(selected.getEmail())) {
-				novo = a.getStatus();
-			}
-		}
-		udao.atualizarAmizade(usuarioLogado.getEmail(), selected.getEmail(), novo);
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Dados Atualizados com sucesso");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-	}
+	
 
 	
 }

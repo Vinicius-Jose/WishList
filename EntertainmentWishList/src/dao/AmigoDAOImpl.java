@@ -26,9 +26,19 @@ public class AmigoDAOImpl implements AmigoDAO {
 	 * @see dao.AmigoDAO#buscarSolicitacao(entity.Usuario)
 	 */
 	@Override
-	public List<Amigo> buscarSolicitacao(Usuario user){
+	public List<Amigo> buscarSolicitacaoRecebida(Usuario user){
 		EntityManager em = emf.createEntityManager();
-		TypedQuery<Amigo> query = em.createQuery("select a from Amigo a where usuario.email = :email and status = 2", Amigo.class);
+		TypedQuery<Amigo> query = em.createQuery("select a from Amigo a where usuarioEmail2 = :email and status = 2", Amigo.class);
+		query.setParameter("email",user.getEmail());
+		List<Amigo> usuarios = query.getResultList();
+		em.close();
+		return usuarios;
+	}
+	
+	@Override
+	public List<Amigo> buscarSolicitacaoEnviada(Usuario user){
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Amigo> query = em.createQuery("select a from Amigo a where usuarioEmail = :email and status = 2", Amigo.class);
 		query.setParameter("email",user.getEmail());
 		List<Amigo> usuarios = query.getResultList();
 		em.close();
@@ -74,9 +84,23 @@ public class AmigoDAOImpl implements AmigoDAO {
 	@Override
 	public void remover(Amigo a) {
 		EntityManager em = emf.createEntityManager();
+		TypedQuery<Amigo> qry = em.createQuery("select a from Amigo a where usuarioEmail = :user and usuarioEmail2 = :user2",Amigo.class);
+		qry.setParameter("user", a.getAmigoPk().getUsuarioEmail());
+		qry.setParameter("user2", a.getAmigoPk().getUsuarioEmail2());
+		a = qry.getSingleResult();
+		em.getTransaction().begin();
+		em.remove(a);
+		em.getTransaction().commit();
+		qry = em.createQuery("select a from Amigo a where usuarioEmail = :user2 and usuarioEmail2 = :user",Amigo.class);
+		qry.setParameter("user", a.getAmigoPk().getUsuarioEmail());
+		qry.setParameter("user2", a.getAmigoPk().getUsuarioEmail2());
+		a = qry.getSingleResult();
 		em.getTransaction().begin();
 		em.remove(a);
 		em.getTransaction().commit();
 		em.close();
 	}
+	
+	
+	
 }

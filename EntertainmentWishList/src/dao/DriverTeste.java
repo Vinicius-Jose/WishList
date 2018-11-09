@@ -94,12 +94,12 @@ public class DriverTeste {
 		//
 		Usuario u = udao.buscarUsuarioEspecifico("antonio@outlook.com");
 		AmigoDAOImpl adao  = new AmigoDAOImpl();
-		Amigo am = new Amigo();
-		AmigoPK apk = new AmigoPK();
-		apk.setUsuarioEmail2("pedro@outlook.com");
-		am.setAmigoPk(apk);
-		adao.remover(u.remover(am));;
-		
+//		Amigo am = new Amigo();
+//		AmigoPK apk = new AmigoPK();
+//		apk.setUsuarioEmail2("pedro@outlook.com");
+//		am.setAmigoPk(apk);
+//		adao.remover(u.getAmigos().get(0));;
+		System.out.println(adao.buscarSolicitacaoRecebida(u).get(0).getAmigoPk().getUsuarioEmail());
 		
 //		Amigo am = new Amigo();
 //		Usuario user = new Usuario();
