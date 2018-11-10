@@ -25,7 +25,7 @@
 
 
 	<div class="ui-fluid" style="width: 50rem; margin-left: 20%;">
-		<h:form>
+		<h:form id="formEnt">
 			<div class="card"
 				style="width: 10rem; margin-left: 0rem; margin-top: 2rem;">
 				<h:graphicImage class="card-img-top"
@@ -40,14 +40,14 @@
 					<br /> <br /> <br /> <br />
 
 					<p:outputLabel id="nome-original"
-						value="#{favoritosBean.selected.nomeOriginal}" />
+						value="#{favoritosBean.filme.nomeOriginal}" />
 					<br />
 					<p:outputLabel id="nome-portugues" value="" />
 					<br />
 					<p:outputLabel id="genero" value="Genero: " />
 					<br />
 
-					<p:outputLabel id="etaria" value="#{favoritosBean.selected.classificacaoEtaria}" />
+					<p:outputLabel id="etaria" value="#{favoritosBean.filme.classificacaoEtaria}" />
 
 				</div>
 
@@ -58,13 +58,13 @@
 					<br /> <br /> <br /> <br />
 
 					<p:outputLabel id="metacritic"
-						value="metacritic: #{favoritosBean.selected.metacritic}" />
+						value="metacritic: #{favoritosBean.filme.metacritic}" />
 					<br />
-					<p:outputLabel id="Imdb" value="Imdb: " />
+					<p:outputLabel id="Imdb" value="Imdb: #{favoritosBean.filme.imdb}" />
 					<br />
 					<p:outputLabel id="RouttenTomatoes" value="RouttenTomatoes:" />
 					<br />
-					<p:outputLabel id="usuario" value="Nota Usuários: #{favoritosBean.selected.notaUsuario}"/>
+					<p:outputLabel id="usuario" value="Nota Usuários: #{favoritosBean.filme.notaUsuario}"/>
 					<br />
 				</div>
 
@@ -76,14 +76,14 @@
 				</p:outputLabel>
 				<br />
 				<p:outputLabel id="sinopse-desc"
-					value="#{favoritosBean.selected.sinopse}" />
+					value="#{favoritosBean.filme.sinopse}" />
 				<br />
 			</div>
 
 			<div style="margin-top: -3rem;">
 				<div style="margin-left: 40rem; margin-top: 5rem;">
 					<p:outputLabel>Minha nota: 
-				<h:selectOneMenu id="tipoEnderecoId">
+				<h:selectOneMenu id="tipoEnderecoId" value="#{favoritosBean.item.nota}">
 							<f:selectItem itemValue="1" itemLabel="1" />
 							<f:selectItem itemValue="2" itemLabel="2" />
 							<f:selectItem itemValue="1" itemLabel="3" />
@@ -101,15 +101,15 @@
 
 
 				<div style="margin-left: 0rem;">
-					<p:outputLabel value="Duração: " />
+					<p:outputLabel value="Duração: #{favoritosBean.filme.duracao}" />
 					<br />
-					<p:outputLabel value="Estudio: #{favoritosBean.selected.estudio.nome}" />
+					<p:outputLabel value="Estudio: #{favoritosBean.filme.estudio.nome}" />
 
 				</div>
 
 				<div style="margin-left: 30rem; margin-top: -4.5rem;">
 					<p:outputLabel
-						value="Data de lançamento: #{favoritosBean.selected.dataLancamento}" />
+						value="Data de lançamento: #{favoritosBean.filme.dataLancamento}" />
 					<br />
 					<p:outputLabel value="Diretor: " />
 				</div>
@@ -118,17 +118,22 @@
 
 			<div style="margin-top: 1rem;">
 				<p:inputTextarea id="comentario" rows="3" cols="77"
-					autoResize="false" />
+					autoResize="false" value="#{favoritosBean.item.critica}"/>
 
 			</div>
 			<div style="width: 8rem;">
-				<p:commandButton id="add-comentario" value="Postar" />
+				<p:commandButton id="add-comentario" value="Postar" action="#{favoritosBean.postar}" update="formEnt"/>
 			</div>
+			
 
 
 
 		</h:form>
-
+			<ui:repeat var="item" value="#{favoritosBean.critica}">
+				<h:outputLabel value="Por: #{item.usuario.primeiroNome}"></h:outputLabel>
+				<h:outputLabel value="Nota: #{item.nota}"></h:outputLabel>
+				<h:outputLabel value="Critica: #{item.critica}"></h:outputLabel>
+			</ui:repeat>
 
 
 	</div>

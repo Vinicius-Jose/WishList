@@ -13,6 +13,8 @@ import javax.faces.context.FacesContext;
 
 import dao.EntretenimentoDAO;
 import dao.EntretenimentoDAOImpl;
+import dao.ItemFavoritoDAO;
+import dao.ItemFavoritoDAOImpl;
 import entity.Entretenimento;
 import entity.Filme;
 import entity.Game;
@@ -27,13 +29,14 @@ public class FavoritosBean {
 
 	private List<ItemFavoritos> favoritos = new LinkedList<>();
 	private Entretenimento selected;
-	
+	private ItemFavoritos item;
+	private List<ItemFavoritos> critica;
 
 	@ManagedProperty(value = "#{usuarioBean.usuarioLogado}")
 	private Usuario usuario;
 
 	public FavoritosBean() {
-
+	
 	}
 
 	public Entretenimento getSelected() {
@@ -70,6 +73,14 @@ public class FavoritosBean {
 		return (Game)selected;
 	}
 
+	public ItemFavoritos getItem() {
+		return item;
+	}
+
+	public void setItem(ItemFavoritos item) {
+		this.item = item;
+	}
+
 	public void visualizar() {
 		ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
 		System.out.println(usuario.getEmail());
@@ -95,7 +106,30 @@ public class FavoritosBean {
 	}
 	
 	public void remover() {
+		item.setUsuario(usuario);
+		ItemFavoritoDAO idao = new ItemFavoritoDAOImpl();
+		idao.remover(item);
+	}
+	
+	public void postar(){
+		item.setUsuario(usuario);
+		ItemFavoritoDAO idao = new ItemFavoritoDAOImpl();
+		try{
+		idao.adicionar(item);
+		}catch(Exception e){
+			idao.alterar(item);
+		}
 		
+	}
+
+	public List<ItemFavoritos> getCritica() {
+		ItemFavoritoDAO idao = new ItemFavoritoDAOImpl();
+		critica = idao.buscarCriticas(selected);
+		return critica;
+	}
+
+	public void setCritica(List<ItemFavoritos> critica) {
+		this.critica = critica;
 	}
 
 }
