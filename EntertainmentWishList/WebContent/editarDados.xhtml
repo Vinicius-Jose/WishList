@@ -63,7 +63,7 @@
 
 					<h:outputLabel for="senhaAtual" value="Senha Atual" />
 					<p:password id="senhaAtual"
-						value="#{usuarioBean.usuarioLogado.senha}" feedback="false"
+						value="#{usuarioBean.usuarioLogado.senha}" feedback="false" 
 						required="true" />
 
 					<h:outputLabel for="novaSenha" value="Nova Senha" />
@@ -82,7 +82,7 @@
 			update="painelEditarDados"
 			actionListener="#{usuarioBean.atualizarDados}" icon="ui-icon-disk"
 			style="float:right;" />
-		<p:commandButton id="cancelar" value="Cancelar" action="/index.xhtml"
+		<p:commandButton id="cancelar" value="Cancelar" action="/index.xhtml?faces-redirect=true"
 			immediate="true" style="float:right;" />
 
 	</h:form>

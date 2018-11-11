@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html 	xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:h="http://java.sun.com/jsf/html"
-		xmlns:f="http://java.sun.com/jsf/core"
-		xmlns:p="http://primefaces.org/ui"
-		xmlns:ui="http://java.sun.com/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Login Usuario</title>
@@ -13,67 +13,75 @@
 
 <h:body>
 	<h:form>
-	
+
 		<div class="ui-fluid">
-			<p:panel id="painelLogin" style="margin-top:95px; margin-bottom:25px;">
-				<p:messages id="message" autoUpdate="true" showDetail="true" showSummary="true"/>
-	
+			<p:panel id="painelLogin"
+				style="margin-top:95px; margin-bottom:25px;">
+				<p:messages id="message" autoUpdate="true" showDetail="true"
+					showSummary="true" />
+
 				<h:panelGrid columns="2" cellpadding="5">
-		
-					<h:outputLabel for="email" value="Email"/>
-					<p:inputText id="email" required="true" value="#{usuarioBean.usuarioLogado.email}"/>
-					
-					<h:outputLabel for="senha" value="Senha"/>
-					<p:password id="senha" required="true" value="#{usuarioBean.usuarioLogado.senha}"/>
-					
-    		<!-- 	<p:messages showDetail="true"/>
+
+					<h:outputLabel for="email" value="Email" />
+					<p:inputText id="email" required="true"
+						value="#{usuarioBean.usuarioLogado.email}">
+						<f:validateRegex
+							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</p:inputText>
+
+					<h:outputLabel for="senha" value="Senha" />
+					<p:password id="senha" required="true"
+						value="#{usuarioBean.usuarioLogado.senha}" />
+
+					<!-- 	<p:messages showDetail="true"/>
 				    <p:captcha label="Captcha" />
 				    <p:commandButton value="Check" actionListener="#{captchaView.submit}" ajax="false" icon="ui-icon-check"/>
-					 -->	
+					 -->
 				</h:panelGrid>
-				
+
 				<p:keyFilter for="email" mask="	/[a-z0-9_\.\-@]/i" />
-				
+
 			</p:panel>
 		</div>
-		
+
 		<div>
-			<p:panel id="painelBotao" style="margin-top:50px; margin-bottom:25px;">
-	
+			<p:panel id="painelBotao"
+				style="margin-top:50px; margin-bottom:25px;">
+
 				<h:panelGrid columns="2" cellpadding="5">
-				
+
 					<p:commandButton id="logar" value="Logar"
-						action="#{usuarioBean.logar}" 
-						style="float:center;"/>
-			
+						action="#{usuarioBean.logar}" style="float:center;" />
+
 					<p:commandButton id="esqueciSenha" value="Esqueci minha Senha"
 						action="/recuperarSenha.xhtml" immediate="true"
-						style="float:right;"/>
-					
+						style="float:right;" />
+
 
 				</h:panelGrid>
 			</p:panel>
 		</div>
-		
+
 	</h:form>
-	
+
 	<h:form>
-	
+
 		<div>
-			<p:panel id="painelCadastrar" style="margin-top:50px; margin-bottom:25px;">
-	
+			<p:panel id="painelCadastrar"
+				style="margin-top:50px; margin-bottom:25px;">
+
 				<h:panelGrid columns="2" cellpadding="5">
-				
-					<h:outputLabel value="Não é cadastrado?"/>
-					
+
+					<h:outputLabel value="Não é cadastrado?" />
+
 					<p:commandButton id="cadastrarLogin" value="Cadastrar!"
-						action="/cadastroUsuario.xhtml" immediate="true" 
-						style="float:right;"/>
-			
+						action="/cadastroUsuario.xhtml" immediate="true"
+						style="float:right;" />
+
 				</h:panelGrid>
 			</p:panel>
 		</div>
-		
+
 	</h:form>
 </h:body>
 </html>

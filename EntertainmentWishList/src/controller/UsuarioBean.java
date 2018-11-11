@@ -18,37 +18,58 @@ import org.primefaces.model.DefaultStreamedContent;
 
 import dao.AmigoDAO;
 import dao.AmigoDAOImpl;
+import dao.CodigoDAO;
+import dao.CodigoDAOImpl;
 import dao.UsuarioDAO;
 import dao.UsuarioDAOImpl;
 import entity.Amigo;
 import entity.AmigoPK;
+import entity.Codigo;
 import entity.Usuario;
 import enumeradas.StatusAmigo;
+import excecoes.CodeNotFoundException;
 import excecoes.FriendException;
 import excecoes.UserException;
 import servicos.ServicoEmail;
-import servicos.ServicoSenha;
+import servicos.ServicoCodigo;
 
 @SessionScoped
 @ManagedBean
 public class UsuarioBean {
 	private Usuario usuarioLogado = new Usuario();
 	private String option;
+	private Codigo codigo = new Codigo();
 
 	private List<Usuario> usuarios = new ArrayList<>();
 	private Usuario selected = new Usuario();
 	private String txtBuscaUsuario;
-
+	private String senha;
 	private int i = 0;
 
-
 	public UsuarioBean() {
-//		try {
-//			usuarioLogado = new UsuarioDAOImpl().buscarUsuarioEspecifico("vinijosenog@hotmail.com");
-//		} catch (UserException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		// try {
+		// usuarioLogado = new
+		// UsuarioDAOImpl().buscarUsuarioEspecifico("vinijosenog@hotmail.com");
+		// } catch (UserException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+	}
+
+	public Codigo getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(Codigo codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public List<Usuario> getUsuarios() {
@@ -118,7 +139,8 @@ public class UsuarioBean {
 		AmigoPK pk = new AmigoPK();
 		pk.setUsuarioEmail(usuarioLogado.getEmail());
 		pk.setUsuarioEmail2(selected.getEmail());
-		amigo.setAmigoPk(pk);;
+		amigo.setAmigoPk(pk);
+		;
 		amigo.setStatus(StatusAmigo.SOLICITADO);
 		AmigoDAO udao = new AmigoDAOImpl();
 		try {
@@ -132,8 +154,6 @@ public class UsuarioBean {
 	}
 
 	public void logar() {
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso!", "Validando dados no servidor...");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
 		criptografar();
 		UsuarioDAO udao = new UsuarioDAOImpl();
 		try {
@@ -175,24 +195,24 @@ public class UsuarioBean {
 		return imageSelected;
 	}
 
-	
-
 	public void recuperar() {
 		UsuarioDAO udao = new UsuarioDAOImpl();
+		System.out.println("recuperando" + " " + codigo.getCodigo() + " " + codigo.getUsuario());
 		try {
-			usuarioLogado = udao.buscarUsuarioEspecifico(usuarioLogado.getEmail());
-			ServicoSenha senha = new ServicoSenha();
-			usuarioLogado.setSenha(senha.gerarSenha());
-			udao.alterar(usuarioLogado);
-			ServicoEmail semail = new ServicoEmail();
-			semail.servicoEmail(usuarioLogado);
-			usuarioLogado = new Usuario();
-			
-			FacesContext.getCurrentInstance().getExternalContext().redirect("./loginUsuario.xhtml");
+			CodigoDAO cdao = new CodigoDAOImpl();
+			if (cdao.buscarCodigo(codigo)) {
+				usuarioLogado = udao.buscarUsuarioEspecifico(codigo.getUsuario());
+				usuarioLogado.setSenha(senha);
+				criptografar();
+				udao.alterar(usuarioLogado);
+				usuarioLogado = new Usuario();
+			}
+			;
+
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Info",
-					"Uma nova senha foi enviada para o seu email");
+					"Sua nova Senha foi salva no sistema");
 			FacesContext.getCurrentInstance().addMessage(null, msg);
-		} catch (UserException | IOException e1) {
+		} catch (UserException | CodeNotFoundException e1) {
 			FacesMessage msgErro = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e1.getMessage());
 			FacesContext.getCurrentInstance().addMessage(null, msgErro);
 			e1.printStackTrace();
@@ -240,15 +260,14 @@ public class UsuarioBean {
 			byte messageDigest[] = algorithm.digest(usuarioLogado.getSenha().getBytes("UTF-8"));
 			StringBuilder hexString = new StringBuilder();
 			for (byte b : messageDigest) {
-			  hexString.append(String.format("%02X", 0xFF & b));
+				hexString.append(String.format("%02X", 0xFF & b));
 			}
 			usuarioLogado.setSenha(hexString.toString());
 		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 	}
 
 	public void buscarUsuarioEmail() {
@@ -275,9 +294,27 @@ public class UsuarioBean {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
-	
+	public void enviarCodigo() {
+		Codigo code = new Codigo();
+		UsuarioDAO udao = new UsuarioDAOImpl();
+		CodigoDAO cdao = new CodigoDAOImpl();
+		ServicoCodigo scode = new ServicoCodigo();
+		ServicoEmail semail = new ServicoEmail();
+		try {
+			usuarioLogado = udao.buscarUsuarioEspecifico(usuarioLogado.getEmail());
+			code.setUsuario(usuarioLogado.getEmail());
+			code.setCodigo(scode.gerarCodigo());
+			cdao.adicionarCodigo(code);
+			semail.servicoEmail(code);
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso!",
+					"Um código foi gerado e enviado para o seu email");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			usuarioLogado = new Usuario();
+			codigo = new Codigo();
+		} catch (UserException e) {
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!", e.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+		}
+	}
 
-	
-
-	
 }
