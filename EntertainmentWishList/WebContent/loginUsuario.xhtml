@@ -54,7 +54,7 @@
 						action="#{usuarioBean.logar}" style="float:center;" />
 
 					<p:commandButton id="esqueciSenha" value="Esqueci minha Senha"
-						action="/recuperarSenha.xhtml" immediate="true"
+						action="/recuperarSenha.xhtml?faces-redirect=true" immediate="true"
 						style="float:right;" />
 
 
@@ -75,7 +75,7 @@
 					<h:outputLabel value="Não é cadastrado?" />
 
 					<p:commandButton id="cadastrarLogin" value="Cadastrar!"
-						action="/cadastroUsuario.xhtml" immediate="true"
+						action="/cadastroUsuario.xhtml?faces-redirect=true" immediate="true"
 						style="float:right;" />
 
 				</h:panelGrid>
