@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Cadastro Plataforma</title>
+</h:head>
+
+<h:body>
+
+	<ui:insert name="cabecalho">
+		<ui:include src="/cabecalho.xhtml"></ui:include>
+	</ui:insert>
+	
+	<h:form id="painelCadastro">
+		<div class="ui-fluid">
+			<p:panel  style="margin-top:25px; margin-bottom:25px;">
+				<p:messages id="message" />
+	
+				<h:panelGrid columns="2" cellpadding="5">
+					
+					<h:outputLabel for="empresa" value="Empresa *" />
+					<p:inputText id="empresa" requiredd="true" value="#{plataformaBean.plataforma.empresa}"/>
+					
+					<h:outputLabel for="nome" value="Nome *"/>
+					<p:inputText id="nome" required="true" value="#{plataformaBean.plataforma.nome}"/>
+
+				</h:panelGrid>
+			</p:panel>
+		</div>
+		
+		<p:commandButton id="cadastrar" value="Cadastrar" update="painelCadastro"
+			action="#{plataformaBean.cadastrar}" icon="ui-icon-disk" 
+			style="float:right;"/>
+		<p:commandButton id="cancelar" value="Cancelar"
+			action="/index.xhtml?faces-redirect=true" 
+			style="float:right;" immediate="true"/>
+	</h:form>
+</h:body>
+</html>
