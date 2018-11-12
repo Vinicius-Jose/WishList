@@ -29,6 +29,15 @@ public class PlataformaDAOImpl implements PlataformaDAO {
 		em.close();
 	}
 	
+	@Override
+	public void adicionarLista(List<Plataforma> list) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(list);
+		em.getTransaction().commit();
+		em.close();		
+	}
+	
 	/* (non-Javadoc)
 	 * @see dao.PlataformaDAO#alterar(entity.Plataforma)
 	 */
@@ -62,6 +71,4 @@ public class PlataformaDAOImpl implements PlataformaDAO {
 		em.close();
 		return plataformas;
 	}
-	
-
 }

@@ -9,10 +9,11 @@ public interface PlataformaDAO {
 
 	void adicionar(Plataforma plataforma);
 
+	void adicionarLista(List<Plataforma> list);
+	
 	void alterar(Plataforma plataforma);
 
 	List<Plataforma> buscarPlataformas();
 
 	List<Plataforma> buscarPlataformas(Game g);
-
 }

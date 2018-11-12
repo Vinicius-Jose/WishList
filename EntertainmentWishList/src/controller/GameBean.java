@@ -80,7 +80,7 @@ public class GameBean {
 
 	public void cadastrar() {
 		GameDAO gdao = new GameDAOImpl();
-		EstudioDAO edao = new EstudioDAOImpl();
+		PlataformaDAO pdao = new PlataformaDAOImpl();
 		List<Plataforma> pl = new ArrayList<Plataforma>();
 		for(String p : plataformaSelected) {
 			for(Plataforma pla : plataformasBanco) {
@@ -91,7 +91,7 @@ public class GameBean {
 			
 		}
 		try {
-			edao.adicionar(game.getEstudio());
+			pdao.adicionarLista(game.getPlataformas());
 			game.setPlataformas(pl);
 			gdao.adicionar(game);
 			game = new Game();
