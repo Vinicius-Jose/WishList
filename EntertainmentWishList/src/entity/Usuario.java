@@ -147,7 +147,8 @@ public class Usuario implements Serializable {
 	}
 
 	public DefaultStreamedContent getImagemUsuario() throws IOException {
-		imagemUsuario = new DefaultStreamedContent(new ByteArrayInputStream(getFoto()), "image/jpg");
+		if(getFoto()!=null)
+			imagemUsuario = new DefaultStreamedContent(new ByteArrayInputStream(getFoto()), "image/jpg");
 		return imagemUsuario;
 	}
 
