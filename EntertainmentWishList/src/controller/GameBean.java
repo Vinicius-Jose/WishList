@@ -91,7 +91,7 @@ public class GameBean {
 			
 		}
 		try {
-			pdao.adicionarLista(game.getPlataformas());
+			pdao.adicionar(game.getPlataformas());
 			game.setPlataformas(pl);
 			gdao.adicionar(game);
 			game = new Game();

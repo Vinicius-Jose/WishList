@@ -7,9 +7,9 @@ import entity.Plataforma;
 
 public interface PlataformaDAO {
 
-	void adicionar(Plataforma plataforma);
+	void adicionarLista(Plataforma plataforma);
 
-	void adicionarLista(List<Plataforma> list);
+	void adicionar(List<Plataforma> list);
 	
 	void alterar(Plataforma plataforma);
 

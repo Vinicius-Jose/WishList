@@ -49,7 +49,10 @@
 					<p:calendar id="dataLancamento" mask="99/99/9999" value="#{gameBean.data}"/>
 	        
 					<h:outputLabel for="estudio" value="Estudio *"/>
-					<p:inputText id="estudio" required="true" value="#{gameBean.game.estudio.nome}"/>
+					<p:selectOneMenu id="estudio" value="#{estudioBean.estudio.nome}">
+		                <f:selectItem itemLabel="" itemValue="" noSelectionOption="false" />
+		                <f:selectItems value="#{estudioBean.estudio.nome}" />
+					</p:selectOneMenu>
 	
 					<h:outputLabel for="plataformaCampo" value="Plataforma *"/>
 					<p:selectManyCheckbox id="plataformaCampo" value="#{gameBean.plataformaSelected}" layout="grid" columns="3">

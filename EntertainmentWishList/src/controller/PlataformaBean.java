@@ -27,7 +27,7 @@ public class PlataformaBean {
 	public void cadastrar() {
 		PlataformaDAO pdao = new PlataformaDAOImpl();
 		try {
-			pdao.adicionar(plataforma);
+			pdao.adicionarLista(plataforma);
 			plataforma = new Plataforma();
 			
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "info", 

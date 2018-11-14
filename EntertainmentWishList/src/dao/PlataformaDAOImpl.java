@@ -21,19 +21,19 @@ public class PlataformaDAOImpl implements PlataformaDAO {
 	 * @see dao.PlataformaDAO#adicionar(entity.Plataforma)
 	 */
 	@Override
-	public void adicionar(Plataforma plataforma) {
+	public void adicionar(List<Plataforma> list) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		em.persist(plataforma);
+		em.persist(list);
 		em.getTransaction().commit();
 		em.close();
 	}
 	
 	@Override
-	public void adicionarLista(List<Plataforma> list) {
+	public void adicionarLista(Plataforma plataforma) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		em.persist(list);
+		em.persist(plataforma);
 		em.getTransaction().commit();
 		em.close();		
 	}
