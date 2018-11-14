@@ -245,6 +245,7 @@ public class UsuarioBean {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Cadastro realizado com sucesso");
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		} catch (UserException e1) {
+			usuarioLogado = new Usuario();
 			FacesMessage msgErro = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e1.getMessage());
 			FacesContext.getCurrentInstance().addMessage(null, msgErro);
 			e1.printStackTrace();
