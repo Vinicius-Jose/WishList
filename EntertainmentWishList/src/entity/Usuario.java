@@ -19,36 +19,35 @@ import org.primefaces.model.DefaultStreamedContent;
 import enumeradas.StatusAmigo;
 
 @Entity
-public class Usuario implements Serializable{
-	
+public class Usuario implements Serializable {
+
 	@Column(length = 200)
 	private String primeiroNome;
-	
+
 	@Column(length = 200)
 	private String segundoNome;
-	
+
 	@Column(length = 100)
 	private String nickName;
 
 	@Id
 	private String email;
-	
+
 	private String senha;
-	
+
 	@Lob
-	@Column(columnDefinition="longblob")
+	@Column(columnDefinition = "longblob")
 	private byte[] foto;
-	
+
 	@Column(length = 1)
 	private char permissao = 'c';
-	
-	
-	private boolean statusUsuario= true;
-	
+
+	private boolean statusUsuario = true;
+
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "Usuarioemail")
 	private List<Amigo> amigos;
-	
+
 	@Transient
 	private DefaultStreamedContent imagemUsuario;
 
@@ -58,9 +57,9 @@ public class Usuario implements Serializable{
 
 	public Amigo remover(Amigo a) {
 		Amigo removido = null;
-		for(Amigo b : amigos) {
-			if(b.getAmigoPk().getUsuarioEmail2().equals(a.getAmigoPk().getUsuarioEmail2())) {
-				removido =b;
+		for (Amigo b : amigos) {
+			if (b.getAmigoPk().getUsuarioEmail2().equals(a.getAmigoPk().getUsuarioEmail2())) {
+				removido = b;
 			}
 		}
 		amigos.remove(removido);
@@ -146,17 +145,13 @@ public class Usuario implements Serializable{
 	public void setAmigos(List<Amigo> amigos) {
 		this.amigos = amigos;
 	}
-	
-	
+
 	public DefaultStreamedContent getImagemUsuario() throws IOException {
-		if (getFoto() != null) {
-			imagemUsuario = new DefaultStreamedContent(new ByteArrayInputStream(getFoto()), "image/jpg");
-			
-		}
+		imagemUsuario = new DefaultStreamedContent(new ByteArrayInputStream(getFoto()), "image/jpg");
 		return imagemUsuario;
 	}
-	
-	public void setImagemUsuario(DefaultStreamedContent imagem)throws IOException{
+
+	public void setImagemUsuario(DefaultStreamedContent imagem) throws IOException {
 		imagemUsuario = imagem;
 	}
 
