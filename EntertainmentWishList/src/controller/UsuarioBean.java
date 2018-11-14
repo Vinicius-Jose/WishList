@@ -162,7 +162,7 @@ public class UsuarioBean {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("./index.xhtml");
 			else {
 				FacesMessage msgError = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO",
-						"Este Login está bloqueado entre em contato com wishList@gmail.com para mais informações");
+						"Este Login está bloqueado entre em contato com wishListRVH@gmail.com para mais informações");
 				FacesContext.getCurrentInstance().addMessage(null, msgError);
 				usuarioLogado = new Usuario();
 			}
