@@ -46,12 +46,11 @@
 					<p:inputNumber decimalPlaces="0" maxValue="200" minValue="1" id="numPlayers" required="true" value="#{gameBean.game.numeroJogadores}"/>
 					
 					<p:outputLabel for="dataLancamento" value="Data de Lançamento *" />
-					<p:calendar id="dataLancamento" mask="99/99/9999" value="#{gameBean.data}"/>
+					<p:calendar id="dataLancamento" mask="99/99/9999" value="#{gameBean.data}" pattern="dd/MM/yyyy"/>
 	        
 					<h:outputLabel for="estudio" value="Estudio *"/>
-					<p:selectOneMenu id="estudio" value="#{estudioBean.estudio.nome}">
-		                <f:selectItem itemLabel="" itemValue="" noSelectionOption="false" />
-		                <f:selectItems value="#{estudioBean.estudio.nome}" />
+					<p:selectOneMenu id="estudio" value="#{gameBean.estudio.nome}" >
+		                <f:selectItems value="#{estudioBean.estudios}" var ="estudio" itemLabel="#{estudio.nome} (#{estudio.localizacao})" itemValue="#{estudio.nome}" id="estudioSelecionado"/>
 					</p:selectOneMenu>
 	
 					<h:outputLabel for="plataformaCampo" value="Plataforma *"/>

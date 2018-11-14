@@ -51,5 +51,16 @@ public class EstudioDAOImpl implements EstudioDAO {
 		em.close();
 		return estudios;
 	}
+	
+	
+	@Override 
+	public Estudio buscarEspecifico(String nome) {
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Estudio> query = em.createQuery("select e from Estudio e where e.nome = :nome", Estudio.class);
+		query.setParameter("nome", nome);
+		Estudio estudios = query.getSingleResult();
+		em.close();
+		return estudios;
+	}
 
 }

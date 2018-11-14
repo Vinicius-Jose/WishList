@@ -15,56 +15,73 @@
 	<ui:insert name="cabecalho">
 		<ui:include src="/cabecalho.xhtml"></ui:include>
 	</ui:insert>
-	<p:importEnum type="enumeradas.Etaria" var="etaria" allSuffix="ALL_VALUES" />  
+	<p:importEnum type="enumeradas.Etaria" var="etaria"
+		allSuffix="ALL_VALUES" />
 
 	<h:form id="painelCadastro">
 		<div class="ui-fluid">
-			<p:panel id="painelCadastro" style="margin-top:25px; margin-bottom:25px;">
+			<p:panel id="painelCadastro"
+				style="margin-top:25px; margin-bottom:25px;">
 				<p:messages id="message" />
-	
+
 				<h:panelGrid columns="2" cellpadding="5">
-	
+
 					<h:outputLabel for="nomeOriginal" value="Nome Original *" />
-					<p:inputText id="nomeOriginal" required="true" value="#{serieBean.serie.nomeOriginal}"/>
-	
-					<h:outputLabel for="urlImagePoster" value="URL da Imagem de Poster *" />
-					<p:inputText id="urlImagePoster" value="#{serieBean.serie.poster}"/>
-					
+					<p:inputText id="nomeOriginal" required="true"
+						value="#{serieBean.serie.nomeOriginal}" />
+
+					<h:outputLabel for="urlImagePoster"
+						value="URL da Imagem de Poster *" />
+					<p:inputText id="urlImagePoster" value="#{serieBean.serie.poster}" />
+
 					<h:outputLabel for="urlImageFundo" value="URL da Imagem de Fundo *" />
-					<p:inputText id="urlImageFundo" value="#{serieBean.serie.imagemFundo}"/>
-	
+					<p:inputText id="urlImageFundo"
+						value="#{serieBean.serie.imagemFundo}" />
+
 					<h:outputLabel for="nomePortugues" value="Nome em Português *" />
-					<p:inputText id="nomePortugues" required="true" value="#{serieBean.serie.nomePortugues}"/>
-	
+					<p:inputText id="nomePortugues" required="true"
+						value="#{serieBean.serie.nomePortugues}" />
+
 					<p:outputLabel for="etaria" value="Etaria *" />
-					<p:selectOneMenu id="etaria" effect="fold" editable="true" value="#{serieBean.serie.classificacaoEtaria}">
-						<f:selectItem itemLabel="Classificação Etária" itemValue="etaria.L" />
+					<p:selectOneMenu id="etaria" effect="fold" editable="true"
+						value="#{serieBean.serie.classificacaoEtaria}">
+						<f:selectItem itemLabel="Classificação Etária"
+							itemValue="etaria.L" />
 						<f:selectItems value="#{etaria.ALL_VALUES}" />
 					</p:selectOneMenu>
-	
-					<h:outputLabel for="temporada" value="Temporada *" />
-					<p:inputText id="temporada" required="true" value="#{serieBean.serie.temporadas}"/>
-	
-					<h:outputLabel for="episodios" value="Episodios *" />
-					<p:inputText id="episodios" required="true" value="#{serieBean.serie.numeroEpisodios}"/>
-	
-					<p:outputLabel for="dataLancamento" value="Data de Lançamento *" />
-					<p:calendar id="dataLancamento" mask="99/99/9999" value="#{serieBean.data}"/>
- 
-					<p:outputLabel for="dataTermino" value="Data de Termino *" />
-					<p:calendar id="dataTermino" mask="99/99/9999" value="#{serieBean.dateFinal}"/>
 
-					<h:outputLabel for="estudio" value="Estudio *" />
-					<p:inputText id="estudio" required="true" value="#{serieBean.serie.estudio.nome}"/>
-	
-					<h:outputLabel for="sinopse" value="Sinopse *" />
-					<p:inputTextarea id="sinopse" required="true" value="#{serieBean.serie.sinopse}"
-						rows="5" cols="80" />
+					<h:outputLabel for="temporada" value="Temporada *" />
+					<p:inputText id="temporada" required="true"
+						value="#{serieBean.serie.temporadas}" />
+
+					<h:outputLabel for="episodios" value="Episodios *" />
+					<p:inputText id="episodios" required="true"
+						value="#{serieBean.serie.numeroEpisodios}" />
+
+					<p:outputLabel for="dataLancamento" value="Data de Lançamento *" />
+					<p:calendar id="dataLancamento" mask="99/99/9999"
+						value="#{serieBean.data}" pattern="dd/MM/yyyy" />
+
+					<p:outputLabel for="dataTermino" value="Data de Termino *" />
+					<p:calendar id="dataTermino" mask="99/99/9999"
+						value="#{serieBean.dateFinal}" pattern="dd/MM/yyyy" />
 					
+					<h:outputLabel for="estudio" value="Estudio *" />
+					<p:selectOneMenu id="estudio" value="#{serieBean.estudio.nome}">
+						<f:selectItems value="#{estudioBean.estudios}" var="estudio"
+							itemLabel="#{estudio.nome} (#{estudio.localizacao})"
+							itemValue="#{estudio.nome}" id="estudioSelecionado" />
+					</p:selectOneMenu>
+
+					<h:outputLabel for="sinopse" value="Sinopse *" />
+					<p:inputTextarea id="sinopse" required="true"
+						value="#{serieBean.serie.sinopse}" rows="5" cols="80" />
+
 					<p:commandButton id="buscar" value="Buscar na API"
 						action="#{serieBean.buscaAPI}" icon="ui-icon-disk"
-						style="float:right;" update="painelCadastro painelCadastroNotas"  partialSubmit="true" process="nomeOriginal buscar dataLancamento"/>
-					
+						style="float:right;" update="painelCadastro painelCadastroNotas"
+						partialSubmit="true" process="nomeOriginal buscar dataLancamento" />
+
 				</h:panelGrid>
 
 				<p:keyFilter for="dataLancamento" mask="num" />
@@ -72,31 +89,35 @@
 
 			</p:panel>
 		</div>
-	
+
 		<div class="ui-fluid">
-			<p:panel id="painelCadastroNotas" style="margin-top:25px; margin-bottom:25px;">
+			<p:panel id="painelCadastroNotas"
+				style="margin-top:25px; margin-bottom:25px;">
 				<h:panelGrid columns="1">
 					<p:outputLabel for="notaRottenTomatoes" value="RottenTomatoes " />
-					<h:outputText id="notaRottenTomatoes" value="#{serieBean.serie.rottenTomatoes}%" />
+					<h:outputText id="notaRottenTomatoes"
+						value="#{serieBean.serie.rottenTomatoes}%" />
 					<h:inputHidden id="nota" value="#{serieBean.serie.rottenTomatoes}" />
-					<p:slider for="nota" display="notaRottenTomatoes" style="width: 200px" displayTemplate="{value}%" />
+					<p:slider for="nota" display="notaRottenTomatoes"
+						style="width: 200px" displayTemplate="{value}%" />
 				</h:panelGrid>
-				
-				<h:panelGrid columns="1">		
+
+				<h:panelGrid columns="1">
 					<p:outputLabel for="notaMetacritic" value="Metacritic " />
-					<p:inputText id="notaMetacritic" value="#{serieBean.serie.metacritic}" />
+					<p:inputText id="notaMetacritic"
+						value="#{serieBean.serie.metacritic}" />
 					<p:slider for="notaMetacritic" style="width: 200px" />
 				</h:panelGrid>
 			</p:panel>
 		</div>
-		
-		<p:commandButton id="cadastrar" value="Cadastrar" update="painelCadastro" 
-			action="#{serieBean.cadastrar}" icon="ui-icon-disk" 
-			style="float:right;" />
+
+		<p:commandButton id="cadastrar" value="Cadastrar"
+			update="painelCadastro" action="#{serieBean.cadastrar}"
+			icon="ui-icon-disk" style="float:right;" />
 		<p:commandButton id="cancelar" value="Cancelar"
-			action="/index.xhtml?faces-redirect=true" 
-			style="float:right;" immediate="true"/>
-		
-	</h:form>		
+			action="/index.xhtml?faces-redirect=true" style="float:right;"
+			immediate="true" />
+
+	</h:form>
 </h:body>
 </html>

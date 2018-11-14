@@ -97,8 +97,9 @@
 
 
 				<div style="margin-left: 0rem;">
-					<p:outputLabel id="temporada" value="temporada: " /> 
-					<p:outputLabel id="Epsodio"  value="Epsodios: "/>
+					<p:outputLabel id="temporada" value="temporadas: #{favoritosBean.serie.temporadas}" /> 
+
+					<p:outputLabel id="Epsodio"  value="Epsodios: #{favoritosBean.serie.numeroEpisodios}"/>
 					<br />
 					<p:outputLabel value="Estudio: #{favoritosBean.serie.estudio}" />
 
@@ -108,7 +109,6 @@
 					<p:outputLabel
 						value="Data de lançamento: #{favoritosBean.serie.dataLancamento}" />
 					<br />
-					<p:outputLabel value="Diretor: " />
 				</div>
 			</div>
 

@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -16,6 +18,7 @@ import entity.Estudio;
 public class EstudioBean {
 
 	private Estudio estudio = new Estudio();
+	private List<Estudio> estudios = new ArrayList();
 	
 	public Estudio getEstudio() {
 		return estudio;
@@ -39,5 +42,13 @@ public class EstudioBean {
 			FacesContext.getCurrentInstance().addMessage(null, messageError);
 			e.printStackTrace();
 		}
+	}
+	public List<Estudio> getEstudios() {
+		EstudioDAO edao = new EstudioDAOImpl();
+		estudios = edao.buscarEstudios();
+		return estudios;
+	}
+	public void setEstudios(List<Estudio> estudios) {
+		this.estudios = estudios;
 	}
 }

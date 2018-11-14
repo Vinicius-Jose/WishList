@@ -28,6 +28,7 @@ public class PlataformaBean {
 		PlataformaDAO pdao = new PlataformaDAOImpl();
 		try {
 			pdao.adicionarLista(plataforma);
+			System.out.println(plataforma.getNome() + plataforma.getEmpresa());
 			plataforma = new Plataforma();
 			
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "info", 

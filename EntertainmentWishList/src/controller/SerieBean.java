@@ -13,6 +13,7 @@ import dao.EstudioDAO;
 import dao.EstudioDAOImpl;
 import dao.SerieDAO;
 import dao.SerieDAOImpl;
+import entity.Estudio;
 import entity.Serie;
 import servicos.ServicoEntretenimento;
 
@@ -22,7 +23,14 @@ public class SerieBean {
 
 	private Serie serie = new Serie();
 	private ServicoEntretenimento se = new ServicoEntretenimento();
+	private Estudio estudio = new Estudio();
 	
+	public Estudio getEstudio() {
+		return estudio;
+	}
+	public void setEstudio(Estudio estudio) {
+		this.estudio = estudio;
+	}
 	public Serie getSerie() {
 		return serie;
 	}
@@ -67,9 +75,11 @@ public class SerieBean {
 		EstudioDAO edao = new EstudioDAOImpl();
 		
 		try {
-			edao.adicionar(serie.getEstudio());
+			estudio = edao.buscarEspecifico(estudio.getNome());
+			serie.setEstudio(estudio);
 			sdao.adicionar(serie);
 			serie = new Serie();
+			estudio = new Estudio();
 			
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "info", "Cadastro de seriado realizado com sucesso");
 			FacesContext.getCurrentInstance().addMessage(null, message);

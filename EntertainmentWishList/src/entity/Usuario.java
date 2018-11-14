@@ -1,5 +1,7 @@
 package entity;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import org.primefaces.model.DefaultStreamedContent;
 
 import enumeradas.StatusAmigo;
 
@@ -44,6 +49,8 @@ public class Usuario implements Serializable{
 	@JoinColumn(name = "Usuarioemail")
 	private List<Amigo> amigos;
 	
+	@Transient
+	private DefaultStreamedContent imagemUsuario;
 
 	public void adicionarAmigo(Amigo a) {
 		amigos.add(a);
@@ -138,6 +145,19 @@ public class Usuario implements Serializable{
 
 	public void setAmigos(List<Amigo> amigos) {
 		this.amigos = amigos;
+	}
+	
+	
+	public DefaultStreamedContent getImagemUsuario() throws IOException {
+		if (getFoto() != null) {
+			imagemUsuario = new DefaultStreamedContent(new ByteArrayInputStream(getFoto()), "image/jpg");
+			
+		}
+		return imagemUsuario;
+	}
+	
+	public void setImagemUsuario(DefaultStreamedContent imagem)throws IOException{
+		imagemUsuario = imagem;
 	}
 
 }

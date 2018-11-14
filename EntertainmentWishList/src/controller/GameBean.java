@@ -19,6 +19,7 @@ import dao.GameDAO;
 import dao.GameDAOImpl;
 import dao.PlataformaDAO;
 import dao.PlataformaDAOImpl;
+import entity.Estudio;
 import entity.Game;
 import entity.Plataforma;
 import servicos.ServicoEntretenimento;
@@ -31,11 +32,9 @@ public class GameBean {
 	private ServicoEntretenimento se = new ServicoEntretenimento();
 	private List<Plataforma> plataformasBanco;
 	private List<String> plataformaSelected;
+	private Estudio estudio = new Estudio();
 	
-	public GameBean() {
-		PlataformaDAO pdao = new PlataformaDAOImpl();
-		setPlataformasBanco(pdao.buscarPlataformas());
-	}
+	
 	
 	public Game getGame() {
 		return game;
@@ -61,6 +60,8 @@ public class GameBean {
 	}
 	
 	public List<Plataforma> getPlataformasBanco() {
+		PlataformaDAO pdao = new PlataformaDAOImpl();
+		setPlataformasBanco(pdao.buscarPlataformas());
 		return plataformasBanco;
 	}
 
@@ -91,10 +92,13 @@ public class GameBean {
 			
 		}
 		try {
-			pdao.adicionar(game.getPlataformas());
+			EstudioDAO edao = new EstudioDAOImpl();
+			estudio = edao.buscarEspecifico(estudio.getNome());
+			game.setEstudio(estudio);
 			game.setPlataformas(pl);
 			gdao.adicionar(game);
 			game = new Game();
+			estudio = new Estudio();
 			
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "info", "Cadastro do jogo realizado com sucesso");
 			FacesContext.getCurrentInstance().addMessage(null, message);
@@ -110,5 +114,13 @@ public class GameBean {
 		System.out.println(game.getNomeOriginal());
 		System.out.println("buscando...");
 		game = (Game) se.servicoEntretenimento(game);
+	}
+
+	public Estudio getEstudio() {
+		return estudio;
+	}
+
+	public void setEstudio(Estudio estudio) {
+		this.estudio = estudio;
 	}
 }

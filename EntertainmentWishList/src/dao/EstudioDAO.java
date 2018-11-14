@@ -12,4 +12,6 @@ public interface EstudioDAO {
 
 	List<Estudio> buscarEstudios();
 
+	Estudio buscarEspecifico(String nome);
+
 }

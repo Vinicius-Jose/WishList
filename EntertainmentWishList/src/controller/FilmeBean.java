@@ -13,6 +13,7 @@ import dao.EstudioDAO;
 import dao.EstudioDAOImpl;
 import dao.FilmeDAO;
 import dao.FilmeDAOImpl;
+import entity.Estudio;
 import entity.Filme;
 import servicos.ServicoEntretenimento;
 
@@ -22,7 +23,14 @@ public class FilmeBean {
 
 	private Filme filme = new Filme();
 	private ServicoEntretenimento se = new ServicoEntretenimento();
+	private Estudio estudio = new Estudio();
 
+	public Estudio getEstudio() {
+		return estudio;
+	}
+	public void setEstudio(Estudio estudio) {
+		this.estudio = estudio;
+	}
 	public Filme getFilme() {
 		return filme;
 	}
@@ -50,9 +58,11 @@ public class FilmeBean {
 		FilmeDAO fdao = new FilmeDAOImpl();
 		EstudioDAO edao = new EstudioDAOImpl();
 		try {
-			edao.adicionar(filme.getEstudio());
+			estudio = edao.buscarEspecifico(estudio.getNome());
+			filme.setEstudio(estudio);
 			fdao.adicionar(filme);
 			filme = new Filme();
+			estudio = new Estudio();
 			
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "info",
 					"Cadastro de filme realizado com sucesso");
