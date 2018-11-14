@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 import enumeradas.StatusAmigo;
 
@@ -47,9 +48,6 @@ public class Usuario implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "Usuarioemail")
 	private List<Amigo> amigos;
-
-	@Transient
-	private DefaultStreamedContent imagemUsuario;
 
 	public void adicionarAmigo(Amigo a) {
 		amigos.add(a);
@@ -146,14 +144,17 @@ public class Usuario implements Serializable {
 		this.amigos = amigos;
 	}
 
-	public DefaultStreamedContent getImagemUsuario() throws IOException {
-		if(getFoto()!=null)
-			imagemUsuario = new DefaultStreamedContent(new ByteArrayInputStream(getFoto()), "image/jpg");
+	public StreamedContent  getImagemUsuario() {
+		StreamedContent imagemUsuario = null;
+		if(getFoto()!=null){
+			imagemUsuario = new DefaultStreamedContent(new ByteArrayInputStream(getFoto()), "image/jpg", "imuser.jpg");
+			System.out.println("getImagemUsuario feito");
+		}
 		return imagemUsuario;
 	}
 
-	public void setImagemUsuario(DefaultStreamedContent imagem) throws IOException {
-		imagemUsuario = imagem;
+	public void setImagemUsuario(StreamedContent imagem) {
+		// imagemUsuario = imagem;
 	}
 
 }

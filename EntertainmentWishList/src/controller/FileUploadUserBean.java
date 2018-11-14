@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.imageio.ImageIO;
 
@@ -17,6 +18,7 @@ import org.primefaces.model.UploadedFile;
 import entity.Usuario;
 
 @ManagedBean
+@SessionScoped
 public class FileUploadUserBean {
 
 	private UploadedFile file ;
