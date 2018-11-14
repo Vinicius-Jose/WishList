@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+	<title>Amigos</title>
+</h:head>
+<h:body>
+	<ui:insert name="cabecalho">
+		<ui:include src="/cabecalho.xhtml"></ui:include>
+	</ui:insert>
+	<p:importEnum type="enumeradas.StatusAmigo" var="status"
+		allSuffix="ALL_VALUES" />
+
+	<div class="ui-fluid">
+		<div style="margin-top: 25px">
+			<p:growl autoUpdate="true" id="messages" showDetail="true"
+				sticky="true"></p:growl>
+			<p:dataGrid var="amigo" value="#{amigoBean.amigos}"
+				emptyMessage="Você ainda não possui amigos adicionados" columns="6"
+				layout="grid" rows="12" paginator="true" id="amigos"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="4,8">
+
+				<f:facet name="header">
+           		 Os seus Amigos
+        		</f:facet>
+
+				<div class="card" style="width: 3; length: 3rem; margin-left: 20px"
+					align="center">
+					<p:graphicImage id="imagem" class="card-img-top" value=""
+						alt="Imagem do Usuário" style="width: 200px ;length: 200px">
+					</p:graphicImage>
+
+
+					<div class="card-body">
+						<p class="card-title">#{amigo.primeiroNome}</p>
+						<p class="card-text" style="font-size: 12px">
+							Nick Name: #{amigo.nickName} <br />Email: #{amigo.email}<br />
+							Status atual: #{amigoBean.buscarStatus(amigo)}
+						</p>
+
+						<h:form>
+							<p:commandButton action="#{indicacaoBean.indicar}"
+								value="Recomendar" id="indicarEntretenimento">
+								<f:setPropertyActionListener target="#{indicacaoBean.enviado}"
+									value="#{amigo}" />
+							</p:commandButton>
+							
+						</h:form>
+					</div>
+				</div>
+			</p:dataGrid>
+
+		</div>
+	</div>
+
+</h:body>
+</html>

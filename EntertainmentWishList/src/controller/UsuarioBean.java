@@ -189,8 +189,9 @@ public class UsuarioBean {
 			i = 0;
 		Usuario u = usuarios.get(i);
 		i++;
-		DefaultStreamedContent imageSelected = new DefaultStreamedContent(new ByteArrayInputStream(u.getFoto()),
-				"image/jpg");
+		DefaultStreamedContent imageSelected = null ;
+		if(u.getFoto()!= null)
+			imageSelected = new DefaultStreamedContent(new ByteArrayInputStream(u.getFoto()),"image/jpg");
 
 		return imageSelected;
 	}

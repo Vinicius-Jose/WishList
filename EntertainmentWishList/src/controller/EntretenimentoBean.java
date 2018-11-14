@@ -30,6 +30,13 @@ public class EntretenimentoBean {
 	private List<Entretenimento> maisBuscados;
 
 	public EntretenimentoBean() {
+		EntretenimentoDAO edao = new EntretenimentoDAOImpl();
+		setMaisBuscados(edao.maisBuscados());
+
+	}
+	
+	
+	private List<String> getNomes(){
 		nomes = new ArrayList<String>();
 		EntretenimentoDAO edao = new EntretenimentoDAOImpl();
 		nomes.addAll(edao.buscarNomes());
@@ -37,8 +44,7 @@ public class EntretenimentoBean {
 		nomes.addAll(fdao.buscarNomesFilmes());
 		SerieDAO sdao = new SerieDAOImpl();
 		nomes.addAll(sdao.buscarNomesSeries());
-		setMaisBuscados(edao.maisBuscados());
-
+		return nomes;
 	}
 
 	public List<Entretenimento> getMaisBuscados() {
@@ -85,7 +91,7 @@ public class EntretenimentoBean {
 	public List<String> completeText(String query) {
 		List<String> results = new ArrayList<>();
 
-		for (String s : nomes) {
+		for (String s : getNomes()) {
 			if (s.toLowerCase().contains(query.toLowerCase())) {
 				results.add(s);
 			}

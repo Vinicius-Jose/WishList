@@ -21,8 +21,7 @@
 	<div class="ui-fluid">
 		<h:form id="form" style="margin-top:25px">
 			<p:dataGrid var="favorito" value="#{favoritosBean.favoritos}"
-				columns="4" layout="grid" rows="12" paginator="true"
-				id="favoritos"
+				columns="4" layout="grid" rows="12" paginator="true" id="favoritos"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="8,12,16">
 
@@ -42,20 +41,78 @@
 									<header
 										style="background-image:url('#{favorito.entretenimento.imagemFundo}')">
 									<h1>#{favorito.entretenimento.nomeOriginal}</h1>
-									<span class="year">#{favorito.entretenimento.dataLancamento} </span> <span
-										class="rating">#{favorito.entretenimento.classificacaoEtaria}</span> </header>
+									<span class="year">#{favorito.entretenimento.dataLancamento}
+									</span> <span class="rating">#{favorito.entretenimento.classificacaoEtaria}</span>
+									</header>
 									<p
 										style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical;">#{favorito.entretenimento.sinopse}</p>
-									<p:commandButton action="#{favoritosBean.visualizar}" 
+									<p:commandButton action="#{favoritosBean.visualizar}"
 										value="Visualizar" id="Ajax">
-										<f:setPropertyActionListener target="#{favoritosBean.selected}"
-											value="#{favorito}" />
+										<f:setPropertyActionListener
+											target="#{favoritosBean.selected}" value="#{favorito}" />
 									</p:commandButton>
-									
-									<p:commandButton action="#{favoritosBean.remover}" 
+
+									<p:commandButton action="#{favoritosBean.remover}"
 										value="Remover" id="remover" update="form">
-										<f:setPropertyActionListener target="#{favoritosBean.selected}"
+										<f:setPropertyActionListener
+											target="#{favoritosBean.selected}"
 											value="#{favorito.entretenimento}" />
+									</p:commandButton>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</p:dataGrid>
+
+		</h:form>
+	</div>
+
+	<div class="ui-fluid">
+		<h:form id="formInd" style="margin-top:25px">
+			<p:dataGrid var="indicacao" value="#{indicacaoBean.recebidas}"
+				columns="4" layout="grid" rows="12" paginator="true" id="indicacoes"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="8,12,16">
+
+				<f:facet name="header">
+           		 Seus favoritos
+        		</f:facet>
+				<h:outputScript library="js" name="modernizr.custom.js" />
+				<h:outputStylesheet library="css" name="component.css" />
+				<h:outputStylesheet library="css" name="demo.css" />
+				<div class="wrapper" style="margin: 5px">
+					<ul class="stage clearfix">
+						<li class="scene">
+							<div class="movie">
+								<div class="poster"
+									style="background-image: url('#{indicacao.entretenimento.poster}')"></div>
+								<div class="info">
+									<header
+										style="background-image:url('#{indicacao.entretenimento.imagemFundo}')">
+									<h1>#{indicacao.entretenimento.nomeOriginal}</h1>
+									<span class="year">#{indicacao.entretenimento.dataLancamento}
+									</span> <span class="rating">#{indicacao.entretenimento.classificacaoEtaria}</span>
+									</header>
+									<p
+										style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">#{indicacao.entretenimento.sinopse}</p>
+									<p:commandButton action="#{favoritosBean.visualizar}"
+										value="Visualizar" id="Ajax">
+										<f:setPropertyActionListener
+											target="#{favoritosBean.selected}" value="#{indicacao.entretenimento}" />
+									</p:commandButton>
+
+									<p:commandButton action="#{indicacaoBean.remover}"
+										value="Remover" id="remover" update="form formInd">
+										<f:setPropertyActionListener
+											target="#{indicacaoBean.indicacao}"
+											value="#{indicacao}" />
+									</p:commandButton>
+									<p:commandButton action="#{indicacaoBean.adicionar}"
+										value="Adicionar" id="adicionar" update="form formInd">
+										<f:setPropertyActionListener
+											target="#{indicacaoBean.indicacao}"
+											value="#{indicacao}" />
 									</p:commandButton>
 								</div>
 							</div>

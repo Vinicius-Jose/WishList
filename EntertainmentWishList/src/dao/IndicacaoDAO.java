@@ -15,4 +15,6 @@ public interface IndicacaoDAO {
 
 	List<Indicacao> buscarIndicacaoRecebida(Usuario user);
 
+	void remover(Indicacao indicacao);
+
 }

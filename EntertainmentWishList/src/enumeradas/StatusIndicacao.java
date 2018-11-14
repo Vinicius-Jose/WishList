@@ -2,6 +2,6 @@ package enumeradas;
 
 public enum StatusIndicacao {
 
-	ADICIONADO, BLOQUEADO;
+	ADICIONADO, BLOQUEADO,ENVIADO;
 
 }

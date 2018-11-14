@@ -36,7 +36,8 @@
 			<div style="margin-top: -15rem;">
 				<div style="margin-left: 11rem; width: 15rem; height: 10rem;">
 
-					<p:commandButton id="add-list" value="Adicionar na lista" action="#{favoritosBean.postar(0)}" />
+					<p:commandButton id="add-list" value="Adicionar na lista"
+						action="#{favoritosBean.postar(0)}" />
 					<br /> <br /> <br /> <br />
 
 					<p:outputLabel id="nome-original"
@@ -55,7 +56,11 @@
 				<div
 					style="text-align: right; margin-left: 38rem; width: 12rem; height: 10rem; margin-top: -10rem;">
 
-					<p:commandButton id="recomendado" value="Recomendar" />
+					<p:commandButton id="recomendado" value="Recomendar"
+						action="#{indicacaoBean.recomendar}">
+						<f:setPropertyActionListener target="#{indicacaoBean.selected}"
+							value="#{favoritosBean.selected}" />
+					</p:commandButton>
 					<br /> <br /> <br /> <br />
 
 					<p:outputLabel id="metacritic"
@@ -128,10 +133,15 @@
 				<p:commandButton id="add-comentario" value="Postar"
 					action="#{favoritosBean.postar(1)}" update="formEnt" />
 			</div>
-			<ui:repeat var="item" value="#{favoritosBean.critica}" >
-				<h:outputLabel value="Por: #{item.usuario.primeiroNome}" style="margin-top:10px; font-size:20px"/><br/>
-				<h:outputLabel value="Nota: #{item.nota}" style="font-size:20px"/><br/>
-				<h:outputLabel value="Critica: #{item.critica}" style="font-size:20px"/><br/>
+			<ui:repeat var="item" value="#{favoritosBean.critica}">
+				<h:outputLabel value="Por: #{item.usuario.primeiroNome}"
+					style="margin-top:10px; font-size:20px" />
+				<br />
+				<h:outputLabel value="Nota: #{item.nota}" style="font-size:20px" />
+				<br />
+				<h:outputLabel value="Critica: #{item.critica}"
+					style="font-size:20px" />
+				<br />
 			</ui:repeat>
 
 

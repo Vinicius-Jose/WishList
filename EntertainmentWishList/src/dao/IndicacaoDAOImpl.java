@@ -66,5 +66,20 @@ public class IndicacaoDAOImpl implements IndicacaoDAO {
 		em.close();
 		return estudios;
 	}
+	
+	
+	@Override
+	public void remover(Indicacao indicacao) {
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Indicacao> query = em.createQuery("select i from Indicacao i where usuarioRecebido.email = :email and entretenimento.nomeOriginal = :nome and usuarioIndicador.email = :enviado", Indicacao.class);
+		query.setParameter("enviado", indicacao.getUsuarioIndicador().getEmail());
+		query.setParameter("nome", indicacao.getEntretenimento().getNomeOriginal());
+		query.setParameter("email", indicacao.getUsuarioRecebido().getEmail());
+		Indicacao found   = query.getSingleResult();
+		em.getTransaction().begin();
+		em.remove(found);
+		em.getTransaction().commit();
+		em.close();
+	}
 
 }
